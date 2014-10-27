@@ -1,0 +1,17 @@
+{
+  "name": "bam",
+  "description": "bam",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.4.8",
+    "underscore": "*",
+    "cluster": "*",
+    "async": "*",
+    "request": "*",
+    "event-stream": "*",
+    "JSONStream": "*",
+    "mongodb": "*",
+    "mongoose": "*"
+  }
+}
