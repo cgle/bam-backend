@@ -1,0 +1,13 @@
+.idea
+# OS & IDE
+.idea
+.DS_Store
+
+# misc
+logs
+
+# package managers
+.npmrc
+npm-debug.log
+node_modules
+bower_components
