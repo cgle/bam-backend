@@ -2,17 +2,15 @@ var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var express = require('express');
 var app = express();
+var path = require('path');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var methodOverrid = require('method-override');
 
 //load project modules & configs
-var databae = require('./config/database');
+var database = require('./config/database');
 
 mongoose.connect(database.url);
-
-app.use(express.static(__dirname + '/frontend'));
 
 var db = mongoose.connection;
 
@@ -35,14 +33,13 @@ db.on('open', function () {
   });
 
   } else {
-    runService();
+    runServer();
   }
 });
 
 var runServer = function() {
-  app.configure(function() {
-    app.set('port', process.env.PORT || 8000);
-  });
+  app.use(express.static(__dirname + '/frontend'));
+  app.set('port', process.env.PORT || 8080);
 
   app.get('/', express.static(path.join(__dirname, '/frontend')));
 

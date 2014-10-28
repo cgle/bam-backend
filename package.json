@@ -12,6 +12,9 @@
     "event-stream": "*",
     "JSONStream": "*",
     "mongodb": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "passport": "*",
+    "morgan": "*",
+    "body-parser": "*"
   }
 }
