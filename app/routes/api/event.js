@@ -4,13 +4,25 @@ var User = require('../../models/user');
 var _ = require('underscore');
 
 module.exports = function(app, isLoggedIn) {
+  //need to convert to km or m or miles
   app.get('/api/events', function(req, res) {
-    Event.find(function(err, events) {
-      if (!err) return res.send({data: events});
-      else res.send({error: err});
-    });
+    if (req.query.lat && req.query.lng) {
+      var maxDistance = req.query.distance ? req.query.distance*1 : 10;
+      var lat = req.query.lat*1;
+      var lng = req.query.lng*1;
+      Event.geoNear([lng, lat], {maxDistance: maxDistance, spherical: true, public: true}, function(err, events, stats) {
+        if (err) res.send({error: err});
+        else res.send({data: events});
+      });
+    } else {
+      Event.find(query, function(err, events) {
+        if (!err) return res.send({data: events});
+        else res.send({error: err});
+      });
+    }
   });
 
+  //need: check for logged in, public/private events
   app.get('/api/events/:event_id', function(req, res) {
     Event.find({_id: req.params.event_id}, function(err, event) {
       if (!err) return res.send({data: event});
@@ -42,7 +54,15 @@ module.exports = function(app, isLoggedIn) {
       function(callback) {
         event.save(function(err) {
           if (err) callback(err);
-          else callback(null);
+          else {
+            Event.collection.ensureIndex(
+              {pos: '2d'},
+              function(err) {
+                if (err) callback(err);
+                else callback(null);
+              }
+            );
+          }
         });
       },
       function(callback) {
@@ -68,12 +88,14 @@ module.exports = function(app, isLoggedIn) {
     var id = req.body._id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
-    var update = _.omit(req.body, ['cohosts','attendants','creator','_id']);
+    var categories = req.body.categories ? req.body.categories : [];
+    var update = _.omit(req.body, ['cohosts','attendants','creator','_id', 'categories']);
+    update['updatedAt'] = Date.now();
     Event.update(
       {_id: id},
       {
         $set: update,
-        $addToSet: {cohosts: cohosts, attendants: attendants},
+        $addToSet: {cohosts: cohosts, attendants: attendants, categories: categories},
       }, {multi: true}, function(err) {
         if (err) res.send({error: err});
         else res.send({data: update});
@@ -81,10 +103,4 @@ module.exports = function(app, isLoggedIn) {
     );
   });
 
-  app.delete('/api/events', isLoggedIn, function(req, res) {
-    Event.remove({_id: req.body._id}, function(err) {
-      if (err) res.send({error: err});
-      else res.send({'message': 'event deleted'});
-    });
-  });
 }

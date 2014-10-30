@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var Vote = new Schema({
+var Comment = new Schema({
   event_id: {type: mongoose.Schema.ObjectId, ref: 'Event'},
-  voter: {type: mongoose.Schema.ObjectId, ref: 'User'},
-  is_upvote: {type: Boolean},
+  commenter: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  comment: {type: String, trim: true},
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}
 });
 
-var exports = module.exports = mongoose.model('Vote', Vote);
+var exports = module.exports = mongoose.model('Comment', Comment);

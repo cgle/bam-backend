@@ -3,8 +3,9 @@ var _ = require('underscore');
 
 module.exports = function(app, isLoggedIn) {
   app.get('/api/users', function(req, res) {
-    User.find(function(err, users) {
-      if (!err) return res.send({'data': users});
+    var query = req.query ? req.query : {};
+    User.find(query, function(err, user) {
+      if (!err) return res.send({'data': user});
       else res.send({error: err});
     });
   });
@@ -29,6 +30,5 @@ module.exports = function(app, isLoggedIn) {
       }
     );
   });
-
 
 };

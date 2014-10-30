@@ -77,11 +77,11 @@ var runServer = function() {
       res.send({error: 'unauthorized'}, 401);
     }
   }
-
   require('./app/routes/api/authenticate')(app);
   require('./app/routes/api/user')(app, isLoggedIn);
   require('./app/routes/api/event')(app, isLoggedIn);
   require('./app/routes/api/vote')(app, isLoggedIn);
+  require('./app/routes/api/comment')(app, isLoggedIn);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');

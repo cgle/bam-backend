@@ -13,7 +13,7 @@ module.exports = function(app, isLoggedIn) {
 
   app.post('/api/votes', isLoggedIn, function(req, res) {
     var vote = new Vote({
-      event: req.body.event,
+      event_id: req.body.event_id,
       voter: req.body.voter,
       is_upvote: req.body.is_upvote
     });
@@ -30,11 +30,14 @@ module.exports = function(app, isLoggedIn) {
       },
       function(callback) {
         Event.update(
-          {_id: vote.event},
+          {_id: vote.event_id},
           {
             $inc: {upvotes: up, downvotes: down},
             $addToSet: {
               attendants: vote.voter
+            },
+            $set {
+              updatedAt: Date.now()
             }
           }, function(err) {
             if (err) callback(err);
@@ -47,7 +50,7 @@ module.exports = function(app, isLoggedIn) {
           {_id: vote.voter},
           {
             $addToSet: {
-              attended_events: vote.event
+              attended_events: vote.event_id
             }
           }, function(err) {
             if (err) callback(err);
@@ -68,9 +71,9 @@ module.exports = function(app, isLoggedIn) {
     async.parallel([
       function(callback) {
         Vote.update(
-          {event: req.body.event, voter: req.body.voter},
+          {event_id: req.body.event_id, voter: req.body.voter},
           {
-            $set: {is_upvote: req.body.is_upvote}
+            $set: {is_upvote: req.body.is_upvote, updatedAt: Date.now()}
           }, function(err) {
             if (err) callback(err);
             else callback(null);
@@ -79,9 +82,10 @@ module.exports = function(app, isLoggedIn) {
       },
       function(callback) {
         Event.update(
-          {_id: req.body.event},
+          {_id: req.body.event_id},
           {
-            $inc: {upvotes: up, downvotes: down}
+            $inc: {upvotes: up, downvotes: down},
+            $set: {updatedAt: Date.now()}
           }, function(err) {
             if (err) callback(err);
             else callback(null);

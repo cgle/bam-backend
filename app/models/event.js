@@ -5,12 +5,17 @@ var User = require('./user');
 var Event = new Schema({
   name: String,
   address: String,
-  timestamp: String,
+  createdAt: {type: Date, default: Date.now},
+  updatedAt: {type: Date, default: Date.now},
   description: String,
-  lng: Number,
-  lat: Number,
-  upvotes: {type:Number, default: 0},
-  downvotes: {type:Number, default: 0},
+  pos: {
+    lng: Number,
+    lat: Number
+  },
+  public: {type: Boolean, default: true},
+  upvotes: {type: Number, default: 0},
+  downvotes: {type: Number, default: 0},
+  categories: [String],
   creator: {type: mongoose.Schema.ObjectId, ref: 'User'},
   cohosts: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   attendants: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
