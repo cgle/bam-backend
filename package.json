@@ -17,8 +17,10 @@
     "morgan": "*",
     "body-parser": "*",
     "cookie-parser": "*",
+    "method-override": "*",
     "passport-local": "*",
     "errorhandler": "*",
-    "passport-local-mongoose": "*"
+    "passport-local-mongoose": "*",
+    "express-session": "*"
   }
 }

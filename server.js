@@ -9,7 +9,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
-
+var methodOverride = require('method-override');
+var session = require('express-session');
 //load project modules & configs
 var database = require('./config/database');
 
@@ -42,27 +43,33 @@ db.on('open', function () {
 });
 
 var runServer = function() {
+  app.use(morgan('dev'));
   app.use(express.static(__dirname + '/frontend'));
   app.set('port', process.env.PORT || 8080);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
    extended: true
   }));
+  app.use(methodOverride());
+
+  app.use(session({secret: 'dollhouse1606stclairave'}));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.get('/', express.static(path.join(__dirname, '/frontend')));
+
   if ('development' == app.get('env')) {
     app.use(errorHandler());
   }
 
-  app.get('/api', function(req,res) {
-    res.send({'message': 'api is running', 'status': res.status});
-  });
-
   var User = require('./app/models/user');
+
   passport.use(User.createStrategy());
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
+
+  app.get('/', express.static(path.join(__dirname, '/frontend')));
+  app.get('/api', function(req,res) {
+    res.send({'message': 'api is running', 'status': res.status});
+  });
 
   require('./app/routes/api/authenticate')(app);
   require('./app/routes/api/user')(app);

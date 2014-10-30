@@ -16,6 +16,7 @@ module.exports = function(app) {
   });
 
   app.get('/api/authenticate/loggedin', function(req, res) {
+    console.log(req.session.user);
     res.send(req.isAuthenticated() ? req.user : '0');
   });
 
