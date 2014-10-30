@@ -15,6 +15,10 @@
     "mongoose": "*",
     "passport": "*",
     "morgan": "*",
-    "body-parser": "*"
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "passport-local": "*",
+    "errorhandler": "*",
+    "passport-local-mongoose": "*"
   }
 }
