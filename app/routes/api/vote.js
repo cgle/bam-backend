@@ -36,7 +36,7 @@ module.exports = function(app, isLoggedIn) {
             $addToSet: {
               attendants: vote.voter
             },
-            $set {
+            $set: {
               updatedAt: Date.now()
             }
           }, function(err) {
