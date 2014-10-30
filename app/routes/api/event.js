@@ -3,7 +3,7 @@ var Event = require('../../models/event');
 var User = require('../../models/user');
 var _ = require('underscore');
 
-module.exports = function(app) {
+module.exports = function(app, isLoggedIn) {
   app.get('/api/events', function(req, res) {
     Event.find(function(err, events) {
       if (!err) return res.send({data: events});
@@ -33,7 +33,7 @@ module.exports = function(app) {
       });
   });
 
-  app.post('/api/events', function(req, res) {
+  app.post('/api/events', isLoggedIn, function(req, res) {
     var event = new Event(req.body);
     var creator = req.body.creator;
     event.attendants.push(creator);
@@ -64,7 +64,7 @@ module.exports = function(app) {
 
   });
 
-  app.put('/api/events', function(req, res) {
+  app.put('/api/events', isLoggedIn, function(req, res) {
     var id = req.body._id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
@@ -81,7 +81,7 @@ module.exports = function(app) {
     );
   });
 
-  app.delete('/api/events', function(req, res) {
+  app.delete('/api/events', isLoggedIn, function(req, res) {
     Event.remove({_id: req.body._id}, function(err) {
       if (err) res.send({error: err});
       else res.send({'message': 'event deleted'});

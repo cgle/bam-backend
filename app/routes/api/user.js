@@ -1,7 +1,7 @@
 var User = require('../../models/user');
 var _ = require('underscore');
 
-module.exports = function(app) {
+module.exports = function(app, isLoggedIn) {
   app.get('/api/users', function(req, res) {
     User.find(function(err, users) {
       if (!err) return res.send({'data': users});
@@ -16,7 +16,7 @@ module.exports = function(app) {
     });
   });
 
-  app.put('/api/users', function(req, res) {
+  app.put('/api/users', isLoggedIn, function(req, res) {
     var id = req.body._id;
     var update = _.omit(req.body, '_id');
     User.update(

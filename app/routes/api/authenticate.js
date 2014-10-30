@@ -9,18 +9,17 @@ module.exports = function(app) {
         res.send({error: err});
       } else {
         passport.authenticate('local')(req, res, function() {
-          return res.send(user);
+          return res.send({message: 'registered'});
         });
       }
     });
   });
 
   app.get('/api/authenticate/loggedin', function(req, res) {
-    console.log(req.session.user);
     res.send(req.isAuthenticated() ? req.user : '0');
   });
 
   app.post('/api/authenticate/login', passport.authenticate('local'), function(req, res) {
-    res.send(req.user);
+    res.send({message: 'logged in'});
   });
 }

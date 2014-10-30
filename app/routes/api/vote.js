@@ -3,7 +3,7 @@ var Vote = require('../../models/vote');
 var Event = require('../../models/event');
 var User = require('../../models/user');
 
-module.exports = function(app) {
+module.exports = function(app, isLoggedIn) {
   app.get('/api/votes/:event_id', function(req, res) {
     Vote.find({event: req.params.event_id}, function(err, votes) {
       if (err) res.send(err);
@@ -11,7 +11,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/votes', function(req, res) {
+  app.post('/api/votes', isLoggedIn, function(req, res) {
     var vote = new Vote({
       event: req.body.event,
       voter: req.body.voter,
@@ -62,7 +62,7 @@ module.exports = function(app) {
     });
   });
 
-  app.put('/api/votes', function(req, res) {
+  app.put('/api/votes', isLoggedIn, function(req, res) {
     var up = req.body.is_upvote ? 1 : -1;
     var down = -1 * up;
     async.parallel([

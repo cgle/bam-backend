@@ -71,10 +71,17 @@ var runServer = function() {
     res.send({'message': 'api is running', 'status': res.status});
   });
 
+  var isLoggedIn = function(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    else {
+      res.send({error: 'unauthorized'}, 401);
+    }
+  }
+
   require('./app/routes/api/authenticate')(app);
-  require('./app/routes/api/user')(app);
-  require('./app/routes/api/event')(app);
-  require('./app/routes/api/vote')(app);
+  require('./app/routes/api/user')(app, isLoggedIn);
+  require('./app/routes/api/event')(app, isLoggedIn);
+  require('./app/routes/api/vote')(app, isLoggedIn);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');
