@@ -57,7 +57,7 @@ var runServer = function() {
 
   passport.use(new BasicStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
+    User.findOne({username: username}, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       if (user.hash != crypto.pbkdf2Sync(password, user.salt, 25000, 512, 'hmac-sha1').toString('hex')) {
@@ -69,7 +69,7 @@ var runServer = function() {
 
   passport.use(new BearerStrategy(
   function(token, done) {
-    User.findOne({ token: token }, function (err, user) {
+    User.findOne({token: token}, function (err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       return done(null, user, { scope: 'all' });
@@ -102,8 +102,8 @@ var runServer = function() {
       res.send({error: 'unauthorized'}, 401);
     }
   };
-  var auth = passport.authenticate('bearer', { session: false });
-  var basicauth = passport.authenticate('basic', {session: false});
+
+  var auth = passport.authenticate(['bearer', 'basic'], {session: false});
 
   //middleware for checking if user's owner
   var isOwner = function(req, res, next) {

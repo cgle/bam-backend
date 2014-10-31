@@ -72,7 +72,6 @@ module.exports = function(app, localauth, auth, isOwner) {
   });
 
   app.put('/api/events/:event_id', auth, isOwner, function(req, res) {
-    console.log(req.user);
     var id = req.params.event_id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
