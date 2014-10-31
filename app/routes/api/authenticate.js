@@ -1,15 +1,22 @@
 var passport = require('passport');
+var jwt = require('jsonwebtoken');
+var crypto = require('crypto');
+var config = require('../../../config/config');
 var User = require('../../models/user');
 
 module.exports = function(app) {
   app.post('/api/authenticate/register', function(req, res) {
-    User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
+    var token = jwt.sign(req.body.username, config.app_secret);
+    User.register(
+      new User({email: req.body.email, username: req.body.username, token: token}),
+      req.body.password,
+      function(err, user) {
       if (err) {
         res.status(err.status || 500);
         res.send({error: err});
       } else {
         passport.authenticate('local')(req, res, function() {
-          return res.send({message: 'registered'});
+          return res.send({message: 'registered', access_token: token});
         });
       }
     });

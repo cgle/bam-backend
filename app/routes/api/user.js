@@ -1,7 +1,7 @@
 var User = require('../../models/user');
 var _ = require('underscore');
 
-module.exports = function(app, isLoggedIn, isOwner) {
+module.exports = function(app, localauth, auth, isOwner) {
   app.get('/api/users', function(req, res) {
     var query = req.query ? req.query : {};
     User.find(query, function(err, user) {
@@ -10,7 +10,7 @@ module.exports = function(app, isLoggedIn, isOwner) {
     });
   });
 
-  app.put('/api/users/:user_id', isLoggedIn, function(req, res) {
+  app.put('/api/users/:user_id', auth, function(req, res) {
     var id = req.params.user_id;
     if (id != req.user._id) {
       return res.send({error: "unauthorized"}, 401);

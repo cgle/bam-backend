@@ -4,7 +4,7 @@ var User = require('../../models/user');
 var _ = require('underscore');
 var passport = require('passport');
 
-module.exports = function(app, isLoggedIn, auth, isOwner) {
+module.exports = function(app, localauth, auth, isOwner) {
   //need to convert to km or m or miles
   app.get('/api/events', function(req, res) {
     var query = req.query ? req.query : {};
@@ -32,7 +32,7 @@ module.exports = function(app, isLoggedIn, auth, isOwner) {
     });
   });
 
-  app.post('/api/events', passport.authenticate('basic', { session: false }), function(req, res) {
+  app.post('/api/events', auth, function(req, res) {
     var event = new Event(req.body);
     event['user_id'] = req.user._id;
     event.attendants.push(event.user_id);
@@ -71,7 +71,8 @@ module.exports = function(app, isLoggedIn, auth, isOwner) {
 
   });
 
-  app.put('/api/events/:event_id', isLoggedIn, isOwner, function(req, res) {
+  app.put('/api/events/:event_id', auth, isOwner, function(req, res) {
+    console.log(req.user);
     var id = req.params.event_id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];

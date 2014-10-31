@@ -3,7 +3,7 @@ var Vote = require('../../models/vote');
 var Event = require('../../models/event');
 var User = require('../../models/user');
 
-module.exports = function(app, isLoggedIn, isOwner) {
+module.exports = function(app, localauth, auth, isOwner) {
   app.get('/api/events/:event_id/votes', function(req, res) {
     var query = req.query ? req.query : {};
     query['event_id'] = req.params.event_id;
@@ -20,7 +20,7 @@ module.exports = function(app, isLoggedIn, isOwner) {
     });
   });
 
-  app.post('/api/events/:event_id/votes', isLoggedIn, function(req, res) {
+  app.post('/api/events/:event_id/votes', auth, function(req, res) {
     var vote = new Vote({
       event_id: req.params.event_id,
       user_id: req.user._id,
@@ -74,7 +74,7 @@ module.exports = function(app, isLoggedIn, isOwner) {
     });
   });
 
-  app.put('/api/events/:event_id/votes/:vote_id', isLoggedIn, isOwner, function(req, res) {
+  app.put('/api/events/:event_id/votes/:vote_id', auth, isOwner, function(req, res) {
     var up = req.body.is_upvote ? 1 : -1;
     var down = -1 * up;
     async.parallel([

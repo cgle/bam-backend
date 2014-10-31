@@ -7,16 +7,18 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var BasicStrategy = require('passport-http').BasicStrategy;
+var BearerStrategy = require('passport-http-bearer').Strategy;
 var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var session = require('express-session');
-//load project modules & configs
-var database = require('./config/database');
+//load project modules & configsss
+var config = require('./config/config');
 
-mongoose.connect(database.url);
+mongoose.connect(config.url);
 
 var db = mongoose.connection;
 
@@ -66,7 +68,16 @@ var runServer = function() {
     });
   }));
 
-  app.use(session({secret: 'dollhouse1606stclairave'}));
+  passport.use(new BearerStrategy(
+  function(token, done) {
+    User.findOne({ token: token }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      return done(null, user, { scope: 'all' });
+    });
+  }));
+
+  app.use(session({secret: config.app_secret}));
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -86,16 +97,14 @@ var runServer = function() {
   });
 
   //middleware for checking if user's logged in
-  var isLoggedIn = function(req, res, next) {
+  var localauth = function(req, res, next) {
     if (req.isAuthenticated()) return next();
     else {
       res.send({error: 'unauthorized'}, 401);
     }
   };
-
-  var auth = function() {
-    return passport.authenticate('basic', { session: false });
-  }
+  var auth = passport.authenticate('bearer', { session: false });
+  var basicauth = passport.authenticate('basic', {session: false});
 
   //middleware for checking if user's owner
   var isOwner = function(req, res, next) {
@@ -106,10 +115,10 @@ var runServer = function() {
   };
 
   require('./app/routes/api/authenticate')(app);
-  require('./app/routes/api/user')(app, isLoggedIn, auth, isOwner);
-  require('./app/routes/api/event')(app, isLoggedIn, auth, isOwner);
-  require('./app/routes/api/vote')(app, isLoggedIn, auth, isOwner);
-  require('./app/routes/api/comment')(app, isLoggedIn, auth, isOwner);
+  require('./app/routes/api/user')(app, localauth, auth, isOwner);
+  require('./app/routes/api/event')(app, localauth, auth, isOwner);
+  require('./app/routes/api/vote')(app, localauth, auth, isOwner);
+  require('./app/routes/api/comment')(app, localauth, auth, isOwner);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');
