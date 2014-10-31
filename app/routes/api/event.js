@@ -2,8 +2,9 @@ var async = require('async');
 var Event = require('../../models/event');
 var User = require('../../models/user');
 var _ = require('underscore');
+var passport = require('passport');
 
-module.exports = function(app, isLoggedIn, isOwner) {
+module.exports = function(app, isLoggedIn, auth, isOwner) {
   //need to convert to km or m or miles
   app.get('/api/events', function(req, res) {
     var query = req.query ? req.query : {};
@@ -31,7 +32,7 @@ module.exports = function(app, isLoggedIn, isOwner) {
     });
   });
 
-  app.post('/api/events', isLoggedIn, function(req, res) {
+  app.post('/api/events', passport.authenticate('basic', { session: false }), function(req, res) {
     var event = new Event(req.body);
     event['user_id'] = req.user._id;
     event.attendants.push(event.user_id);

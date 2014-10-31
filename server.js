@@ -6,6 +6,8 @@ var path = require('path');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var BasicStrategy = require('passport-http').BasicStrategy;
+var crypto = require('crypto');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
@@ -52,6 +54,18 @@ var runServer = function() {
   }));
   app.use(methodOverride());
 
+  passport.use(new BasicStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      if (user.hash != crypto.pbkdf2Sync(password, user.salt, 25000, 512, 'hmac-sha1').toString('hex')) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  }));
+
   app.use(session({secret: 'dollhouse1606stclairave'}));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -79,19 +93,23 @@ var runServer = function() {
     }
   };
 
+  var auth = function() {
+    return passport.authenticate('basic', { session: false });
+  }
+
   //middleware for checking if user's owner
   var isOwner = function(req, res, next) {
     if (req.user._id == req.body.user_id) return next();
     else {
       res.send({error: 'unauthorized'}, 401);
     }
-  }
+  };
 
   require('./app/routes/api/authenticate')(app);
-  require('./app/routes/api/user')(app, isLoggedIn, isOwner);
-  require('./app/routes/api/event')(app, isLoggedIn, isOwner);
-  require('./app/routes/api/vote')(app, isLoggedIn, isOwner);
-  require('./app/routes/api/comment')(app, isLoggedIn, isOwner);
+  require('./app/routes/api/user')(app, isLoggedIn, auth, isOwner);
+  require('./app/routes/api/event')(app, isLoggedIn, auth, isOwner);
+  require('./app/routes/api/vote')(app, isLoggedIn, auth, isOwner);
+  require('./app/routes/api/comment')(app, isLoggedIn, auth, isOwner);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');
