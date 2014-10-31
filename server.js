@@ -71,17 +71,27 @@ var runServer = function() {
     res.send({'message': 'api is running', 'status': res.status});
   });
 
+  //middleware for checking if user's logged in
   var isLoggedIn = function(req, res, next) {
     if (req.isAuthenticated()) return next();
     else {
       res.send({error: 'unauthorized'}, 401);
     }
+  };
+
+  //middleware for checking if user's owner
+  var isOwner = function(req, res, next) {
+    if (req.user._id == req.body.user_id) return next();
+    else {
+      res.send({error: 'unauthorized'}, 401);
+    }
   }
+
   require('./app/routes/api/authenticate')(app);
-  require('./app/routes/api/user')(app, isLoggedIn);
-  require('./app/routes/api/event')(app, isLoggedIn);
-  require('./app/routes/api/vote')(app, isLoggedIn);
-  require('./app/routes/api/comment')(app, isLoggedIn);
+  require('./app/routes/api/user')(app, isLoggedIn, isOwner);
+  require('./app/routes/api/event')(app, isLoggedIn, isOwner);
+  require('./app/routes/api/vote')(app, isLoggedIn, isOwner);
+  require('./app/routes/api/comment')(app, isLoggedIn, isOwner);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');

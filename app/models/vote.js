@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var Vote = new Schema({
   event_id: {type: mongoose.Schema.ObjectId, ref: 'Event'},
-  voter: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  user_id: {type: mongoose.Schema.ObjectId, ref: 'User'},
   is_upvote: {type: Boolean},
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}

@@ -3,9 +3,10 @@ var Event = require('../../models/event');
 var User = require('../../models/user');
 var _ = require('underscore');
 
-module.exports = function(app, isLoggedIn) {
+module.exports = function(app, isLoggedIn, isOwner) {
   //need to convert to km or m or miles
   app.get('/api/events', function(req, res) {
+    var query = req.query ? req.query : {};
     if (req.query.lat && req.query.lng) {
       var maxDistance = req.query.distance ? req.query.distance*1 : 10;
       var lat = req.query.lat*1;
@@ -47,8 +48,8 @@ module.exports = function(app, isLoggedIn) {
 
   app.post('/api/events', isLoggedIn, function(req, res) {
     var event = new Event(req.body);
-    var creator = req.body.creator;
-    event.attendants.push(creator);
+    event['user_id'] = req.user._id;
+    event.attendants.push(event.user_id);
 
     async.parallel([
       function(callback) {
@@ -67,9 +68,9 @@ module.exports = function(app, isLoggedIn) {
       },
       function(callback) {
         User.update(
-          {_id: creator},
+          {_id: req.user._id},
           {
-            $addToSet: {created_events: event._id}
+            $addToSet: {created_events: event._id, attended_events: event._id}
           },
           function(err) {
             if (err) callback(err);
@@ -84,21 +85,21 @@ module.exports = function(app, isLoggedIn) {
 
   });
 
-  app.put('/api/events', isLoggedIn, function(req, res) {
-    var id = req.body._id;
+  app.put('/api/events/:event_id', isLoggedIn, isOwner, function(req, res) {
+    var id = req.params.event_id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
     var categories = req.body.categories ? req.body.categories : [];
-    var update = _.omit(req.body, ['cohosts','attendants','creator','_id', 'categories']);
+    var update = _.omit(req.body, ['cohosts','attendants','user_id','_id', 'categories']);
     update['updatedAt'] = Date.now();
     Event.update(
       {_id: id},
       {
         $set: update,
         $addToSet: {cohosts: cohosts, attendants: attendants, categories: categories},
-      }, {multi: true}, function(err) {
+      }, {multi: true}, function(err, data) {
         if (err) res.send({error: err});
-        else res.send({data: update});
+        else res.send({data: data});
       }
     );
   });

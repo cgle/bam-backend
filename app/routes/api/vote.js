@@ -3,18 +3,27 @@ var Vote = require('../../models/vote');
 var Event = require('../../models/event');
 var User = require('../../models/user');
 
-module.exports = function(app, isLoggedIn) {
-  app.get('/api/votes/:event_id', function(req, res) {
-    Vote.find({event: req.params.event_id}, function(err, votes) {
+module.exports = function(app, isLoggedIn, isOwner) {
+  app.get('/api/events/:event_id/votes', function(req, res) {
+    var query = req.query ? req.query : {};
+    query['event_id'] = req.params.event_id;
+    Vote.find(query, function(err, votes) {
       if (err) res.send(err);
       else res.send({'data': votes});
     });
   });
 
-  app.post('/api/votes', isLoggedIn, function(req, res) {
+  app.get('/api/users/:user_id/votes', function(req, res) {
+    Vote.find({user_id: req.params.user_id}, function(err, votes) {
+      if (err) res.send(err);
+      else res.send({'data': votes});
+    });
+  });
+
+  app.post('/api/events/:event_id/votes', isLoggedIn, function(req, res) {
     var vote = new Vote({
-      event_id: req.body.event_id,
-      voter: req.body.voter,
+      event_id: req.params.event_id,
+      user_id: req.user._id,
       is_upvote: req.body.is_upvote
     });
 
@@ -34,7 +43,7 @@ module.exports = function(app, isLoggedIn) {
           {
             $inc: {upvotes: up, downvotes: down},
             $addToSet: {
-              attendants: vote.voter
+              attendants: vote.user_id
             },
             $set: {
               updatedAt: Date.now()
@@ -47,7 +56,7 @@ module.exports = function(app, isLoggedIn) {
       },
       function(callback) {
         User.update(
-          {_id: vote.voter},
+          {_id: vote.user_id},
           {
             $addToSet: {
               attended_events: vote.event_id
@@ -65,37 +74,37 @@ module.exports = function(app, isLoggedIn) {
     });
   });
 
-  app.put('/api/votes', isLoggedIn, function(req, res) {
+  app.put('/api/events/:event_id/votes/:vote_id', isLoggedIn, isOwner, function(req, res) {
     var up = req.body.is_upvote ? 1 : -1;
     var down = -1 * up;
     async.parallel([
       function(callback) {
         Vote.update(
-          {event_id: req.body.event_id, voter: req.body.voter},
+          {event_id: req.params.event_id, user_id: req.user._id},
           {
             $set: {is_upvote: req.body.is_upvote, updatedAt: Date.now()}
-          }, function(err) {
+          }, function(err, data) {
             if (err) callback(err);
-            else callback(null);
+            else callback(null, data);
           }
         );
       },
       function(callback) {
         Event.update(
-          {_id: req.body.event_id},
+          {_id: req.params.event_id},
           {
             $inc: {upvotes: up, downvotes: down},
             $set: {updatedAt: Date.now()}
-          }, function(err) {
+          }, function(err, data) {
             if (err) callback(err);
-            else callback(null);
+            else callback(null, data);
           }
         );
       }
     ],
-    function(err) {
+    function(err, data) {
       if (err) res.send({error: err});
-      else res.send(req.body);
+      else res.send({data: data[1]});
     });
   });
 }

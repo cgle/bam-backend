@@ -12,11 +12,12 @@ var Event = new Schema({
     lng: Number,
     lat: Number
   },
+  zip: String,
   public: {type: Boolean, default: true},
   upvotes: {type: Number, default: 0},
   downvotes: {type: Number, default: 0},
   categories: [String],
-  creator: {type: mongoose.Schema.ObjectId, ref: 'User'},
+  user_id: {type: mongoose.Schema.ObjectId, ref: 'User'},
   cohosts: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   attendants: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });
