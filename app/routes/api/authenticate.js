@@ -22,4 +22,9 @@ module.exports = function(app) {
   app.post('/api/authenticate/login', passport.authenticate('local'), function(req, res) {
     res.send({message: 'logged in'});
   });
+
+  app.post('/api/authenticate/logout', function(req, res) {
+    req.logout();
+    res.send({message: 'logged out'});
+  });
 }

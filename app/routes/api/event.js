@@ -31,21 +31,6 @@ module.exports = function(app, isLoggedIn, isOwner) {
     });
   });
 
-  app.get('/api/events/:event_id/users', function(req, res) {
-    Event
-      .findOne({_id: req.params.event_id})
-      .populate('creator cohosts attendants')
-      .exec(function(err, event) {
-        if (err) return res.send({error: err});
-        else res.send({
-          event: req.params.event_id,
-          attendants: event.attendants,
-          creator: event.creator,
-          cohosts: event.cohosts
-        });
-      });
-  });
-
   app.post('/api/events', isLoggedIn, function(req, res) {
     var event = new Event(req.body);
     event['user_id'] = req.user._id;
