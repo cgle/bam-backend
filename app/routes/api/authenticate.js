@@ -1,7 +1,7 @@
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
-var config = require('../../../config/config');
+var config = require('../../../config/app');
 var User = require('../../models/user');
 
 module.exports = function(app) {

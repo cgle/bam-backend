@@ -15,9 +15,8 @@ var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var session = require('express-session');
-//load project modules & configsss
-var config = require('./config/config');
-
+//load project modules & configs);
+var config = require('./config/app');
 mongoose.connect(config.url);
 
 var db = mongoose.connection;
