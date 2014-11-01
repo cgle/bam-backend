@@ -17,6 +17,14 @@ var methodOverride = require('method-override');
 var session = require('express-session');
 //load project modules & configs);
 var config = require('./config/app');
+var redisClient = require('./app/utils').redisClient;
+var allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTIONS,PATCH");
+  next();
+};
 mongoose.connect(config.url);
 
 var db = mongoose.connection;
@@ -49,11 +57,15 @@ var runServer = function() {
   app.use(morgan('dev'));
   app.use(express.static(__dirname + '/frontend'));
   app.set('port', process.env.PORT || 8080);
+  app.use(allowCrossDomain);
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({
    extended: true
   }));
   app.use(methodOverride());
+  if ('development' == app.get('env')) {
+    app.use(errorHandler());
+  }
 
   passport.use(new BasicStrategy(
   function(username, password, done) {
@@ -67,12 +79,17 @@ var runServer = function() {
     });
   }));
 
+  //check redis for token
   passport.use(new BearerStrategy(
   function(token, done) {
-    User.findOne({token: token}, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      return done(null, user, { scope: 'all' });
+    redisClient.get(token, function(err, user_id) {
+      if (err) return done(err);
+      if (!user_id) return done(null, false);
+      User.findOne({_id: user_id}, function(err, user) {
+        if (err) return done(err);
+        if (!user) return done(null, false);
+        return done(null, user, {scope: 'all', token: token});
+      });
     });
   }));
 
@@ -80,20 +97,11 @@ var runServer = function() {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  if ('development' == app.get('env')) {
-    app.use(errorHandler());
-  }
-
   var User = require('./app/models/user');
 
   passport.use(User.createStrategy());
   passport.serializeUser(User.serializeUser());
   passport.deserializeUser(User.deserializeUser());
-
-  app.get('/', express.static(path.join(__dirname, '/frontend')));
-  app.get('/api', function(req,res) {
-    res.send({'message': 'api is running', 'status': res.status});
-  });
 
   //middleware for checking if user's logged in
   var localauth = function(req, res, next) {
@@ -113,6 +121,10 @@ var runServer = function() {
     }
   };
 
+  app.get('/', express.static(path.join(__dirname, '/frontend')));
+  app.get('/api', function(req,res) {
+    res.send({'message': 'api is running', 'status': res.status});
+  });
   require('./app/routes/api/authenticate')(app);
   require('./app/routes/api/user')(app, localauth, auth, isOwner);
   require('./app/routes/api/event')(app, localauth, auth, isOwner);

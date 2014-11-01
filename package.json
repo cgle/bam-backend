@@ -24,6 +24,9 @@
     "express-session": "*",
     "passport-http": "*",
     "jsonwebtoken": "*",
-    "passport-http-bearer": "*"
+    "passport-http-bearer": "*",
+    "redis": "*",
+    "express-jwt": "*",
+    "express-unless": "*"
   }
 }
