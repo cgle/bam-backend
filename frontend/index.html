@@ -1,17 +1,35 @@
 <!doctype html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>Bam!</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="icon" type="image/jpeg" href="/bam.jpeg">
-  </head>
-  <body>
+<html lang="en" ng-app="bamApp" ng-controller="EventsListCtrl">
+<head>
+  <meta charset="utf-8">
+  <title ng-bind-template="Bam!: {{query}}">Bam!: </title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body>
 
-    wsup
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
 
-    <script src="scripts/main.js"></script>
+        Search: <input ng-model="query">
+
+      </div>
+      <div class="col-md-10">
+       
+        <ul class="events">
+          <li ng-repeat="event in events | filter:query">
+            {{event.name}}
+            <p>{{event.snippet}}</p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
