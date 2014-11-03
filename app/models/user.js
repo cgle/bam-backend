@@ -12,6 +12,10 @@ var User = new Schema({
   birthyear: {type: String, default: ''},
   profile_pic: {type: String, default: ''},
   zip: {type: String, default: ''},
+  current_pos: {
+    lng: {type: Number, default: 0.0},
+    lat: {type: Number. default: 0.0}
+  },
   address: {type: String, default: ''},
   created_events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
   attended_events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],

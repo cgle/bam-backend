@@ -19,14 +19,20 @@ module.exports = function(app) {
         res.send({error: err});
       } else {
         passport.authenticate('local')(req, res, function() {
-          return res.send({message: 'registered'});
+          User.collection.ensureIndex(
+              {current_pos: '2d'},
+              function(err) {
+                if (err) res.send({error: err});
+                else res.send({message: 'registered'});
+              }
+            );
         });
       }
     });
   });
 
   app.get('/api/authenticate/loggedin', function(req, res) {
-    res.send(req.isAuthenticated() ? req.user : '0');
+    res.send(req.isAuthenticated() ? {"message": "loggedin"} : {"error": "unauthorized"});
   });
 
   app.post('/api/authenticate/login', passport.authenticate(['local', 'basic']), function(req, res) {
