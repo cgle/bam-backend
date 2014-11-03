@@ -1,1 +1,11 @@
 Bam! Application
+
+Get that young bower 
+-> bower install
+-> npm install
+
+End to end tests with Protractor
+-> npm run protractor
+
+Unit tests with Karma
+-> npm test
