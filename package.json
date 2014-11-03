@@ -22,6 +22,11 @@
     "errorhandler": "*",
     "passport-local-mongoose": "*",
     "express-session": "*",
-    "passport-http": "*"
+    "passport-http": "*",
+    "jsonwebtoken": "*",
+    "passport-http-bearer": "*",
+    "redis": "*",
+    "express-jwt": "*",
+    "express-unless": "*"
   }
 }
