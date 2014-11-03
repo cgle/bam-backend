@@ -35,7 +35,7 @@ db.on('open', function () {
   //clustering implementation on CPU cores
   if (cluster.isMaster) {
   // Fork workers.
-  for (var i = 0; i < numCPUs; i++) {
+  for (var i = 0; i < 1; i++) {
     cluster.fork();
   }
 
