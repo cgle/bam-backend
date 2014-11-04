@@ -111,7 +111,7 @@ Make sure you have node, mongodb
     ```
   - GET `/api/authenticate/loggedin`: test if current user is logged in
     only works on browser using cookie
-      ```
+    ```
     $.ajax({
       url: '/api/authenticate/loggedin',
       type: 'get',
@@ -122,7 +122,6 @@ Make sure you have node, mongodb
         //error callback
       }
     });
-
     ```
   - POST `/api/authenticate/logout`: log user out
     ```
@@ -139,7 +138,6 @@ Make sure you have node, mongodb
         //error callback
       }
     });
-
     ```
 
 2. Event:
@@ -181,7 +179,6 @@ Make sure you have node, mongodb
         //error callback
       }
     });
-
     ```
   - PUT `/api/events/:event_id`: update event by event_id
 
