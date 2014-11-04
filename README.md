@@ -186,6 +186,7 @@ Make sure you have node, mongodb
   - GET `/api/users`: return users with query or all users
   - GET `/api/users/:user_id`: return user by user_id
   - PUT `/api/users/:user_id`: update user profile
+
     ```
     $.ajax({
       url: '/api/users/:user_id',
@@ -194,8 +195,7 @@ Make sure you have node, mongodb
         "Authorization": "Bearer ACCESS_TOKEN"
       }, //IMPORTANT: ACCESS TOKEN IS REQUIRED TO POST/PUT USER PROFILE
       data: {
-        fullname: 'dollhouse winter ball party',
-        ...
+        fullname: 'dollhouse winter ball party'
       },
       success: function(data) {
         //success callback
