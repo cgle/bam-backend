@@ -14,7 +14,7 @@ var User = new Schema({
   zip: {type: String, default: ''},
   current_pos: {
     lng: {type: Number, default: 0.0},
-    lat: {type: Number. default: 0.0}
+    lat: {type: Number, default: 0.0}
   },
   address: {type: String, default: ''},
   created_events: [{type: mongoose.Schema.ObjectId, ref: 'Event'}],
