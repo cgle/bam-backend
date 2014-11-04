@@ -10,6 +10,13 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
+  app.get('/api/users/:user_id', function(req, res) {
+    User.find({_id: req.params.user_id}, function(err, user) {
+      if (!err) return res.send({'data': user});
+      else res.send({error: err});
+    });
+  });
+
   app.put('/api/users/:user_id', auth, function(req, res) {
     var id = req.params.user_id;
     if (id != req.user._id) {
