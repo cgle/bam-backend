@@ -144,7 +144,7 @@ Make sure you have node, mongodb
 
 2. Event:
   - GET `/api/events`: get events, with or without query string. If query includes `lat` and `lng`, return events within `distance`, by default 100 m.
-      ```
+    ```
     $.ajax({
       url: '/api/events' + QUERY_STRING, //not required
       type: 'get',
