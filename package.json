@@ -27,6 +27,7 @@
     "passport-http-bearer": "*",
     "redis": "*",
     "express-jwt": "*",
-    "express-unless": "*"
+    "express-unless": "*",
+    "knox": "*"
   }
 }

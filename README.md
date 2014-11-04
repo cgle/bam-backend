@@ -15,12 +15,26 @@ Make sure you have node, mongodb
 * feature/*: create your own feature branches by "git checkout develop, git pull origin develop, git checkout -b feature/your-branch-name" to develop feature. When done, add/commit/push to corresponding feature/ branch and pull request for peer code review
 * hotfix/*: create your own hotfix branch by "git checkout master, git pull origin master, git checkout out -b hotfix/your-branch-name". When done, merge master and develop, then push develop and master
 
+##Tech stack
+1. Backend: nodeJS
+  - Server: AWS EC2
+  - Redis: AWS ElastiCache or RedisLabs
+  - MongoDB: MongoLabs
+
+2. Frontend: AngularJS, iOS, Android
+
+##Models:
+1. User
+2. Event
+3. Vote
+4. Comment
+
 ##API Endpoints:
 1. Authenticate:
   - POST `/api/authenticate/register`: register new user
   - POST `/api/authenticate/login`: log user in
   - GET `/api/authenticate/loggedin`: test if current user is logged in
-  - POST `/api/authenticate/logout: log user out
+  - POST `/api/authenticate/logout`: log user out
 
 2. Event:
   - GET `/api/events`: get events, with or without query string. If query includes `lat` and `lng`, return events within `distance`, by default 100 m.
@@ -44,3 +58,5 @@ Make sure you have node, mongodb
   - POST `/api/events/:event_id/comments`: create new comment
   - PUT `/api/events/:event_id/comments/:comment_id`: update comment
   - DELETE `/api/events/:event_id/comments/:comment_id`: delete comment
+
+
