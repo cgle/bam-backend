@@ -17,14 +17,23 @@
       <div class="col-md-2">
 
         Search: <input ng-model="query">
+        Sort by:
+        <select ng-model="orderProp">
+          <option value="name">Alphabetical</option>
+          <option value="age">Newest</option>
+          <option value="-age">Oldest</option>
+        </select>
 
       </div>
       <div class="col-md-10">
        
         <ul class="events">
-          <li ng-repeat="event in events | filter:query">
-            {{event.name}}
-            <p>{{event.snippet}}</p>
+          <li ng-repeat="event in events | filter:query | orderBy: orderProp">
+             <span>{{event.name}}</span>
+            <p>
+              {{event.snippet}} <br>
+              {{event.date}}
+            </p>
           </li>
         </ul>
 
