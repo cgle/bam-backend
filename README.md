@@ -71,6 +71,7 @@ Make sure you have node, mongodb
 ##API Endpoints:
 1. Authenticate:
   - POST `/api/authenticate/register`: register new user
+
     ```
     $.ajax({
       url: '/api/authenticate/register',
@@ -91,7 +92,9 @@ Make sure you have node, mongodb
     });
 
     ```
+
   - POST `/api/authenticate/login`: log user in
+
     ```
     $.ajax({
       url: '/api/authenticate/login',
@@ -109,8 +112,11 @@ Make sure you have node, mongodb
     });
 
     ```
+
   - GET `/api/authenticate/loggedin`: test if current user is logged in
     only works on browser using cookie
+
+
     ```
     $.ajax({
       url: '/api/authenticate/loggedin',
@@ -123,7 +129,9 @@ Make sure you have node, mongodb
       }
     });
     ```
+
   - POST `/api/authenticate/logout`: log user out
+
     ```
     $.ajax({
       url: '/api/authenticate/logout',
@@ -140,8 +148,10 @@ Make sure you have node, mongodb
     });
     ```
 
+
 2. Event:
   - GET `/api/events`: get events, with or without query string. If query includes `lat` and `lng`, return events within `distance`, by default 100 m.
+
     ```
     $.ajax({
       url: '/api/events' + QUERY_STRING, //not required
@@ -155,8 +165,10 @@ Make sure you have node, mongodb
     });
 
     ```
+
   - GET `/api/events/:event_id`: return event by event_id
   - POST `/api/events`: create new event
+
     ```
     $.ajax({
       url: '/api/authenticate/events',
@@ -180,6 +192,7 @@ Make sure you have node, mongodb
       }
     });
     ```
+
   - PUT `/api/events/:event_id`: update event by event_id
 
 3. User
