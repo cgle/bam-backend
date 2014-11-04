@@ -207,7 +207,7 @@ Make sure you have node, mongodb
         //error callback
       }
     });
-
+    ```
 
 4. Vote //REQUIRE ACCESS TOKEN TO POST/PUT VOTES
   - GET `/api/events/:event_id/votes`: return all votes given event_id, can query by user_id
