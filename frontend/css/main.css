@@ -12,10 +12,16 @@
     float: left;
 }
 
-.header .quick-navigation .search .icon {
-    background-image: url(../images/magnifying-glass.png);
-    width: 16px;
-    height: 16px;
+.sections img {
+    margin-top: -3px;
+}
+
+.search img {
+    margin-top: -3px;
+}
+
+.settings img {
+    margin-top: -3px;
 }
 
 .user-tools button {
@@ -24,10 +30,51 @@
 
 .masthead {
     clear: both;
-    font-family: Time New Roman;
-    font-size: 50px;
     text-align: center;
-    border: 1px solid #000000;
+    /*padding: 15px;*/
+    margin-bottom: -15px;
+}
+
+#nameplate {
+    font-size: 50px;
+}
+
+.masthead-menu {
+    margin-top: 10px;
+    margin-right: 50px;
+    margin-bottom: -10px;
+}
+
+.masthead-menu li {
+    display: inline-block;
+    margin-right: 3px;
+}
+
+.masthead hr {
+    display: block;
+    height: 1px;
+    border-top: 2px solid black;
+}
+
+.page-wide-text {
+    font-family: "Times New Roman";
+}
+
+.mini-navigation-menu {
+    margin-bottom: -15px;
+    text-align: center;
+}
+
+.mini-navigation-menu li {
+    display: inline-block;
+    margin-right: 48px;
+    font-size: 13px;
+}
+
+.mini-navigation hr {
+    display: block;
+    height: 1px;
+    border-top: 1px solid #ccc;
 }
 
 .button-text {
@@ -41,3 +88,52 @@ button {
     border : 0;
     background-color: white;
 }
+
+.comic-container {
+    border: 1px solid black;
+    height: 610px;
+    width: 100%;
+}
+
+.comic-block {
+    height: 200px;
+    border: 1px solid black;
+    background: #2db34a;
+}
+
+.comic-container > div > div:not(:last-child) {
+    margin-right: 0.5%;
+}
+
+.comic-container div:not(:first-child) div{
+    margin-top: 0.5%;
+}
+
+.first-row {
+    clear: both;
+}
+
+.second-row {
+    clear: both;
+}
+
+#title-section {
+    float: left;
+    width: 63%;
+}
+
+#title-aside {
+    float:left;
+    width: 36.5%;
+}
+
+.second-row div {
+    float: left;
+    width: 24.62%;
+}
+
+.third-row div {
+    float: left;
+    width: 33%;
+}
+
