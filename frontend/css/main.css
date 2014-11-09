@@ -1,0 +1,43 @@
+/* Header */
+
+.header {
+    margin: 10px 0px 0px 0px;
+}
+
+.header div button {
+    margin: 10px;
+}
+
+.quick-navigation button {
+    float: left;
+}
+
+.header .quick-navigation .search .icon {
+    background-image: url(../images/magnifying-glass.png);
+    width: 16px;
+    height: 16px;
+}
+
+.user-tools button {
+    float: right;
+}
+
+.masthead {
+    clear: both;
+    font-family: Time New Roman;
+    font-size: 50px;
+    text-align: center;
+    border: 1px solid #000000;
+}
+
+.button-text {
+    color: black;
+    background-color: transparent;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+button {
+    border : 0;
+    background-color: white;
+}
