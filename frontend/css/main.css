@@ -90,14 +90,14 @@ button {
 }
 
 .comic-container {
-    border: 1px solid black;
-    height: 610px;
+    /*border: 1px solid black;*/
+    height: 613px;
     width: 100%;
 }
 
 .comic-block {
     height: 200px;
-    border: 1px solid black;
+    border: 2px solid black;
     background: #2db34a;
 }
 
@@ -135,5 +135,59 @@ button {
 .third-row div {
     float: left;
     width: 33%;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.80);
+}
+
+.overlay-close {
+    position: absolute;
+    right: 312px;
+    top: 87px;
+    overflow: hidden;
+    border: none;
+    z-index: 100;
+}
+
+.overlay-data {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.overlay-open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.login-button {
+    background-color: #FF3333;
+    border-radius: 5px;
+}
+
+.login-button span {
+    color: white;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 5px;
+}
+
+.login-container {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    height: 325px;
+    width: 375px;
+    border: 1px solid #d3d3d3;
 }
 

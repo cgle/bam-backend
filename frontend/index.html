@@ -2,13 +2,15 @@
 <html lang="en" ng-app="bamApp" ng-controller="EventsListCtrl">
 <head>
   <meta charset="utf-8">
-  <title ng-bind-template="Bam!: {{query}}">Bam!: </title>
+  <!-- <title ng-bind-template="Bam!: {{query}}">Bam!: </title> -->
+  <title>Bam!</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" type="image/jpeg" href="/bam.jpeg">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <script src="bower_components/angular/angular.js"></script>
-  <script src="js/controllers.js"></script>
   <script src="bower_components/jquery/jquery.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/main.js"></script>
 </head>
 <body>
 
@@ -27,10 +29,10 @@
       </div>
 
       <div class="user-tools">
-        <button class="login-button">
-          <span class="button-text">Log In</span>
+        <button class="login-button" type="button">
+          <span>Log In</span>
         </button>
-        <button class="settings">
+        <button class="settings" type="button"`>
           <img height="18" width="18" src="images/settings.png">
           <span class="button-text">Settings</span>
         </button>
@@ -62,23 +64,54 @@
 
     <div class="comic-container">
       <div class="first-row">
-        <div id="title-section" class="comic-block"></div>
-        <div id="title-aside" class="comic-block"></div>
+        <div id="title-section" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+        </div>
+        <div id="title-aside" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
+        </div>
       </div>
       <div class="second-row">
-        <div class="comic-block"></div>
-        <div class="comic-block"></div>
-        <div class="comic-block"></div>
-        <div class="comic-block"></div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
+        </div>
       </div>
       <div class="third-row">
-        <div class="comic-block"></div>
-        <div class="comic-block"></div>
-        <div class="comic-block"></div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
+        </div>
       </div>
     </div>
 
     <hr/>
+
+    <div class="overlay overlay-data">
+      <div class="login-container">
+      <button type="button" class="overlay-close">
+        <img height="30" width="30" src="images/close-button.png">  
+      </button>
+      <form id="login-form">
+          Log In
+          <input type="text" id="login-email" name="login-email" placeholder="Email Address">
+          <input type="password" id="login-password" name="login-password" placeholder="Password">
+      </form>
+      </div>
+    </div>
 
   </div>
 
