@@ -1,0 +1,236 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>Bam!</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+
+  <script src="/bower_components/masonry.pkgd.min.js"></script>
+  <style>
+
+
+    body{
+      padding-top: 30px;
+      padding-left: 40px;
+    }
+
+    .center {
+    margin-left: auto;
+    margin-right: auto;
+    border-style: solid;
+
+    /*background-color: #b0e0e6;*/
+  }
+
+
+    .main-img {
+      /*padding-left: 5%;*/
+      position: relative;
+      z-index: 1;
+      width: 80%;
+      height: 250px;
+      border-right-width: 50px;
+      border-left-width: 50px;
+      border-color: red;
+      background: url(images/dots.png);
+      /*background-repeat: no-repeat;*/
+      background-size:75px 75px;
+      /*margin-left: 20px;*/
+      /*top: -30px;*/
+    }
+
+    .main-title {
+      padding: 4px;
+      position: relative;
+      z-index: 2;
+      /*font-size: 100px;*/
+      border-style: none;
+      /*margin: 4px 4px 0px 4px;*/
+      display: table;
+      background-color: red;
+      width: 80%;
+    }
+
+    .main-title-text {
+      text-align: center;
+      /*background-color: white;*/
+      font-family: 'Bangers', cursive;
+      font-size: 70px;
+      color: white;
+      text-shadow: 4px 4px black;
+      letter-spacing: 4px;
+    }
+
+    .vote {
+      font-size: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 40%;
+    }
+
+    #bam-vote{
+      color: red;
+      padding: 20px;
+    }
+
+    #slam-vote {
+      color: blue;
+      padding: 20px;
+    }
+
+    .vote-count {
+      border-style: solid;
+      display: inline;
+    }
+
+    .attending {
+      margin-top: 40px;
+      padding: 15px;
+      border-style: solid;
+      width: 91%;
+      height: 150px;
+      background-color: white;
+    }
+
+    .event-description-container {
+      height: 100%;
+      width: 50%;
+      z-index: 2;
+      /*padding: 5px;*/
+      overflow: auto;
+      /*margin-top: -230px;*/
+      float: right;
+
+
+    }
+
+    .event-description-text {
+      display: inline;
+      line-height: 1.5em;
+      background: yellow;
+    }
+
+
+
+    .btn {
+      width: 150px;
+    }
+
+    .event-info {
+      border-style: solid;
+      padding:5px;
+      background-color: #0080ff;
+      font-size: 20px;
+      width: 80%
+    }
+
+    .event-date {
+      color: white;
+    }
+
+    .event-location {
+      color: white;
+      float: right;
+    }
+
+    .container {
+      width: 80%;
+      height: 300px;
+      background-color: red;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+
+  <div class="header">
+    <div class="quick-navigation">
+      <button class="sections">
+        <img height="13" width="13" src="images/three-lines.png">
+        <span class="button-text">Sections</span>
+      </button>
+      <button class="search">
+        <img height="13" width="13" src="images/magnifying-glass.png">
+        <span class="button-text">Search</span>
+      </button>
+    </div>
+
+    <div class="user-tools">
+      <button class="login-button" type="button">
+        <span>Log In</span>
+      </button>
+      <button class="settings" type="button"`>
+        <img height="18" width="18" src="images/settings.png">
+        <span class="button-text">Settings</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="masthead">
+    <img id="nameplate" width="200" height="150" src="/images/bam.jpeg">
+    <ul class="masthead-menu">
+      <li class="page-wide-text">Sunday, November 9, 2014</li>
+      <li style="color: #d3d3d3"> | </li>
+      <li class="page-wide-text">Users Online: 2,001</li>
+    </ul>
+    <hr/>
+  </div>
+
+  <div class="mini-navigation">
+    <ul class="mini-navigation-menu">
+      <li class="page-wide-text">Event Type 1</li>
+      <li class="page-wide-text">Event Type 2</li>
+      <li class="page-wide-text">Event Type 3</li>
+      <li class="page-wide-text">Event Type 4</li>
+      <li class="page-wide-text">Event Type 5</li>
+      <li class="page-wide-text">Event Type 6</li>
+      <li class="page-wide-text">Event Type 7</li>
+    </ul>
+    <hr/>
+  </div>
+
+  <div class="vote">
+    <button type="button" class="btn btn-primary">Bam!</button>
+      <div class="vote-count">25</div>
+    <button type="button" class="btn btn-danger">Slam!</button>
+      <div class="vote-count">25</div>
+  </div>
+
+
+
+
+    <div class="main-title center">
+      <div class="main-title-text">
+        Event title
+      </div>
+    </div>
+    <div class="event-info center">
+      <span class="event-date">July 3, 2014</span>
+      <span class="event-location">1606 Saint Clair Ave, Saint Paul MN</span>
+    </div>
+    <div class="main-img center">
+      <img height="100%" width="50%" src="images/c-and-hobbes-one.png">
+      <div class="event-description-container">
+        <b><i><p class="event-description-text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        </p></i></b>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="attending center">
+        Attendees
+      </div>
+    </div>
+
+
+
+
+</body>
+</html>
