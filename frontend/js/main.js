@@ -3,22 +3,37 @@
 $(document).ready(function() {
 
     $(".login-button").click(function() {
-        $(".overlay").addClass('overlay-open');
-    });
-
-    $(".overlay-close").click(function() {
-        $(".overlay").removeClass("overlay-open");
+        $("#login-container").addClass('overlay-open');
     });
 
     $(".search-button").click(function() {
-        $(".search-flyout").addClass('search-open');
+        $("#search-flyout").addClass('overlay-open');
     });
 
     $(".sections-button").click(function() {
-        $(".dropdown").addClass('dropdown-open');
+        $(".dropdown-container").toggle();
+    })
+
+    $('.sections-button').click(function(event){
+        event.stopPropagation();
     });
 
-    // if(!$(event.target).is('.search-container')) {
-    //     $(".search-flyout").removeClass("search-open");
-    // }
+    $('.settings-button').click(function(event){
+        $("#settings-container").addClass('overlay-open');
+    })
+
+    $('html').click(function(e) {
+        $('.dropdown-container').hide();
+        if (e.target.className == 'overlay overlay-open') {
+            $(".overlay").removeClass("overlay-open");
+        }
+    });
+
+    $(".comic-block").mouseover(function(e) {
+        if (e.target.className == 'comic-block') {
+            $(this).css("opacity","0.50");
+        }
+    }).mouseout(function() {
+        $(this).css("opacity","1.0");
+    })
 });

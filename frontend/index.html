@@ -20,10 +20,17 @@
         <button class="sections-button">
           <img height="13" width="13" src="images/three-lines.png">
           <span class="button-text">Sections</span>
+          <ul class="dropdown-container">
+            <li><a href="#">Social</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Food</a></li>
+            <li><a href="#">Recreational</a></li>
+            <li><a href="#">Informational</a></li>
+          </ui>
         </button>
         <button class="search-button">
           <img height="13" width="13" src="images/magnifying-glass.png">
-          <span class="button-text">Search</span>      
+          <span id="search-button" class="button-text">Search</span>      
         </button>
       </div>
 
@@ -31,7 +38,7 @@
         <button class="login-button" type="button">
           <span>Log In</span>
         </button>
-        <button class="settings" type="button"`>
+        <button class="settings-button" type="button"`>
           <img height="18" width="18" src="images/settings.png">
           <span class="button-text">Settings</span>
         </button>
@@ -62,7 +69,7 @@
     <div class="comic-container">
       <div class="first-row">
         <div id="title-section" class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+          <!-- <img class="comic-block-overlay" height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
         </div>
         <div id="title-aside" class="comic-block">
           <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
@@ -98,11 +105,7 @@
 
     <hr/>
 
-    <div class="overlay">
-      <div class="login-container">
-        <button type="button" id="login-close" class="overlay-close">
-          <img height="30" width="30" src="images/close-button.png">  
-        </button>
+      <div id="login-container" class="overlay">
         <form id="login-form">
           <h3 class="page-wide-text">Log In</h3>
           <input type="text" id="login-email" name="login-email" placeholder="Email Address">
@@ -115,21 +118,34 @@
           </button>
         </form>
       </div>
-    </div>
 
-    <div class="search-flyout">
-      <div class="search-container">
-        <form id="search-form">
-          <input type="text" id="search" name="search" placeholder="Search">
+      <div id="search-flyout" class="overlay">
+        <div class="search-container">
+          <form id="search-form">
+            <input type="text" name="search" placeholder="Search">
+          </form>
+        </div>
+      </div>
+
+      <div id="settings-container" class="overlay">
+        <form id="settings-form">
+          <h3 class="page-wide-text">Settings</h3>
+          
+          <div>
+            Distance:  
+            <input type="radio" name="distance" checked> 1 mi.
+            <input type="radio" name="distance"> 3 mi.
+            <input type="radio" name="distance"> 5 mi.
+            <input type="radio" name="distance"> 10 mi.
+          </div>
+          <div>
+            Order By:  
+            <input type="radio" name="popularity" checked> Best Event
+            <input type="radio" name="popularity"> Upvotes
+            <input type="radio" name="popularity"> Downvotes
+          </div>
         </form>
       </div>
-    </div>
-
-    <div class="dropdown">
-      <div class="dropdown-container">
-        <p>Drop Down</p>
-      </div>
-    </div>
 
 
 <!--   <div class="container-fluid">
