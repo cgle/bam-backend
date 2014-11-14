@@ -73,21 +73,37 @@ module.exports = function(app, localauth, auth, isOwner) {
 
   app.put('/api/events/:event_id', auth, isOwner, function(req, res) {
     var id = req.params.event_id;
+    var add = req.query.add ? req.query.add : false;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
+    attendants = _.union(attendants,cohosts);
     var categories = req.body.categories ? req.body.categories : [];
     var update = _.omit(req.body, ['cohosts','attendants','user_id','_id', 'categories']);
     update['updatedAt'] = Date.now();
-    Event.update(
-      {_id: id},
-      {
-        $set: update,
-        $addToSet: {cohosts: cohosts, attendants: attendants, categories: categories},
-      }, {multi: true}, function(err, data) {
-        if (err) res.send({error: err});
-        else res.send({data: data});
-      }
-    );
+    if (add) {
+      Event.update(
+        {_id: id},
+        {
+          $set: update,
+          $addToSet: {cohosts: cohosts, attendants: attendants, categories: categories},
+        }, {multi: true}, function(err, data) {
+          if (err) res.send({error: err});
+          else res.send({data: data});
+        }
+      );
+    } else {
+      Event.update(
+        {_id: id},
+        {
+          $set: update,
+          $addToSet: {categories: categories},
+          $pull: {cohosts: cohosts, attendants: attendants},
+        }, {multi: true}, function(err, data) {
+          if (err) res.send({error: err});
+          else res.send({data: data});
+        }
+      );
+    }
   });
 
 }
