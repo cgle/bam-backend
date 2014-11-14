@@ -1,0 +1,76 @@
+<!DOCTYPE>
+<html>
+<head>
+  <title>Bam!</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
+  <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="/bower_components/masonry.pkgd.min.js"></script>
+
+  <style>
+    * {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+
+.masonry {
+  max-width: 1000px;
+}
+
+.masonry .item {
+  width:  200px;
+  height: 200px;
+  float: left;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
+
+.item.w2 { width:  120px; }
+.item.w3 { width:  180px; }
+.item.w4 { width:  240px; }
+
+.item.h2 { height: 100px; }
+.item.h3 { height: 130px; }
+.item.h4 { height: 180px; }
+
+.bg {
+  background: url(images/c-and-hobbes-title.png);
+  background-size: 500px 200px;
+  min-height: 300px;
+  background-repeat: no-repeat;
+}
+  </style>
+
+</head>
+<body>
+  <h1>Masonry - columnWidth</h1>
+
+
+
+<div class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 30 }'>
+  <div class="item"></div>
+  <div class="item w2 h2"></div>
+  <div class="item h3"></div>
+
+</div>
+
+<div class='bg'>
+  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobos
+</div>
+
+
+
+
+
+
+</body>
+
+</html>
