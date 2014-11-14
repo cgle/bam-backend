@@ -15,14 +15,13 @@
 <body>
 
   <div class="container">
-
     <div class="header">
       <div class="quick-navigation">
-        <button class="sections">
+        <button class="sections-button">
           <img height="13" width="13" src="images/three-lines.png">
           <span class="button-text">Sections</span>
         </button>
-        <button class="search">
+        <button class="search-button">
           <img height="13" width="13" src="images/magnifying-glass.png">
           <span class="button-text">Search</span>      
         </button>
@@ -42,7 +41,7 @@
     <div class="masthead">
       <img id="nameplate" width="200" height="150" src="/images/bam.jpeg">
       <ul class="masthead-menu">
-        <li class="page-wide-text">Sunday, November 9, 2014</li>
+        <li class="page-wide-text">Friday, November 14, 2014</li>
         <li style="color: #d3d3d3"> | </li>
         <li class="page-wide-text">Users Online: 2,001</li>
       </ul>
@@ -51,13 +50,11 @@
 
     <div class="mini-navigation">
       <ul class="mini-navigation-menu">
-        <li class="page-wide-text">Event Type 1</li>
-        <li class="page-wide-text">Event Type 2</li>
-        <li class="page-wide-text">Event Type 3</li>
-        <li class="page-wide-text">Event Type 4</li>
-        <li class="page-wide-text">Event Type 5</li>
-        <li class="page-wide-text">Event Type 6</li>
-        <li class="page-wide-text">Event Type 7</li>
+        <li class="page-wide-text"><a href="#">Social</a></li>
+        <li class="page-wide-text"><a href="#">Sports</a></li>
+        <li class="page-wide-text"><a href="#">Food</a></li>
+        <li class="page-wide-text"><a href="#">Recreational</a></li>
+        <li class="page-wide-text"><a href="#">Informational</a></li>
       </ul>
       <hr/>
     </div>
@@ -97,23 +94,42 @@
         </div>
       </div>
     </div>
+  </div>
 
     <hr/>
 
-    <div class="overlay overlay-data">
+    <div class="overlay">
       <div class="login-container">
-      <button type="button" class="overlay-close">
-        <img height="30" width="30" src="images/close-button.png">  
-      </button>
-      <form id="login-form">
-          Log In
+        <button type="button" id="login-close" class="overlay-close">
+          <img height="30" width="30" src="images/close-button.png">  
+        </button>
+        <form id="login-form">
+          <h3 class="page-wide-text">Log In</h3>
           <input type="text" id="login-email" name="login-email" placeholder="Email Address">
           <input type="password" id="login-password" name="login-password" placeholder="Password">
-      </form>
+          <button class="login-button" type="button">
+            <span>Log In</span>
+          </button>
+          <button class="register-button" type="button">
+            <span>Register</span>
+          </button>
+        </form>
       </div>
     </div>
 
-  </div>
+    <div class="search-flyout">
+      <div class="search-container">
+        <form id="search-form">
+          <input type="text" id="search" name="search" placeholder="Search">
+        </form>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="dropdown-container">
+        <p>Drop Down</p>
+      </div>
+    </div>
 
 
 <!--   <div class="container-fluid">
