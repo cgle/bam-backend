@@ -21,3 +21,7 @@ bamApp.controller('EventsListCtrl', ['$scope',
     ];
     $scope.orderProp = 'age';
 }]);
+
+bamApp.controller('UpdateController', ['$scope', function($scope){
+  $scope.master = {firstName: "John", lastName: "Doe"};
+}])
