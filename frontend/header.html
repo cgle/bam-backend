@@ -1,76 +1,109 @@
-<!DOCTYPE>
-<html>
-<head>
-  <title>Bam!</title>
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
-  <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/jquery/jquery.js"></script>
-  <script src="/bower_components/masonry.pkgd.min.js"></script>
+ <div class="container">
+    <div class="header">
+      <div class="quick-navigation">
+        <button class="sections-button">
+          <img height="13" width="13" src="images/three-lines.png">
+          <span class="button-text">Sections</span>
+          <ul class="dropdown-container">
+            <li><a href="#">Social</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Food</a></li>
+            <li><a href="#">Recreational</a></li>
+            <li><a href="#">Informational</a></li>
+          </ui>
+        </button>
+        <button class="search-button">
+          <img height="13" width="13" src="images/magnifying-glass.png">
+          <span id="search-button" class="button-text">Search</span>      
+        </button>
+      </div>
 
-  <style>
-    * {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
+      <div class="user-tools">
+        <button class="login-button" type="button">
+          <span>Log In</span>
+        </button>
+        <button class="settings-button" type="button"`>
+          <img height="18" width="18" src="images/settings.png">
+          <span class="button-text">Settings</span>
+        </button>
+      </div>
+    </div>
 
-body { font-family: sans-serif; }
+    <div class="masthead">
+      <img id="nameplate" width="200" height="150" src="/images/bam.jpeg">
+      <ul class="masthead-menu">
+        <li class="page-wide-text">Friday, November 14, 2014</li>
+        <li style="color: #d3d3d3"> | </li>
+        <li class="page-wide-text">Users Online: 2,001</li>
+      </ul>
+      <hr/>
+    </div>
+
+    <div class="mini-navigation">
+      <ul class="mini-navigation-menu">
+        <li class="page-wide-text"><a href="#">Social</a></li>
+        <li class="page-wide-text"><a href="#">Sports</a></li>
+        <li class="page-wide-text"><a href="#">Food</a></li>
+        <li class="page-wide-text"><a href="#">Recreational</a></li>
+        <li class="page-wide-text"><a href="#">Informational</a></li>
+      </ul>
+      <hr/>
+    </div>   
+  </div>
+
+    <hr/>
+
+      <div id="login-container" class="overlay">
+        <form id="login-form">
+          <h3 class="page-wide-text">Log In</h3>
+          <input type="text" id="login-email" name="login-email" placeholder="Email Address">
+          <input type="password" id="login-password" name="login-password" placeholder="Password">
+          <button class="login-button" type="button">
+            <span>Log In</span>
+          </button>
+          <button class="register-button" type="button">
+            <span>Register</span>
+          </button>
+        </form>
+      </div>
+
+      <div id="search-flyout" class="overlay">
+        <div class="search-container">
+          <form id="search-form">
+            <input type="text" name="search" placeholder="Search">
+          </form>
+        </div>
+      </div>
+
+      <div id="settings-container" class="overlay">
+        <form id="settings-form">
+          <h3 class="page-wide-text">Settings</h3>
+          
+          <div>
+            Distance:  
+            <input type="radio" name="distance" checked> 1 mi.
+            <input type="radio" name="distance"> 3 mi.
+            <input type="radio" name="distance"> 5 mi.
+            <input type="radio" name="distance"> 10 mi.
+          </div>
+          <div>
+            Order By:  
+            <input type="radio" name="popularity" checked> Best Event
+            <input type="radio" name="popularity"> Upvotes
+            <input type="radio" name="popularity"> Downvotes
+          </div>
+        </form>
+      </div>
 
 
-.masonry {
-  max-width: 1000px;
-}
 
-.masonry .item {
-  width:  200px;
-  height: 200px;
-  float: left;
-  background: #D26;
-  border: 2px solid #333;
-  border-color: hsla(0, 0%, 0%, 0.5);
-  border-radius: 5px;
-}
 
-.item.w2 { width:  120px; }
-.item.w3 { width:  180px; }
-.item.w4 { width:  240px; }
+      </div>
+    </div>
+  </div>
 
-.item.h2 { height: 100px; }
-.item.h3 { height: 130px; }
-.item.h4 { height: 180px; }
-
-.bg {
-  background: url(images/c-and-hobbes-title.png);
-  background-size: 500px 200px;
-  min-height: 300px;
-  background-repeat: no-repeat;
-}
-  </style>
-
-</head>
-<body>
-  <h1>Masonry - columnWidth</h1>
+  <script src="js/main.js"></script>
+   
 
 
 
-<div class="masonry js-masonry"  data-masonry-options='{ "columnWidth": 30 }'>
-  <div class="item"></div>
-  <div class="item w2 h2"></div>
-  <div class="item h3"></div>
-
-</div>
-
-<div class='bg'>
-  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobos
-</div>
-
-
-
-
-
-
-</body>
-
-</html>

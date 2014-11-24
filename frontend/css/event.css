@@ -1,0 +1,58 @@
+/* css for events page */
+body {
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.vote-button-container {
+	width: 40%;
+}
+
+.vote-btn {
+	width: 200px;
+}
+
+.main-event-container {
+	background-color: #555555;
+	color:#ffa500;
+	width:80%;
+	max-width: 1000px;
+}
+
+.event-title {
+	text-align: center;
+}
+
+.data-location-container {
+	color: #555555;
+	background-color: #ffa500;
+}
+
+#event-date {
+
+}
+
+#event-location {
+	float: right;
+}
+
+#event-desc {
+	float: right;
+	width: 40%;
+	padding-right: 40px;
+	padding-top: 40px;
+}
+
+#event-img {
+	padding-left: 20px;
+}
+
+.attendees {
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+}

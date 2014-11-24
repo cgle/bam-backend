@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="eventApp">
+<head>
+  <meta charset="utf-8">
+  <title>Bam!</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/event.css">
+  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/eventApp.js"></script>
+  <script src="js/main.js"></script>
+</head>
+<body>
+
+
+  <div>
+    <div ng-include='"header.html"'></div>
+  </div>
+
+  <div class="vote-button-container center">
+    <button type="button" class="btn btn-success vote-btn">Bam!</button>
+    <button type="button" class="btn btn-danger vote-btn">Bam!</button>
+    <div>
+      <span>vote count</span>
+      <span>vote count</span>
+    </div>
+  </div>
+
+  <div ng-controller="eventsController" class="main-event-container center">
+    <div ng-include='"event-title.html"'></div>
+    <div class="center data-location-container">
+      <span ng-bind="eventDate" id="event-date"></span>
+      <span ng-bind="eventLocation" id="event-location"></span>
+    </div>
+    <div ng-include='"event-content.html"'></div>
+
+    <ul>
+      <li ng-repeat="event in events">{{ event.name }}</li>
+    </ul>
+
+  </div>
+  <!-- <div ng-app="eventsApps"> -->
+    <div ng-controller="testResourceController">
+
+    </div>
+<!--   </div> -->
+  
+
+
+
+</body>
+</html>
