@@ -122,6 +122,7 @@ var runServer = function() {
   };
 
   app.get('/', express.static(path.join(__dirname, '/frontend')));
+  app.get('/structured', express.static(path.join(__dirname, '/structured_frontend')));
   app.get('/api', function(req,res) {
     res.send({'message': 'api is running', 'status': res.status});
   });
