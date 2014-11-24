@@ -25,7 +25,6 @@ bamApp.controller('EventsListCtrl', ['$scope',
     $scope.orderProp = 'age';
 }]);
 
-<<<<<<< HEAD
 
 bamApp.controller('eventsController', function($scope, eventsFactory) {
   eventsFactory.getEventsAsync(function(results) {
