@@ -25,6 +25,7 @@ bamApp.controller('EventsListCtrl', ['$scope',
     $scope.orderProp = 'age';
 }]);
 
+<<<<<<< HEAD
 
 bamApp.controller('eventsController', function($scope, eventsFactory) {
   eventsFactory.getEventsAsync(function(results) {
@@ -80,4 +81,8 @@ eventControllers.controller('testResourceController', function($scope, EventTest
 });
 
 
+
+bamApp.controller('UpdateController', ['$scope', function($scope){
+  $scope.master = {firstName: "John", lastName: "Doe"};
+}])
 
