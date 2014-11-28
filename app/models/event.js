@@ -5,6 +5,7 @@ var User = require('./user');
 var Event = new Schema({
   name: String,
   address: {type: String, trim: true},
+  date: {type: Date, default: Date.now},
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now},
   description: String,

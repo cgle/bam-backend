@@ -39,3 +39,9 @@ $(document).ready(function() {
 
     console.log('js loaded');
 });
+
+function getUserData(userId) {
+    $ajax({
+        url: '/api/users/' + userId,
+    });
+}
