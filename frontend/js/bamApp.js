@@ -22,7 +22,7 @@ bamApp.config(function($routeProvider) {
 			templateUrl: "user_Test.html"
 		}).
 		when('/user/edit', {
-			controller: 'UserController',
+			controller: 'UserEditController',
 			templateUrl: "userInfo_form.html"
 		});
 

@@ -43,14 +43,41 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
 }]);
 
 
-eventControllers.controller("UserController", ['$scope', '$location', function($scope, $location){
+
+eventControllers.factory('UserData', function(){
+  var UserData = {firstName:"Rhyan", lastName:"Foo Kune", email:"rfookune@macalester.edu", birthdate:"12/30/1992", userDescription:"Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi."};
+  return UserData;
+})
+
+eventControllers.controller("UserEditController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
   window.scope = $scope;
-  $scope.credentials = { firstName:"", lastName:"", email:""};
+  $scope.credentials = { firstName:"", lastName:"", email:"", birthdate:"", userDescription:""};
+  window.data = UserData;
 
   $scope.saveChanges = function() {
-    $location.path('/user')
+
+    UserData.firstName = $scope.credentials.firstName;
+    UserData.lastName = $scope.credentials.lastName;
+    UserData.email = $scope.credentials.email;
+    $scope.userDescription = $scope.credentials.userDescription;
+    $location.path('/user');
   }
 }]);
+
+eventControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
+  window.scope = $scope;
+  window.scope = UserData;
+  $scope.firstName = UserData.firstName;
+  $scope.lastName = UserData.lastName;
+  $scope.email = UserData.email;
+  $scope.birthdate = UserData.birthdate
+  $scope.userDescription = UserData.userDescription;
+
+  $scope.edit = function() {
+    $location.path('/user/edit')
+  }
+}]);
+
 
 // bamApp.controller('eventsController', function($scope, eventsFactory) {
 //   eventsFactory.getEventsAsync(function(results) {
