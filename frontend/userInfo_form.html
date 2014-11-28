@@ -1,0 +1,27 @@
+
+
+<form id="edit-form" ng-submit="saveChanges()">
+    <h3 class="page-wide-text">Edit Personal Information</h3>
+    </br>
+    
+    <input type="text" id="firstName" name="firstName" placeholder="First Name" ng-model="credentials.firstName" required>
+    
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name"  ng-model="credentials.lastName" required>
+    
+    <input type="email" id="email" name="email" placeholder="Email Address"  ng-model="credentials.email" required>
+    
+    </br>
+    <span class='editText'>Date of Birth</span>
+    </br>
+    <input type="date" id="birthdate" name="birthdate" placeholder="Date of Birth"  ng-model="credentials.birthdate">
+    </br>
+    
+    <span class='editText'>Description</span>
+    </br>
+    <textarea rows="5" cols="50" id="description">
+    </textarea>
+    
+    <button class="edit-button" type="submit">
+    <span>Save Changes</span>
+    </button>
+</form>

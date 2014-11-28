@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Bam!</title>
+  <link rel="icon" type="image/jpeg" href="/bam.jpeg">
+  <link rel=stylesheet href='css/pageTransition.css'>
+  <script src="js/pageTransition.js"></script>
+  <script src="js/main.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<div class="mini-navigation">
+  <ul class="mini-navigation-menu">
+    <li class="page-wide-text"><a href='#page-1'>User Info</a></li>
+    <li class="page-wide-text"><a href='#page-2'>Events</a></li>
+    <li class="page-wide-text"><a href='#page-3'>Friends</a></li>
+  </ul>
+
+  <hr/>
+
+</div>
+
+    
+
+<div class='page current'>
+  <div class="userimage-block">
+    <img height="100%" width="100%" src="images/user_pic.jpg">
+  </div>
+        
+  <div class="userDescription-block">
+    <p><b>Firstname: </b> {{firstName}} </p> 
+    <p><b>Lastname: </b> {{lastName}} </p>
+    <p><b>Birth Date: </b> 12/30/1992 </p>
+    <p><b>Email: </b> {{email}} </p>
+    <p>Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi.</p>
+          
+    <button class="edit-button" type="button">
+      <span>Edit</span>
+    </button>
+
+    <p>Name: <input type="text" ng-model="firstName" value="John"></p>
+    <p ng-bind="firstName"></p>
+
+  </div>
+
+</div>
+
+
+<div class='page'>
+  <div class="comic-container">
+    <div class="first-row">
+      <div id="title-section" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+      </div>
+      <div id="title-aside" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
+      </div>
+    </div>
+    <div class="third-row">
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
+      </div>
+    </div>
+  </div>    
+</div>
+    
+<div class='page'>
+  <div class="comic-container">
+    <div class="first-row">
+      <div id="title-section" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+      </div>
+      <div id="title-aside" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
+      </div>
+    </div>
+    <div class="third-row">
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
+      </div>
+      <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
+      </div>
+    </div>
+  </div>    
+</div>
+
+</body>
+</html>

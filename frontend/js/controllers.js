@@ -43,6 +43,14 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
 }]);
 
 
+eventControllers.controller("UserController", ['$scope', '$location', function($scope, $location){
+  window.scope = $scope;
+  $scope.credentials = { firstName:"", lastName:"", email:""};
+
+  $scope.saveChanges = function() {
+    $location.path('/user')
+  }
+}]);
 
 // bamApp.controller('eventsController', function($scope, eventsFactory) {
 //   eventsFactory.getEventsAsync(function(results) {
