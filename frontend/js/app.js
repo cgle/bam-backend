@@ -1,26 +1,20 @@
 // setter
-var app = angular.module("bamApp", []).config(function($routeProvider){
+var app = angular.module("bamApp", []);
+
+// app.config(function($routeProvider){
 	
-	$routeProvider.when('/home', {
-		templateUrl: 'home.html',
-		controller: 'homeController'
-	});
+// 	$routeProvider.when('/test', {
+// 		templateUrl: 'testPartial.html',
+// 		controller: 'homeController'
+// 	});
 
-	$routeProvider.when('/user_Test', {
-		templateUrl: 'user_Test.html',
-		controller: 'userController'
-	});
-
-	$routeProvider.otherwise({redirectTo : '/home'});
-});
+// 	$routeProvider.otherwise({redirectTo : '/test'});
+// });
 
 
-// Add controller for index
-app.controller('homeController', function(){
+// Add controller
+// app.controller('homeController', function(){
 
-});
+// });
 
-// Add controller for user
-app.controller('userController', function(){
-
-});
+app.controller('userController', function($scope))
