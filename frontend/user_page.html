@@ -79,7 +79,7 @@
         <div class="userimage-block">
           <img height="100%" width="100%" src="images/user_pic.jpg">
         </div>
-        <div class="userDescription-block" ng-contoroller="UpdateController">
+        <div class="userDescription-block" ng-contoroller="user-controllers">
           <p><b>Firstname: </b>Rhyan </p> 
           <p><b>Lastname: </b>Foo Kune</p>
           <p><b>Birth Date: </b>12/30/1992</p>
@@ -90,11 +90,13 @@
             <span>Edit</span>
           </button>
 
-          <!-- First Name: <input type="text" ng-model="firstName"><br> -->
-          <!-- Last Name: <input type="text" ng-model="lastName"><br> -->
-          <br>
-          Full Name: <span ng-bind="firstName + lastName"></span>
+          <p>Name: <input type="text" ng-model="firstName" value="John"></p>
+          <p ng-bind="firstName"></p>
 
+        </div>
+
+        <div ng-controller="MyCtrl">
+          <p ng-init="incrementValue(1)">{{value}}</p>
         </div>
 
     </div>
@@ -186,6 +188,7 @@
           <h3>Edit User Information</h3>
           <input type="text" ng-model="firstName" value="Firstname" /> {{firstName}}
           <input type="text" ng-model="lastName" value="Lastname" />
+          {{lastName}}
           <input type="date"ng-model="birthdate" value="Birth Date" />
           <input type="email" ng-model="email" value="email" />
           <textarea rows="4" cols="50" ng-model="description">

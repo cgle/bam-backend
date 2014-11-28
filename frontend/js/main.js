@@ -21,6 +21,9 @@ $(document).ready(function() {
     $('.settings-button').click(function(event){
         $("#settings-container").addClass('overlay-open');
     })
+    $('.edit-button').click(function(event){
+        $("#edit-container").addClass('overlay-open');
+    })
 
     $('html').click(function(e) {
         $('.dropdown-container').hide();

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="bamApp" ng-controller="EventsListCtrl">
+<html lang="en" ng-app="bamApp">
 <head>
   <meta charset="utf-8">
   <!-- <title ng-bind-template="Bam!: {{query}}">Bam!: </title> -->
@@ -7,11 +7,16 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="icon" type="image/jpeg" href="/bam.jpeg">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel=stylesheet href='css/pageTransition.css'>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/jquery/jquery.js"></script>
-  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/app.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="js/pageTransition.js"></script>
+
+
 
 </head>
 <body>
@@ -57,21 +62,47 @@
       <hr/>
     </div>
 
+
     <div class="mini-navigation">
       <ul class="mini-navigation-menu">
-        <li class="page-wide-text"><a href="#">Social</a></li>
-        <li class="page-wide-text"><a href="#">Sports</a></li>
-        <li class="page-wide-text"><a href="#">Food</a></li>
-        <li class="page-wide-text"><a href="#">Recreational</a></li>
-        <li class="page-wide-text"><a href="#">Informational</a></li>
+        <li class="page-wide-text"><a href='#page-1'>User Info</a></li>
+        <li class="page-wide-text"><a href='#page-2'>Events</a></li>
+        <li class="page-wide-text"><a href='#page-3'>Friends</a></li>
+        <li class="page-wide-text"><a href="index.html">Homepage</a></li>
       </ul>
       <hr/>
     </div>
 
+    
+
+    
+    <div class='page current'>
+        <div class="userimage-block">
+          <img height="100%" width="100%" src="images/user_pic.jpg">
+        </div>
+        <div class="userDescription-block" ng-contoroller="user-controllers">
+          <p><b>Firstname: </b>Rhyan </p> 
+          <p><b>Lastname: </b>Foo Kune</p>
+          <p><b>Birth Date: </b>12/30/1992</p>
+          <p><b>Email: </b>rfookune@macalester.edu</p>
+          <p>Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi.</p>
+          
+          <button class="edit-button" type="button">
+            <span>Edit</span>
+          </button>
+
+          <p>Name: <input type="text" ng-model="firstName" value="John"></p>
+          <p ng-bind="firstName"></p>
+
+        </div>
+
+    </div>
+
+    <div class='page'>
     <div class="comic-container">
       <div class="first-row">
         <div id="title-section" class="comic-block">
-          <!-- <img class="comic-block-overlay" height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
         </div>
         <div id="title-aside" class="comic-block">
           <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
@@ -102,10 +133,61 @@
           <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
         </div>
       </div>
+    </div>    
     </div>
-  </div>
+    
+    <div class='page'>
+    <div class="comic-container">
+      <div class="first-row">
+        <div id="title-section" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
+        </div>
+        <div id="title-aside" class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
+        </div>
+      </div>
+      <div class="second-row">
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
+        </div>
+      </div>
+      <div class="third-row">
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
+        </div>
+        <div class="comic-block">
+          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
+        </div>
+      </div>
+    </div>    
+    </div>
 
     <hr/>
+
+      <div id="edit-container" class="overlay">
+        <form id="edit-form">
+          <h3 class="page-wide-text">Edit Personal Information</h3>
+          <input type="text" id="firstName" name="firstName" placeholder="First Name">
+          <input type="text" id="lastName" name="lastName" placeholder="Last Name">
+          <input type="date" id="birthdate" name="birthdate" placeholder="Date of Birth">
+          <input type="email" id="email" name="email" placeholder="Email Address">
+          <textarea rows="5" cols="50" id="description"> Description
+          </textarea>
+          <input class="edit-button" type="submit" value="Save Changes">
+        </form>
+      </div>
 
       <div id="login-container" class="overlay">
         <form id="login-form">
@@ -149,35 +231,6 @@
         </form>
       </div>
 
-
-<!--   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-
-        Search: <input ng-model="query">
-        Sort by:
-        <select ng-model="orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
-          <option value="-age">Oldest</option>
-        </select>
-
-      </div>
-      <div class="col-md-10">
-       
-        <ul class="events">
-          <li ng-repeat="event in events | filter:query | orderBy: orderProp">
-             <span>{{event.name}}</span>
-            <p>
-              {{event.snippet}} <br>
-              {{event.date}}
-            </p>
-          </li>
-        </ul> -->
-
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>
