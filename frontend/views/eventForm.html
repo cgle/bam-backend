@@ -1,6 +1,11 @@
+
+
+<div ng-controller="EventFormController">
+
 <div id='eventFormContainer' ng-controller="EventFormController">
 	<h3>{{eventForm.name}}</h3>
 	<p> @ {{eventForm.address}}</p></br>
+
 	<form>
 		<!-- <span class='formSpan'>Name</span></br> -->
 		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name"></br>
@@ -28,7 +33,9 @@
 			<option value="food">Food</option>
 			<option value="recreational">Recreactional</option>
 			<option value="informational">Informational</option>
-		</select>
+		</select><br/>
+
+		<input id="googleAddress" type="text" placeholder="Search Box">
 	</form>
 
 	<br/></br></br>
@@ -46,5 +53,16 @@
 	  <div>
 	  	{{eventForm.time}}
 	  </div>
-	</div> --> 
+<<<<<<< HEAD
+	</div> 
 </div>
+
+
+
+
+
+
+	</div> --> 
+	 <script src="js/googleMapsApi.js"></script>
+</div>
+

@@ -34,7 +34,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
         description : $scope.eventForm.description,
         privacy : $scope.eventForm.privacy,
         date : $scope.eventForm.date,
-        category : [$scope.eventForm.categories]
+        categories : $scope.eventForm.category
       };
       var responsePromise = $http.post("/api/events", newEvent, {});
       responsePromise.success(function(data, status, headers, config){
