@@ -1,3 +1,4 @@
+
 <div ng-controller="EventFormController">
 	<form>
 		<label for="name">Name</label>
@@ -25,7 +26,9 @@
 			<option value="food">Food</option>
 			<option value="recreational">Recreactional</option>
 			<option value="informational">Informational</option>
-		</select>
+		</select><br/>
+
+		<input id="googleAddress" type="text" placeholder="Search Box">
 	</form>
 
 	<button class="btn btn-primary" ng-click="eventForm.createEvent()">Create Event</button>
@@ -44,3 +47,8 @@
 	  </div>
 	</div> 
 </div>
+
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
+ <script src="js/googleMapsApi.js"></script>
+
+
