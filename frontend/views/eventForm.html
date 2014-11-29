@@ -1,21 +1,31 @@
-<div ng-controller="EventFormController">
+<div id='eventFormContainer' ng-controller="EventFormController">
+	<h3>{{eventForm.name}}</h3></br>
 	<form>
-		<label for="name">Name</label>
-		<input type="text" id="name" ng-model="eventForm.name" ng-minlength="5" ng-maxlength="12"><br/>
+		<span for="name">Name</span></br>
+		<input type="text" id="name" ng-model="eventForm.name" ng-minlength="5" ng-maxlength="12"><br/></br>
 		
-		<label for="address">Address</label>
-		<input type="text" id="address" ng-model="eventForm.address"><br/>
+		<span for="address">Address</span></br>
+		<input type="text" id="address" ng-model="eventForm.address"><br/></br>
 		
-		<label for="date">Date</label>
-		<input type="date" id="date" ng-model="eventForm.date"><br/>
+		<span for="date">Date</span></br>
+		<input type="date" id="date" ng-model="eventForm.date"><br/></br>
 		
-		<label for="desciption">Description</label>
-		<input type="text" id="description" ng-model="eventForm.description"><br/>
+		<span>Description</span></br>
+		<input type="text" id="description" ng-model="eventForm.description"><br/></br>
 		
-		<label for="privacy">Privacy</label>
+		<span for="privacy">Privacy</span>
 		<select ng-model="eventForm.privacy">
 			<option value="public">Public</option>
 			<option value="private">Private</option>
+		</select>
+
+		<span for="category">Category</span>
+		<select id="category" ng-model="eventForm.category">
+			<option value="social">Social</option>
+			<option value="sports">Sports</option>
+			<option value="food">Food</option>
+			<option value="recreational">Recreactional</option>
+			<option value="informational">Informational</option>
 		</select>
 	</form>
 

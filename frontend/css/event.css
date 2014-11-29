@@ -78,7 +78,6 @@ body {
 
 select {
 	float: left;
-	margin-left: 42px;
 }
 
 input{
@@ -89,4 +88,7 @@ input{
 
 span {
 	font-weight: bold;
+	float: left;
+	margin-left: 40px;
+	margin-right: 10px;
 }
