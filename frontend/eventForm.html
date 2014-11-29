@@ -17,6 +17,14 @@
 			<option value="public">Public</option>
 			<option value="private">Private</option>
 		</select>
+		<label for="category">Category</label>
+		<select id="category" ng-model="eventForm.category">
+			<option value="social">Social</option>
+			<option value="sports">Sports</option>
+			<option value="food">Food</option>
+			<option value="recreational">Recreactional</option>
+			<option value="informational">Informational</option>
+		</select>
 	</form>
 
 	<button class="btn btn-primary" ng-click="eventForm.createEvent()">Create Event</button>
