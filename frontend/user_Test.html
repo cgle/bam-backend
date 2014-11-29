@@ -6,7 +6,6 @@
   <title>Bam!</title>
   <link rel="icon" type="image/jpeg" href="/bam.jpeg">
   <link rel=stylesheet href='css/pageTransition.css'>
-  <script src="js/pageTransition.js"></script>
   <script src="js/main.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
@@ -15,9 +14,9 @@
 
 <div class="mini-navigation">
   <ul class="mini-navigation-menu">
-    <li class="page-wide-text"><a href='#page-1'>User Info</a></li>
-    <li class="page-wide-text"><a href='#page-2'>Events</a></li>
-    <li class="page-wide-text"><a href='#page-3'>Friends</a></li>
+    <li class="page-wide-text"><a href ng-click='userPage()'>User Info</a></li>
+    <li class="page-wide-text"><a href ng-click='userEvents()'>Events</a></li>
+    <li class="page-wide-text"><a href ng-click='userFriends()'>Friends</a></li>
   </ul>
 
   <hr/>
@@ -31,7 +30,7 @@
     <img height="100%" width="100%" src="images/user_pic.jpg">
   </div>
         
-  <div class="userDescription-block">
+  <div id="userDescription-block">
     <p><b>Firstname: </b> {{firstName}} </p> 
     <p><b>Lastname: </b> {{lastName}} </p>
     <p><b>Birth Date: </b> 12/30/1992 </p>
@@ -43,83 +42,6 @@
     </button>
   </div>
 
-</div>
-
-
-<div class='page'>
-  <div class="comic-container">
-    <div class="first-row">
-      <div id="title-section" class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
-      </div>
-      <div id="title-aside" class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
-      </div>
-    </div>
-    <div class="second-row">
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
-      </div>
-    </div>
-    <div class="third-row">
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
-      </div>
-    </div>
-  </div>    
-</div>
-    
-<div class='page'>
-  <div class="comic-container">
-    <div class="first-row">
-      <div id="title-section" class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-title.png"> -->
-      </div>
-      <div id="title-aside" class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-one.png"> -->
-      </div>
-    </div>
-    <div class="second-row">
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-two.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-three.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-four.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-five.png"> -->
-      </div>
-    </div>
-    <div class="third-row">
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-six.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-seven.png"> -->
-      </div>
-      <div class="comic-block">
-          <!-- <img height="100%" width="100%" src="images/c-and-hobbes-eight.png"> -->
-      </div>
-    </div>
-  </div>    
 </div>
 
 </body>

@@ -49,18 +49,21 @@ eventControllers.factory('UserData', function(){
   return UserData;
 })
 
-eventControllers.controller("UserEditController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
+eventControllers.controller("UserEditController", ['$scope', '$location', 'UserData', '$filter', function($scope, $location, UserData, $filter){
   window.scope = $scope;
   $scope.credentials = { firstName:"", lastName:"", email:"", birthdate:"", userDescription:""};
   window.data = UserData;
+  // $scope.dateAsString = $filter('birthdate')($scope.dateAsString, 'yyyy-MM-dd');
 
   $scope.saveChanges = function() {
 
     UserData.firstName = $scope.credentials.firstName;
     UserData.lastName = $scope.credentials.lastName;
     UserData.email = $scope.credentials.email;
-    $scope.userDescription = $scope.credentials.userDescription;
+    UserData.userDescription = $scope.credentials.userDescription;
+    
     $location.path('/user');
+
   }
 }]);
 
@@ -70,12 +73,26 @@ eventControllers.controller("UserController", ['$scope', '$location', 'UserData'
   $scope.firstName = UserData.firstName;
   $scope.lastName = UserData.lastName;
   $scope.email = UserData.email;
-  $scope.birthdate = UserData.birthdate
+  // $scope.birthdate = UserData.birthdate
   $scope.userDescription = UserData.userDescription;
 
   $scope.edit = function() {
     $location.path('/user/edit')
   }
+
+  $scope.userPage = function() {
+    $location.path('/user')
+  }
+
+  $scope.userEvents = function() {
+    $location.path('/user/events')
+  }
+
+  $scope.userFriends = function() {
+    $location.path('/user/friends')
+  }
+
+
 }]);
 
 
