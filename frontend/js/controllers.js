@@ -14,7 +14,10 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
 
 eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
-    $http.get('api/events')
+    $http.get('api/events').success(function(data) {
+      $scope.events = data.data;
+      console.log(data.data);
+    });
   }]);
 
 eventControllers.controller("EventFormController", ['$scope', '$http', '$location',
@@ -28,7 +31,8 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
         address : $scope.eventForm.address,
         description : $scope.eventForm.description,
         privacy : $scope.eventForm.privacy,
-        date : $scope.eventForm.date
+        date : $scope.eventForm.date,
+        category : [$scope.eventForm.categories]
       };
       var responsePromise = $http.post("/api/events", newEvent, {});
       responsePromise.success(function(data, status, headers, config){

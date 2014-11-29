@@ -6,8 +6,8 @@ bamApp.config(function($routeProvider) {
 
 	$routeProvider.
 		when('/events', {
-			controller: 'eventsController',
-			templateUrl: 'views/eventTest.html'
+			controller: 'EventListController',
+			templateUrl: 'views/eventListView.html'
 		}).
 		when('/events/new', {
 			controller:'EventFormController',
@@ -15,7 +15,7 @@ bamApp.config(function($routeProvider) {
 		}).
 		when('/events/:eventId', {
 			controller: 'EventDetailController',
-			templateUrl: 'views/eventTest.html'
+			templateUrl: 'views/eventView.html'
 		});
 
 });
