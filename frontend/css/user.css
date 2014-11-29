@@ -1,4 +1,5 @@
 
+
 .userimage-block {
     height: 200px;
     width: 250px;
@@ -9,10 +10,12 @@
     background: #2db34a;
 }
 
-.userDescription-block{
+#userDescription-block{
 	height: auto;
-	width: 100%;
-	padding: 20px 20px 30px 20px;
+	margin-bottom: 50px;
+	margin-right: 50px;
+	margin-left: 50px;
+	padding: 20px 20px 40px 20px;
 	border: 2px solid black;
 	background: #2db34a;	
 }
@@ -29,29 +32,10 @@
     padding: 5px;
 }
 
-#editPopupBox{
-    top: 0;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    height: 120%;
-    background-color: rgba(0,0,0,0.7);
-    display: none;
-}
 
-.popupBoxWrapper{
-    width: 550px;
-    margin: 50px auto;
-    text-align: left;
-}
-
-.popupBoxContent{
-    background-color: #FFF;
-    padding: 20px 20px 30px 20px;
-}
-
-.close-icon{
-    float: right;
+.editText{
+	margin-left: 40px;
+	float: left;
 }
 
 input{
@@ -63,4 +47,18 @@ input{
 textarea{
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+#edit-form {
+    background-color: white;
+    padding: 20px;
+    padding-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    height: auto;
+    width: 500px;
+    border: 3px solid #d3d3d3;
+    text-align: center;
 }

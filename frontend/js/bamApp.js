@@ -15,7 +15,27 @@ bamApp.config(function($routeProvider) {
 		}).
 		when('/events/:eventId', {
 			controller: 'EventDetailController',
+<<<<<<< HEAD
 			templateUrl: 'views/eventView.html'
+=======
+			templateUrl: 'views/eventTest.html'
+		}).
+		when('/user', {
+			controller: 'UserController',
+			templateUrl: "user_Test.html"
+		}).
+		when('/user/edit', {
+			controller: 'UserEditController',
+			templateUrl: "userInfo_form.html"
+		}).
+		when('/user/events', {
+			controller: 'UserController',
+			templateUrl: 'event_view.html'
+		}).
+		when('/user/friends', {
+			controller: 'UserController',
+			templateUrl: 'friends_view.html'
+>>>>>>> FETCH_HEAD
 		});
 
 });
