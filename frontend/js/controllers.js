@@ -24,6 +24,8 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
   function($scope, $http, $location) {
     $scope.eventForm={};
     $scope.eventForm.privacy = "public";
+    $scope.eventForm.name = ' Event Name'
+    $scope.eventForm.address = ' Location'
     $scope.eventForm.createEvent = function(item, event) {
       console.log("SUBMITTING");
       var newEvent = {

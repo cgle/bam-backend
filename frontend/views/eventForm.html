@@ -1,25 +1,27 @@
 <div id='eventFormContainer' ng-controller="EventFormController">
-	<h3>{{eventForm.name}}</h3></br>
+	<h3>{{eventForm.name}}</h3>
+	<p> @ {{eventForm.address}}</p></br>
 	<form>
-		<span for="name">Name</span></br>
-		<input type="text" id="name" ng-model="eventForm.name" ng-minlength="5" ng-maxlength="12"><br/></br>
+		<!-- <span class='formSpan'>Name</span></br> -->
+		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name"></br>
 		
-		<span for="address">Address</span></br>
-		<input type="text" id="address" ng-model="eventForm.address"><br/></br>
+		<!-- <span class='formSpan'>Address</span></br> -->
+		<input type="text" id="address" placeholder='Address' ng-model="eventForm.address"></br>
 		
-		<span for="date">Date</span></br>
-		<input type="date" id="date" ng-model="eventForm.date"><br/></br>
+		<span class='formSpan'>Date</span></br>
+		<input type="date" id="date" ng-model="eventForm.date"></br>
 		
-		<span>Description</span></br>
-		<input type="text" id="description" ng-model="eventForm.description"><br/></br>
+		<span class='formSpan'>Description</span></br>
+		<textarea rows="5" cols="50" id="description" ng-model="eventForm.description">
+		</textarea></br></br>
 		
-		<span for="privacy">Privacy</span>
+		<span class='formSpan'>Privacy</span>
 		<select ng-model="eventForm.privacy">
 			<option value="public">Public</option>
 			<option value="private">Private</option>
 		</select>
 
-		<span for="category">Category</span>
+		<span class='formSpan'>Category</span>
 		<select id="category" ng-model="eventForm.category">
 			<option value="social">Social</option>
 			<option value="sports">Sports</option>
