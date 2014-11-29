@@ -1,27 +1,43 @@
-<div ng-controller="EventFormController">
+<div id='eventFormContainer' ng-controller="EventFormController">
+
 	<form>
-		<label for="name">Name</label>
-		<input type="text" id="name" ng-model="eventForm.name" ng-minlength="5" ng-maxlength="12"><br/>
 		
-		<label for="address">Address</label>
-		<input type="text" id="address" ng-model="eventForm.address"><br/>
+		<h3 class="page-wide-text">{{eventForm.name}}</h3>
+		</br>
+
+    	<span class='editText'>Name</span>
+    	</br>
+		<input type="text" id="name" ng-model="eventForm.name"></br>
 		
-		<label for="date">Date</label>
-		<input type="date" id="date" ng-model="eventForm.date"><br/>
+		</br>
+    	<span class='editText'>Address</span>
+    	</br>	
+		<input type="text" id="address" ng-model="eventForm.address"></br>
 		
-		<label for="desciption">Description</label>
-		<input type="text" id="description" ng-model="eventForm.description"><br/>
+		</br>
+    	<span class='editText'>Date</span>
+    	</br>
+		<input type="date" id="date" ng-model="eventForm.date"></br>
 		
-		<label for="privacy">Privacy</label>
+		</br>
+    	<span class='editText'>Description</span>
+    	</br>
+		<input type="text" id="description" ng-model="eventForm.description"></br>
+		
+		
+		</br>
+    	<span class='editText'>Privacy</span>
+	    </br>
 		<select ng-model="eventForm.privacy">
 			<option value="public">Public</option>
 			<option value="private">Private</option>
 		</select>
 	</form>
 
-	<button class="btn btn-primary" ng-click="eventForm.createEvent()">Create Event</button>
+	</br></br>
+	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
 
-	<div>
+<!-- 	<div>
 	    {{eventForm.name}}
 	  </div>
 	  <div>
@@ -33,5 +49,7 @@
 	  <div>
 	  	{{eventForm.time}}
 	  </div>
-	</div> 
+	</div>  -->
 </div>
+
+
