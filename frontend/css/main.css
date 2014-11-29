@@ -252,4 +252,9 @@ button {
     -moz-transition: opacity .25s ease;
 }
 
-
+.formSpan {
+    font-weight: bold;
+    float: left;
+    margin-left: 40px;
+    margin-right: 10px;
+}

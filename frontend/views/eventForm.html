@@ -1,25 +1,32 @@
+<<<<<<< HEAD
 
 <div ng-controller="EventFormController">
+=======
+<div id='eventFormContainer' ng-controller="EventFormController">
+	<h3>{{eventForm.name}}</h3>
+	<p> @ {{eventForm.address}}</p></br>
+>>>>>>> FETCH_HEAD
 	<form>
-		<label for="name">Name</label>
-		<input type="text" id="name" ng-model="eventForm.name" ng-minlength="5" ng-maxlength="12"><br/>
+		<!-- <span class='formSpan'>Name</span></br> -->
+		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name"></br>
 		
-		<label for="address">Address</label>
-		<input type="text" id="address" ng-model="eventForm.address"><br/>
+		<!-- <span class='formSpan'>Address</span></br> -->
+		<input type="text" id="address" placeholder='Address' ng-model="eventForm.address"></br>
 		
-		<label for="date">Date</label>
-		<input type="date" id="date" ng-model="eventForm.date"><br/>
+		<span class='formSpan'>Date</span></br>
+		<input type="date" id="date" ng-model="eventForm.date"></br>
 		
-		<label for="desciption">Description</label>
-		<input type="text" id="description" ng-model="eventForm.description"><br/>
+		<span class='formSpan'>Description</span></br>
+		<textarea rows="5" cols="50" id="description" ng-model="eventForm.description">
+		</textarea></br></br>
 		
-		<label for="privacy">Privacy</label>
-		<select id="privacy" ng-model="eventForm.privacy">
+		<span class='formSpan'>Privacy</span>
+		<select ng-model="eventForm.privacy">
 			<option value="public">Public</option>
 			<option value="private">Private</option>
-		</select><br/>
+		</select>
 
-		<label for="category">Category</label>
+		<span class='formSpan'>Category</span>
 		<select id="category" ng-model="eventForm.category">
 			<option value="social">Social</option>
 			<option value="sports">Sports</option>
@@ -31,9 +38,10 @@
 		<input id="googleAddress" type="text" placeholder="Search Box">
 	</form>
 
-	<button class="btn btn-primary" ng-click="eventForm.createEvent()">Create Event</button>
+	<br/></br></br>
+	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
 
-	<div>
+<!-- 	<div>
 	    {{eventForm.name}}
 	  </div>
 	  <div>
@@ -45,6 +53,7 @@
 	  <div>
 	  	{{eventForm.time}}
 	  </div>
+<<<<<<< HEAD
 	</div> 
 </div>
 
@@ -52,3 +61,7 @@
  <script src="js/googleMapsApi.js"></script>
 
 
+=======
+	</div> --> 
+</div>
+>>>>>>> FETCH_HEAD
