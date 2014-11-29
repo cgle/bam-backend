@@ -15,10 +15,7 @@ bamApp.config(function($routeProvider) {
 		}).
 		when('/events/:eventId', {
 			controller: 'EventDetailController',
-<<<<<<< HEAD
 			templateUrl: 'views/eventView.html'
-=======
-			templateUrl: 'views/eventTest.html'
 		}).
 		when('/user', {
 			controller: 'UserController',
@@ -35,7 +32,6 @@ bamApp.config(function($routeProvider) {
 		when('/user/friends', {
 			controller: 'UserController',
 			templateUrl: 'friends_view.html'
->>>>>>> FETCH_HEAD
 		});
 
 });
