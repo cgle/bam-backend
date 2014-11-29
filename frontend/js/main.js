@@ -26,6 +26,12 @@ $(document).ready(function() {
         $("#edit-container").addClass('overlay-open');
     });
 
+    // $('.close-button').click(function(event){
+        // $("#search-flyout").addClass('overlay')
+        // $("#settings-container").addClass('overlay')
+        // $("#edit-container").addClass('overlay')
+    // })
+
     $('html').click(function(e) {
         $('.dropdown-container').hide();
         if (e.target.className == 'overlay overlay-open') {

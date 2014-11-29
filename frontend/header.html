@@ -1,3 +1,6 @@
+ <script src="js/main.js"></script>
+
+
  <div class="container">
     <div class="header">
       <div class="quick-navigation">
@@ -54,7 +57,11 @@
     <hr/>
 
       <div id="login-container" class="overlay">
+        
         <form id="login-form">
+          <button class="close-button" type="button" onclick="close-overlay">
+            <img height="30" width="30" src="images/close-button.png">
+          </button>
           <h3 class="page-wide-text">Log In</h3>
           <input type="text" id="login-email" name="login-email" placeholder="Email Address">
           <input type="password" id="login-password" name="login-password" placeholder="Password">
@@ -70,6 +77,9 @@
       <div id="search-flyout" class="overlay">
         <div class="search-container">
           <form id="search-form">
+            <button class="close-button" type="button" onclick="close-overlay">
+            <img height="30" width="30" src="images/close-button.png">
+            </button>
             <input type="text" name="search" placeholder="Search">
           </form>
         </div>
@@ -77,6 +87,10 @@
 
       <div id="settings-container" class="overlay">
         <form id="settings-form">
+          <button class="close-button" type="button" onclick="close-overlay">
+            <img height="30" width="30" src="images/close-button.png">
+          </button>
+
           <h3 class="page-wide-text">Settings</h3>
           
           <div>
@@ -96,13 +110,10 @@
       </div>
 
 
-
-
       </div>
     </div>
   </div>
 
-  <script src="js/main.js"></script>
    
 
 
