@@ -20,10 +20,24 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     });
   }]);
 
+eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
+    $scope.events = [];
+    console.log("ROUTE PARAM>>", $routeParams);
+    $http.get('api/events').success(function(data) {
+      data.data.forEach(function(event){
+        console.log("EVENT>>", event);
+        if ($.inArray($routeParams.category, event.categories) > -1){
+          $scope.events.push(event);
+        }
+      });
+    });
+  }]);
+
 eventControllers.controller("EventFormController", ['$scope', '$http', '$location',
   function($scope, $http, $location) {
     $scope.eventForm={};
-    $scope.eventForm.privacy = "public";
+    $scope.eventForm.privacy = true;
     $scope.eventForm.name = ' Event Name'
     $scope.eventForm.address = ' Location'
     $scope.eventForm.createEvent = function(item, event) {
@@ -32,7 +46,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
         name : $scope.eventForm.name,
         address : $scope.eventForm.address,
         description : $scope.eventForm.description,
-        privacy : $scope.eventForm.privacy,
+        public : $scope.eventForm.privacy,
         date : $scope.eventForm.date,
         categories : $scope.eventForm.category
       };
@@ -101,49 +115,4 @@ eventControllers.controller("UserController", ['$scope', '$location', 'UserData'
 
 }]);
 
-
-// bamApp.controller('eventsController', function($scope, eventsFactory) {
-//   eventsFactory.getEventsAsync(function(results) {
-//     console.log('events value returned');
-//     console.log(results.data)
-//     $scope.events = results.data;
-//   });
-// });
-
-// bamApp.factory('EventTestFactory', function($resouce) {
-//   return $resource("/api/events/:event_id");
-// });
-
-// bamApp.controller('testResourceController', function($scope, EventTestFactory) {
-//   var entry = EventTestFactory.get({ id: $scope.id }, function() {
-//     console.log(entry);
-//   });
-// });
-
-
-// eventControllers.controller('eventsController', function($scope, eventsFactory) {
-//   eventsFactory.getEventsAsync(function(results) {
-//     console.log('events value returned');
-//     console.log(results.data)
-//     $scope.events = results.data;
-//   });
-// });
-
-// eventControllers.factory('eventsFactory', function($http) {
-//   return {
-//     getEventsAsync: function(callback) {
-//       $http.get('/api/events').success(callback);
-//     }
-//   };
-// });
-
-// eventControllers.factory('EventTestFactory', function($resource) {
-//   return $resource("/api/events/:event_id");
-// });
-
-// eventControllers.controller('testResourceController',function($scope, EventTestFactory) {
-//   var entry = EventTestFactory.get({ id: $scope.id }, function() {
-//     console.log(">>>>", entry);
-//   });
-// });
 
