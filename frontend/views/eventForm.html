@@ -11,7 +11,10 @@
 		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name"></br>
 		
 		<!-- <span class='formSpan'>Address</span></br> -->
-		<input type="text" id="address" placeholder='Address' ng-model="eventForm.address"></br>
+		<!-- <input type="text" id="address" placeholder='Address' ng-model="eventForm.address"></br> -->
+
+		<span class='formSpan'>Address</span>
+		<input ng-model="eventForm.address" id="googleAddress" type="text" placeholder="Enter address">
 		
 		<span class='formSpan'>Date</span></br>
 		<input type="date" id="date" ng-model="eventForm.date"></br>
@@ -35,34 +38,13 @@
 			<option value="informational">Informational</option>
 		</select><br/>
 
-		<input id="googleAddress" type="text" placeholder="Search Box">
+
 	</form>
 
 	<br/></br></br>
 	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
 
-<!-- 	<div>
-	    {{eventForm.name}}
-	  </div>
-	  <div>
-	    {{eventForm.address}}
-	  </div>
-	  <div>
-	  	{{eventForm.date}}
-	  </div>
-	  <div>
-	  	{{eventForm.time}}
-	  </div>
-<<<<<<< HEAD
 	</div> 
-</div>
-
-
-
-
-
-
-	</div> --> 
 	 <script src="js/googleMapsApi.js"></script>
 </div>
 

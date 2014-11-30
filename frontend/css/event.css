@@ -2,6 +2,16 @@
 body {
 }
 
+#googleAddress {
+    background-color: #fff;
+    padding: 0 11px 0 13px;
+    width: 400px;
+    font-size: 15px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+    margin-left: 40px;
+  }
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
