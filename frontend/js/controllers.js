@@ -62,14 +62,14 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
     }
 }]);
 
-
+var userControllers = angular.module('userControllers', []);
 
 eventControllers.factory('UserData', function(){
   var UserData = {firstName:"Rhyan", lastName:"Foo Kune", email:"rfookune@macalester.edu", birthdate:"12/30/1992", userDescription:"Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi."};
   return UserData;
 })
 
-eventControllers.controller("UserEditController", ['$scope', '$location', 'UserData', '$filter', function($scope, $location, UserData, $filter){
+userControllers.controller("UserEditController", ['$scope', '$location', 'UserData', '$filter', function($scope, $location, UserData, $filter){
   window.scope = $scope;
   $scope.credentials = { firstName:"", lastName:"", email:"", birthdate:"", userDescription:""};
   window.data = UserData;
@@ -87,32 +87,41 @@ eventControllers.controller("UserEditController", ['$scope', '$location', 'UserD
   }
 }]);
 
-eventControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
-  window.scope = $scope;
-  window.scope = UserData;
-  $scope.firstName = UserData.firstName;
-  $scope.lastName = UserData.lastName;
-  $scope.email = UserData.email;
-  // $scope.birthdate = UserData.birthdate
-  $scope.userDescription = UserData.userDescription;
+userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
+    console.log($routeParams);
+    $http.get('api/users/' + $routeParams.userId).success(function(data) {
+      $scope.user = data.data[0];
+      console.log(data.data[0]);
+    });
+  }]);
 
-  $scope.edit = function() {
-    $location.path('/user/edit')
-  }
+// userControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
+//   window.scope = $scope;
+//   window.scope = UserData;
+//   $scope.firstName = UserData.firstName;
+//   $scope.lastName = UserData.lastName;
+//   $scope.email = UserData.email;
+//   // $scope.birthdate = UserData.birthdate
+//   $scope.userDescription = UserData.userDescription;
 
-  $scope.userPage = function() {
-    $location.path('/user')
-  }
+//   $scope.edit = function() {
+//     $location.path('/user/edit')
+//   }
 
-  $scope.userEvents = function() {
-    $location.path('/user/events')
-  }
+//   $scope.userPage = function() {
+//     $location.path('/user')
+//   }
 
-  $scope.userFriends = function() {
-    $location.path('/user/friends')
-  }
+//   $scope.userEvents = function() {
+//     $location.path('/user/events')
+//   }
+
+//   $scope.userFriends = function() {
+//     $location.path('/user/friends')
+//   }
 
 
-}]);
+// }]);
 
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var bamApp = angular.module('bamApp', ['ngRoute', 'eventControllers', 'ngResource']);
+var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'ngRoute', 'ngResource']);
 
 bamApp.config(function($routeProvider) {
 
@@ -21,9 +21,9 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventDetailController',
 			templateUrl: 'views/eventView.html'
 		}).
-		when('/user', {
+		when('/user/:userId', {
 			controller: 'UserController',
-			templateUrl: "user_Test.html"
+			templateUrl: "userView.html"
 		}).
 		when('/user/edit', {
 			controller: 'UserEditController',
