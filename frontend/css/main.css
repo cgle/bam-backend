@@ -263,3 +263,22 @@ button {
 .close-button{
     float: right;
 }
+
+.login-button{
+    float: left;
+    margin-left: 5%;
+}
+
+.register-button{
+    float: left;
+    margin-left: 5%;
+}
+
+.login-password {
+    margin-left: 20px;    
+}
+
+.login-email {
+    float: left;
+    margin-left: 5%;
+}

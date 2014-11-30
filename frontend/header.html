@@ -15,17 +15,17 @@
             <li><a href="#">Informational</a></li>
           </ui>
         </button>
-        <button class="search-button">
+        <button class="search-button"  onclick="toggle_visibility('search-flyout')">
           <img height="13" width="13" src="images/magnifying-glass.png">
           <span id="search-button" class="button-text">Search</span>      
         </button>
       </div>
 
       <div class="user-tools">
-        <button class="login-button" type="button">
+        <button class="login-button" type="button" onclick="toggle_visibility('login-container')">
           <span>Log In</span>
         </button>
-        <button class="settings-button" type="button"`>
+        <button class="settings-button" type="button" onclick="toggle_visibility('settings-container')">
           <img height="18" width="18" src="images/settings.png">
           <span class="button-text">Settings</span>
         </button>
@@ -59,22 +59,25 @@
       <div id="login-container" class="overlay">
         
         <form id="login-form">
-          <button class="close-button" type="button" onclick="close-overlay">
+          <button class="close-button" type="button" onclick="toggle_visibility('login-container')">
             <img height="30" width="30" src="images/close-button.png">
           </button>
           <h3 class="page-wide-text">Log In</h3>
           <input type="text" id="login-email" name="login-email" placeholder="Email Address">
           <input type="password" id="login-password" name="login-password" placeholder="Password">
+          
+          </br>
           <button class="login-button" type="button">
             <span>Log In</span>
           </button>
+          </br></br>
           <button class="register-button" type="button">
             <span>Register</span>
           </button>
         </form>
       </div>
 
-      <div id="search-flyout" class="overlay">
+      <div id="search-flyout" class="overlay" onclick="toggle_visibility('search-flyout')">
         <div class="search-container">
           <form id="search-form">
             <button class="close-button" type="button" onclick="close-overlay">
@@ -87,7 +90,7 @@
 
       <div id="settings-container" class="overlay">
         <form id="settings-form">
-          <button class="close-button" type="button" onclick="close-overlay">
+          <button class="close-button" type="button" onclick="toggle_visibility('settings-container')">
             <img height="30" width="30" src="images/close-button.png">
           </button>
 
