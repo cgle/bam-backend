@@ -33,13 +33,13 @@
 }
 
 
-input{
+#edit-form input{
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 200px; 
 }
 
-textarea{
+#edit-form textarea{
     margin-top: 5px;
     margin-bottom: 5px;
 }

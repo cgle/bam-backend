@@ -76,11 +76,11 @@ body {
 	float: right;
 }
 
-select {
+#eventFormContainer select {
 	float: left;
 }
 
-input{
+#eventFormContainer input{
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 200px; 

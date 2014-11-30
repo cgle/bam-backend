@@ -1,4 +1,4 @@
-/* Header */
+ Header */
 
 .header {
     margin: 10px 0px 0px 0px;
@@ -154,9 +154,10 @@ button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 120px;
-    height: 325px;
+    padding-bottom: 150px;
+    height: auto;
     width: 375px;
-    border: 1px solid #d3d3d3;
+    border: 2px solid #d3d3d3;
     text-align: center;
 }
 
@@ -187,10 +188,16 @@ button {
 
 #login-form .login-button {
     margin-top: 15px;
+    float: left;
+    margin-left: 5%;
+    margin-right: 50%;
 }
 
 #login-form .register-button {
     margin-top: 10px;
+    float: left;
+    margin-left: 5%;
+    margin-right: 50%;
 }
 
 /* Overlay */
@@ -227,13 +234,39 @@ button {
     height: 30px;
 }
 
-.dropdown-container {
+#dropdown-container {
+    position: absolute;
     display: none;
     list-style-type: none;
     text-align: left;
     padding: 0;
     margin: 0;
+    padding-bottom: 0px;
+    margin-top: 8px;
 }
+
+#dropdown-container li {
+    margin-left: 15px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+}
+
+#dropdown-container li:hover{
+    border-style: solid;
+    border-color: lightblue; 
+
+}
+
+#dropdown-container a {
+    text-decoration: none;
+    color: black;
+} 
 
 #settings-form {
     background-color: white;
@@ -260,25 +293,11 @@ button {
     margin-right: 10px;
 }
 
-.close-button{
+.close-button {
     float: right;
 }
 
-.login-button{
-    float: left;
-    margin-left: 5%;
-}
-
-.register-button{
-    float: left;
-    margin-left: 5%;
-}
-
-.login-password {
-    margin-left: 20px;    
-}
-
-.login-email {
+#login-email, #login-password {
     float: left;
     margin-left: 5%;
 }
