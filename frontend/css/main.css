@@ -223,15 +223,19 @@ button {
 }
 
 #search-form {
-    margin-left: 30%;
-    margin-top: 20%;
+    margin-left: 50%;
+    margin-top: 150px;
     width: 400px;
-    /*text-align: center;*/
 }
 
 #search-form input {
     width: 350px;
     height: 30px;
+    margin-left: -200px;
+}
+
+#search-form button {
+    margin-right: 200px;
 }
 
 #dropdown-container {

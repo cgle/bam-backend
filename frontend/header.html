@@ -4,16 +4,15 @@
  <div class="container">
     <div class="header">
       <div class="quick-navigation">
-        <button class="sections-button">
+        <button class="sections-button"  onclick="toggle_visibility('dropdown-container')" onclick="changeCSS('dropdown-container')">
           <img height="13" width="13" src="images/three-lines.png">
           <span class="button-text">Sections</span>
-          <ul class="dropdown-container">
-            <li><a href="#">Social</a></li>
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Recreational</a></li>
-            <li><a href="#">Informational</a></li>
-          </ui>
+          <ul id="dropdown-container" >
+            <li><a href="#">Home Page</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Your Events</a></li>
+            <li><a href="#">Friends</a></li>
+          </ul>
         </button>
         <button class="search-button"  onclick="toggle_visibility('search-flyout')">
           <img height="13" width="13" src="images/magnifying-glass.png">
