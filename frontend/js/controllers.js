@@ -87,6 +87,17 @@ userControllers.controller("UserEditController", ['$scope', '$location', 'UserDa
   }
 }]);
 
+userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
+    $scope.credentials = {};
+    $http.get('api/users/' + $routeParams.userId).success(function(data) {
+      console.log(data.data[0]);
+      $scope.credentials.username = data.data[0].username;
+      $scope.credentials.email = data.data[0].email;
+      $scope.credentials.birthdate = data.data[0].birthyear;
+    });
+  }]);
+
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     console.log($routeParams);
@@ -95,6 +106,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
       console.log(data.data[0]);
     });
   }]);
+
+
 
 // userControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
 //   window.scope = $scope;
