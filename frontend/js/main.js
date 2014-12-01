@@ -59,13 +59,3 @@ function toggle_visibility(id) {
         e.style.display = 'block';
     }
 }
-
-function changeCSS(id){
-    var e = document.getElementById(id);
-    if(e.style.display == 'block'){
-        e.css('padding-bottom', '100px');
-    }
-    else{
-        e.css('padding-bottom', '0px');
-    } 
-}

@@ -23,19 +23,15 @@ bamApp.config(function($routeProvider) {
 		}).
 		when('/user/edit/:userId', {
 			controller: 'UserEditController',
-			templateUrl: "userInfo_form.html"
+			templateUrl: "views/userInfo_form.html"
 		}).
 		when('/user/events', {
 			controller: 'UserController',
-			templateUrl: 'event_view.html'
-		}).
-		when('/user/friends', {
-			controller: 'UserController',
-			templateUrl: 'friends_view.html'
+			templateUrl: 'views/eventView.html'
 		}).
 		when('/user/:userId', {
 			controller: 'UserController',
-			templateUrl: "userView.html"
+			templateUrl: "views/userView.html"
 		});
 
 });
