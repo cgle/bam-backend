@@ -95,8 +95,8 @@ userControllers.factory('User_ID', function(){
 })
 
 
-userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http',
-  function($scope, $routeParams, $http) {
+userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location',
+  function($scope, $routeParams, $http, $location) {
     var userId;
     $scope.userForm = {};
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
@@ -128,10 +128,10 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
         },
         success: function(data) {
           console.log("success");
-          $location.path('user/' + userId)
+          $location.path('user/' + userId);
         },
         error: function(err) {
-          console.log("noooo")
+          console.log("noooo");
         }
       });
     }

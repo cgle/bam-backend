@@ -20,13 +20,18 @@
 	background: #2db34a;	
 }
 
-.edit-button {
+.edit-button, .user-edit-button {
     background-color: #FF3333;
     border-radius: 5px;
     float: right;
 }
 
-.edit-button span {
+.upload-pic-button {
+    background-color: #FF3333;
+    border-radius: 5px;
+}
+
+.edit-button span, .upload-pic-button span, .user-edit-button span {
     color: white;
     font-weight: 400;
     padding: 5px;
