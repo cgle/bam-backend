@@ -22,7 +22,7 @@ $(document).ready(function() {
         $("#settings-container").addClass('overlay-open');
     });
 
-    $('.edit-button').click(function(event){
+    $('.user-edit-button').click(function(event){
         $("#edit-container").addClass('overlay-open');
     });
 

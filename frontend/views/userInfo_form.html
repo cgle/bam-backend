@@ -1,30 +1,30 @@
 
 
-<form id="edit-form" ng-submit="saveChanges()">
+<form id="edit-form" ng-submit="submitEdit()" ng-controller="UserEditController">
     <h3 class="page-wide-text">Edit Personal Information</h3>
     </br>
     
-    <input type="text" id="firstName" name="firstName" placeholder="First Name" ng-model="credentials.firstName" required>
+    <input type="text" id="firstName" name="firstName" placeholder="First Name" ng-model="userForm.firstName" required>
     
-    <input type="text" id="lastName" name="lastName" placeholder="Last Name"  ng-model="credentials.lastName" required>
+    <input type="text" id="lastName" name="lastName" placeholder="Last Name"  ng-model="userForm.lastName" required>
 
-    <input type="text" id="username" name="username" placeholder="Username"  ng-model="credentials.username" required>
+    <input type="text" id="username" name="username" placeholder="Username"  ng-model="userForm.username" required>
     
-    <input type="email" id="email" name="email" placeholder="Email Address"  ng-model="credentials.email" required>
+    <input type="email" id="email" name="email" placeholder="Email Address"  ng-model="userForm.email" required>
     
     </br>
     <span class='formSpan'>Date of Birth</span>
     </br>
-    <input type="date" id="birthdate" name="birthdate" placeholder="Date of Birth"  ng-model="credentials.birthdate">
+    <input type="date" id="birthdate" name="birthdate" placeholder="Date of Birth"  ng-model="userForm.birthdate">
     </br>
     
     <span class='formSpan'>Description</span>
     </br>
-    <textarea rows="5" cols="50" id="description" ng-model="credentials.userDescription">
+    <textarea rows="5" cols="50" id="description" ng-model="userForm.userDescription">
     </textarea>
     
     </br></br>
-    <button class="edit-button" type="submit">
+    <button class="user-edit-button" type="submit">
     <span>Save Changes</span>
     </button>
 </form>

@@ -20,7 +20,7 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
-  app.post('/api/events/:event_id/votes', auth, function(req, res) {
+  app.post('/api/events/:event_id/votes', localauth, function(req, res) {
     var vote = new Vote({
       event_id: req.params.event_id,
       user_id: req.user._id,
@@ -74,7 +74,7 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
-  app.put('/api/events/:event_id/votes/:vote_id', auth, isOwner, function(req, res) {
+  app.put('/api/events/:event_id/votes/:vote_id', localauth, isOwner, function(req, res) {
     var up = req.body.is_upvote ? 1 : -1;
     var down = -1 * up;
     async.parallel([

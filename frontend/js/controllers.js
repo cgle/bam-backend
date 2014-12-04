@@ -69,33 +69,63 @@ eventControllers.factory('UserData', function(){
   return UserData;
 })
 
-userControllers.controller("UserEditController", ['$scope', '$location', 'UserData', '$filter', function($scope, $location, UserData, $filter){
-  window.scope = $scope;
-  $scope.credentials = { firstName:"", lastName:"", email:"", birthdate:"", userDescription:""};
-  window.data = UserData;
-  // $scope.dateAsString = $filter('birthdate')($scope.dateAsString, 'yyyy-MM-dd');
+// userControllers.controller("UserEditController", ['$scope', '$location', 'UserData', '$filter', function($scope, $location, UserData, $filter){
+//   window.scope = $scope;
+//   $scope.userForm = { firstName:"", lastName:"", email:"", birthdate:"", userDescription:""};
+//   window.data = UserData;
+//   // $scope.dateAsString = $filter('birthdate')($scope.dateAsString, 'yyyy-MM-dd');
 
-  $scope.saveChanges = function() {
+//   $scope.saveChanges = function() {
 
-    UserData.firstName = $scope.credentials.firstName;
-    UserData.lastName = $scope.credentials.lastName;
-    UserData.email = $scope.credentials.email;
-    UserData.userDescription = $scope.credentials.userDescription;
+//     UserData.firstName = $scope.userForm.firstName;
+//     UserData.lastName = $scope.userForm.lastName;
+//     UserData.email = $scope.userForm.email;
+//     UserData.userDescription = $scope.userForm.userDescription;
     
-    $location.path('/user');
+//     $location.path('/user');
 
-  }
-}]);
+//   }
+// }]);
 
 userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
-    $scope.credentials = {};
+    var userId;
+    $scope.userForm = {};
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
-      console.log(data.data[0]);
-      $scope.credentials.username = data.data[0].username;
-      $scope.credentials.email = data.data[0].email;
-      $scope.credentials.birthdate = data.data[0].birthyear;
+      console.log(data.data[0]._id);
+      userId = data.data[0]._id;
+      $scope.userForm.username = data.data[0].username;
+      $scope.userForm.email = data.data[0].email;
+      $scope.userForm.birthdate = data.data[0].birthyear;
     });
+    $scope.submitEdit = function(item, event) {
+      console.log("SUBMITTING");
+      console.log(userId);
+      var editUser = {
+        
+      };
+      $.ajax({
+        url: '/api/users/' + userId,
+        type: 'put',
+        // headers: {
+          
+        // }, 
+        data: {
+          firstName: $scope.userForm.firstName,
+          lastName: $scope.userForm.lastName,
+          username : $scope.userForm.username,
+          email : $scope.userForm.email,
+          description : $scope.userForm.description,
+          birthdate : $scope.userForm.birthdate,
+        },
+        success: function(data) {
+          console.log("success");
+        },
+        error: function(err) {
+          console.log("noooo")
+        }
+      });
+    }
   }]);
 
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http',

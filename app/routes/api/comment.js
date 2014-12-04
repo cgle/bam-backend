@@ -21,7 +21,7 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
-  app.post('/api/events/:event_id/comments', auth, function(req, res) {
+  app.post('/api/events/:event_id/comments', localauth, function(req, res) {
     var comment = new Comment({
       event_id: req.params.event_id,
       user_id: req.user._id,
@@ -33,7 +33,7 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
-  app.put('/api/events/:event_id/comments/:comment_id', auth, isOwner, function(req, res) {
+  app.put('/api/events/:event_id/comments/:comment_id', localauth, isOwner, function(req, res) {
     Comment.update(
       {_id: req.params.comment_id},
       {

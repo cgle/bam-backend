@@ -32,7 +32,7 @@ module.exports = function(app, localauth, auth, isOwner) {
     });
   });
 
-  app.post('/api/events', auth, function(req, res) {
+  app.post('/api/events', localauth, function(req, res) {
     var event = new Event(req.body);
     event['user_id'] = req.user._id;
     event.attendants.push(event.user_id);
@@ -71,7 +71,7 @@ module.exports = function(app, localauth, auth, isOwner) {
 
   });
 
-  app.put('/api/events/:event_id', auth, isOwner, function(req, res) {
+  app.put('/api/events/:event_id', localauth, isOwner, function(req, res) {
     var id = req.params.event_id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
