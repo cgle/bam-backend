@@ -110,29 +110,21 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
       console.log("SUBMITTING");
       console.log(userId);
       var editUser = {
-        
+        firstname : $scope.userForm.firstName,
+        lastname : $scope.userForm.lastName,
+        username : $scope.userForm.userName,
+        email : $scope.userForm.email,
+        description : $scope.userForm.userDescription,
+        birthyear : $scope.userForm.birthdate
       };
-      $.ajax({
-        url: '/api/users/' + userId,
-        type: 'put',
-        // headers: {
-          
-        // }, 
-        data: {
-          firstName: $scope.userForm.firstName,
-          lastName: $scope.userForm.lastName,
-          username : $scope.userForm.username,
-          email : $scope.userForm.email,
-          description : $scope.userForm.description,
-          birthdate : $scope.userForm.birthdate,
-        },
-        success: function(data) {
-          console.log("success");
-          $location.path('user/' + userId);
-        },
-        error: function(err) {
-          console.log("noooo");
-        }
+      var responsePromise = $http.put("/api/users/" + userId, editUser, {});
+      responsePromise.success(function(data, status, headers, config){
+        console.log('success');
+        console.log("THIS>>", data);
+        $location.path('/user/' + userId);
+      });
+      responsePromise.error(function(data, status, headers, config){
+        console.log("error");
       });
     }
 
