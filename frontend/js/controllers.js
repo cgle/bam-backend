@@ -210,4 +210,32 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       console.log(password);
       // add ajax post code to authenticate user here !!!
     }
+    $scope.registerLink = function(){
+      $location.path('register')
+    }
+}])
+
+loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
+  function($scope, $routeParams, $http, $location) {
+    var email, username, firstname, lastname, password1, password2;
+    $scope.submitRegister = function() {
+      firstname = $scope.registerForm.firstname;
+      lastname = $scope.registerForm.lastname;
+      username = $scope.registerForm.username;
+      email = $scope.registerForm.email;
+      password1 = $scope.registerForm.password1;
+      password2 = $scope.registerForm.password2;
+
+      if (password1 !== password2){
+        alert("password do not match");
+      } else {
+        console.log(firstname);
+        console.log(lastname);
+        console.log(username);
+        console.log(email);
+        console.log(password1);
+        console.log(password2);
+      }
+      // add ajax post code to register user here !!!
+    }
 }])

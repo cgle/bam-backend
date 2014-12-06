@@ -1,6 +1,6 @@
 'use strict';
 
-var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'ngRoute', 'ngResource']);
+var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'loginControllers', 'ngRoute', 'ngResource']);
 
 bamApp.config(function($routeProvider) {
 
@@ -36,6 +36,10 @@ bamApp.config(function($routeProvider) {
 		when('/user/:userId', {
 			controller: 'UserController',
 			templateUrl: "views/userView.html"
+		}).
+		when('/register', {
+			controller:'registerController',
+			templateUrl:'views/register-form.html'
 		});
 
 });

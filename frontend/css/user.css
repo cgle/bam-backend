@@ -38,18 +38,18 @@
 }
 
 
-#edit-form input{
+#edit-form input, #register-form input{
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 200px; 
 }
 
-#edit-form textarea{
+#edit-form textarea, #register-form textarea {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-#edit-form {
+#edit-form, #register-form {
     background-color: white;
     padding: 20px;
     padding-bottom: 50px;
