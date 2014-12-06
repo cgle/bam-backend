@@ -1,6 +1,6 @@
 'use strict';
 
-var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'ngRoute', 'ngResource']);
+var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'voteControllers', 'ngRoute', 'ngResource']);
 
 bamApp.config(function($routeProvider) {
 

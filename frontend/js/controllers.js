@@ -102,6 +102,15 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     }
   }]);
 
+var voteControllers = angular.module('voteControllers', []);
+
+voteControllers.controller("EventVoteController", ['$scope', '$http',
+  function($scope, $http) {
+    $scope.eventVote = function() {
+      console.log("VOTED");
+    }
+  }]);
+
 var userControllers = angular.module('userControllers', []);
 
 // userControllers.factory('UserData', function(){
