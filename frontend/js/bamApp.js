@@ -17,7 +17,7 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventCategoriesController',
 			templateUrl: 'views/eventCategoryListView.html'
 		}).
-		when('/events/edit/:eventId', {
+		when('/events/:eventId/edit', {
 			controller: 'EventEditController',
 			templateUrl: 'views/eventEditForm.html'
 		}).
@@ -25,7 +25,7 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventDetailController',
 			templateUrl: 'views/eventView.html'
 		}).
-		when('/user/edit/:userId', {
+		when('/user/:userId/edit', {
 			controller: 'UserEditController',
 			templateUrl: "views/userInfo_form.html"
 		}).
