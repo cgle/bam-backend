@@ -305,3 +305,17 @@ button {
     float: left;
     margin-left: 5%;
 }
+
+#textInfo {
+    color: #BFBFBF;
+    float: left;
+    text-indent: 40px;
+    margin-top: 5px;
+    font-size: 12px;
+
+}
+
+#registerText {
+    float: left;
+    text-indent: 40px;
+}
