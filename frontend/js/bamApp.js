@@ -17,6 +17,10 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventCategoriesController',
 			templateUrl: 'views/eventCategoryListView.html'
 		}).
+		when('/events/edit/:eventId', {
+			controller: 'EventEditController',
+			templateUrl: 'views/eventEditForm.html'
+		}).
 		when('/events/:eventId', {
 			controller: 'EventDetailController',
 			templateUrl: 'views/eventView.html'

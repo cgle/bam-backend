@@ -1,8 +1,4 @@
-
-
-
-
-<div id='eventFormContainer' ng-controller="EventFormController">
+<div id='eventFormContainer' ng-controller="EventEditController">
 	<h3>{{eventForm.name}}</h3>
 	<p> @ {{eventForm.address}}</p></br>
 
@@ -42,9 +38,7 @@
 	</form>
 
 	<br/></br></br>
-	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
+	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.updateEvent()">Update Event</button>
 
 	</div> 
 	 <script src="js/googleMapsApi.js"></script>
-
-
