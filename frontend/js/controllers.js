@@ -192,7 +192,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
     // console.log(User_ID.id); 
 
     $scope.edit = function() {
-      $location.path('user/edit/' + userId)
+      $location.path('user/' + userId + '/edit')
     }
 
   }]);
