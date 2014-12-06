@@ -212,6 +212,8 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
   function($scope, $routeParams, $http, $location) {
     var email;
     var password;
+    
+    // stores location information
     var c = function(pos){
       var lat = pos.coords.latitude,
           long = pos.coords.longitude,
@@ -219,22 +221,23 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
           console.log(coords);
     }
 
+    // Handle getting location errors 
     var showError = function(error) {
-    switch(error.code) {
+      switch(error.code) {
         case error.PERMISSION_DENIED:
-            console.log("User denied the request for Geolocation.")
-            break;
+          console.log("User denied the request for Geolocation.")
+          break;
         case error.POSITION_UNAVAILABLE:
-            console.log("Location information is unavailable.")
-            break;
+          console.log("Location information is unavailable.")
+          break;
         case error.TIMEOUT:
-            console.log("The request to get user location timed out.")
-            break;
+          console.log("The request to get user location timed out.")
+          break;
         case error.UNKNOWN_ERROR:
-            console.log("An unknown error occurred.")
-            break;
-    }
-}
+          console.log("An unknown error occurred.")
+          break;
+      }
+  }
 
     $scope.submitLogin = function() {
       // Get location of user
