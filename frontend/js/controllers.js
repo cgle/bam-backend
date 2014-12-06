@@ -102,9 +102,12 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
       console.log(data.data[0]._id);
       userId = data.data[0]._id;
+      $scope.userForm.firstname = data.data[0].firstname; 
+      $scope.userForm.lastname = data.data[0].lastname;
       $scope.userForm.username = data.data[0].username;
       $scope.userForm.email = data.data[0].email;
       $scope.userForm.birthdate = data.data[0].birthyear;
+      $scope.userForm.userDescription = data.data[0].description;
     });
     $scope.submitEdit = function(item, event) {
       console.log("SUBMITTING");
