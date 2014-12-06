@@ -17,7 +17,7 @@ var Event = new Schema({
   public: {type: Boolean, default: true},
   upvotes: {type: Number, default: 0},
   downvotes: {type: Number, default: 0},
-  categories: [String],
+  category: String,
   user_id: {type: mongoose.Schema.ObjectId, ref: 'User'},
   cohosts: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   attendants: [{type: mongoose.Schema.ObjectId, ref: 'User'}]

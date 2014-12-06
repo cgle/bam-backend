@@ -75,14 +75,14 @@ module.exports = function(app, localauth, auth, isOwner) {
     var id = req.params.event_id;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
-    var categories = req.body.categories ? req.body.categories : [];
-    var update = _.omit(req.body, ['cohosts','attendants','user_id','_id', 'categories']);
+    //var categories = req.body.categories ? req.body.categories : [];
+    var update = _.omit(req.body, ['cohosts','attendants','user_id','_id']);
     update['updatedAt'] = Date.now();
     Event.update(
       {_id: id},
       {
         $set: update,
-        $addToSet: {cohosts: cohosts, attendants: attendants, categories: categories},
+        $push: {cohosts: {$each :cohosts}, attendants: {$each :attendants}}
       }, {multi: true}, function(err, data) {
         if (err) res.send({error: err});
         else res.send({data: data});

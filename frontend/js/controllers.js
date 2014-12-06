@@ -65,16 +65,23 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
 eventControllers.controller("EventEditController", ['$scope', '$http', '$location', '$routeParams',
   function($scope, $http, $location, $routeParams) {
     $scope.eventForm = {}
+    var userId;
+    var eventAttendants;
+    var eventUpvotes;
+    var eventDownvotes;
+    var eventCohosts;
+
     console.log($routeParams);
     $http.get('api/events/' + $routeParams.eventId).
       success(function(data) {
         console.log("event data>>", data);
+        userId = data.data[0].user_id;
         $scope.eventForm.name = data.data[0].name;
         $scope.eventForm.address = data.data[0].address;
         $scope.eventForm.date = data.data[0].date;
         $scope.eventForm.privacy = data.data[0].public;
         $scope.eventForm.description = data.data[0].description;
-        $scope.eventForm.category = data.data[0].categories;
+        $scope.eventForm.category = data.data[0].category;
     }).
       error(function(data) {
         console.log('Could not edit event info');
@@ -82,12 +89,14 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     $scope.eventForm.updateEvent = function(){
       console.log("SUBMITTING");
       var editEvent = {
+        user_id : userId,
         name : $scope.eventForm.name,
         address : $scope.eventForm.address,
         date : $scope.eventForm.date,
         public : $scope.eventForm.description,
         description : $scope.eventForm.description,
-        categories : $scope.eventForm.category
+        category : $scope.eventForm.category,
+        
       }
 
       var responsePromise = $http.put("/api/events/" + $routeParams.eventId, editEvent, {});
