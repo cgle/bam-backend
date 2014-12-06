@@ -4,24 +4,25 @@
   <h3 class="page-wide-text">Register</h3>
   </br>
 
-  <input type="text" id="firstName" placeholder="First Name" ng-model="registerForm.firstname"></br>
-    
-  <input type="text" id="lastName" placeholder="Last Name" ng-model="registerForm.lastname"></br>
-
   <input type="text" id="username" placeholder="Username*"  ng-model="registerForm.username" required></br>
     
   <input type="email" id="email" placeholder="Email Address*"  ng-model="registerForm.email" required></br>
-
-  <span id='registerText'>Date of Birth</span>
-  </br>
-  <input type="date" id='birthdate' ng-model='registerForm.birthdate'>
-
-  <input ng-model="registerForm.address" id="myLocation" type="text" placeholder="My Location*">
 
   <input type="password" id="password1" placeholder="Password*"  ng-model="registerForm.password1" required></br>
 
   <input type="password" id="password2" placeholder="Confirm Password*"  ng-model="registerForm.password2" required>
   </br>
+
+  <input type="text" id="firstName" placeholder="First Name" ng-model="registerForm.firstname"></br>
+    
+  <input type="text" id="lastName" placeholder="Last Name" ng-model="registerForm.lastname"></br>
+
+  <span id='registerText'>Date of Birth</span>
+  </br>
+  <input type="date" id='birthdate' ng-model='registerForm.birthdate'>
+
+  <input ng-model="registerForm.address" id="googleAddress" type="text" placeholder="My Location">
+
   <p id='textInfo'>*Required field</p>
   </br></br></br>
 
@@ -31,3 +32,5 @@
   </button>
 
 </form>
+
+<script src="js/googleMapsApi.js"></script>

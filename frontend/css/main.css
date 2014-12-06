@@ -318,4 +318,5 @@ button {
 #registerText {
     float: left;
     text-indent: 40px;
+    margin-top: 15px;
 }
