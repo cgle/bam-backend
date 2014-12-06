@@ -115,7 +115,7 @@ var runServer = function() {
 
   //middleware for checking if user's owner
   var isOwner = function(req, res, next) {
-    if (req.user._id === req.body.user_id) return next();
+    if (req.user._id == req.body.user_id) return next();
     else {
       res.send({error: 'unauthorized'}, 401);
     }
