@@ -7,9 +7,9 @@
   
 <body>
 
-  <div class="vote-button-container center">
-    <button type="button" class="btn btn-success vote-btn">Bam!</button>
-    <button type="button" class="btn btn-danger vote-btn">Bam!</button>
+  <div class="vote-button-container center" ng-controller="EventVoteController">
+    <button type="button" class="btn btn-success vote-btn" ng-click="eventVote()">Bam!</button>
+    <button type="button" class="btn btn-danger vote-btn" ng-click="eventVote()">Bam!</button>
     <div>
       <span>vote count</span>
       <span>vote count</span>
