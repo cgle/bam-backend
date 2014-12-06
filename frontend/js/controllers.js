@@ -171,3 +171,17 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 // }]);
 
 
+var loginControllers = angular.module('loginControllers', []);
+
+loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location',
+  function($scope, $routeParams, $http, $location) {
+    var email;
+    var password;
+    $scope.submitLogin = function() {
+      email = $scope.loginForm.email;
+      password = $scope.loginForm.password;
+      console.log(email);
+      console.log(password);
+      // add ajax post code to authenticate user here !!!
+    }
+}])
