@@ -113,10 +113,31 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
 
 var voteControllers = angular.module('voteControllers', []);
 
-voteControllers.controller("EventVoteController", ['$scope', '$http',
-  function($scope, $http) {
-    $scope.eventVote = function() {
-      console.log("VOTED");
+voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams',
+  function($scope, $http, $routeParams) {
+    var userId;
+    $http.get("/api/events/" + $routeParams.eventId).
+      success(function(data) {
+        userId = data.data[0].user_id;
+      }).
+      error(function(data) {
+        console.log('problem retrieving event info');
+      });
+
+    $scope.eventVote = function(voteType) {
+      console.log("VOTED ", voteType);
+      var vote = {
+        event_id : $routeParams.eventId,
+        user_id : userId,
+        is_upvote: voteType
+      }
+      var responsePromise = $http.post('/api/events/'+$routeParams.eventId+'/votes', vote, {});
+      responsePromise.success(function(){
+        console.log('has votred');
+      });
+      responsePromise.error(function(){
+        console.log('error, not able to vote');
+      });
     }
   }]);
 
