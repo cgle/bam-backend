@@ -1,6 +1,8 @@
 'use strict';
 
-var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'voteControllers', 'ngRoute', 'ngResource']);
+var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'loginControllers', 'voteControllers',
+	'ngRoute', 'ngResource']);
+
 
 bamApp.config(function($routeProvider) {
 
@@ -17,7 +19,7 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventCategoriesController',
 			templateUrl: 'views/eventCategoryListView.html'
 		}).
-		when('/events/edit/:eventId', {
+		when('/events/:eventId/edit', {
 			controller: 'EventEditController',
 			templateUrl: 'views/eventEditForm.html'
 		}).
@@ -25,7 +27,7 @@ bamApp.config(function($routeProvider) {
 			controller: 'EventDetailController',
 			templateUrl: 'views/eventView.html'
 		}).
-		when('/user/edit/:userId', {
+		when('/user/:userId/edit', {
 			controller: 'UserEditController',
 			templateUrl: "views/userInfo_form.html"
 		}).
@@ -36,6 +38,10 @@ bamApp.config(function($routeProvider) {
 		when('/user/:userId', {
 			controller: 'UserController',
 			templateUrl: "views/userView.html"
+		}).
+		when('/register', {
+			controller:'registerController',
+			templateUrl:'views/register-form.html'
 		});
 
 });

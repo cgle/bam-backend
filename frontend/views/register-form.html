@@ -1,0 +1,25 @@
+
+<form id='register-form' ng-submit="submitRegister()" ng-controller="registerController">
+  
+  <h3 class="page-wide-text">Register</h3>
+  </br>
+
+  <input type="text" id="firstName" placeholder="First Name" ng-model="registerForm.firstname" required></br>
+    
+  <input type="text" id="lastName" placeholder="Last Name" ng-model="registerForm.lastname" required></br>
+
+  <input type="text" id="username" placeholder="Username"  ng-model="registerForm.username" required></br>
+    
+  <input type="email" id="email" placeholder="Email Address"  ng-model="registerForm.email" required></br>
+
+  <input type="password" id="password1" placeholder="Password"  ng-model="registerForm.password1" required></br>
+
+  <input type="password" id="password2" placeholder="Confirm Password"  ng-model="registerForm.password2" required>
+  </br>
+  </br>
+  
+  <button class="user-edit-button" type="submit">
+  <span>Register</span>  
+  </button>
+
+</form>
