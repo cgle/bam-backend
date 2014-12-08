@@ -93,7 +93,9 @@ var runServer = function() {
     });
   }));
 
-  app.use(session({secret: config.app_secret}));
+  app.use(session({secret: config.app_secret,
+                resave : false,
+                saveUninitialized: false}));
   app.use(passport.initialize());
   app.use(passport.session());
 
