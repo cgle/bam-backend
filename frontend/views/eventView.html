@@ -1,5 +1,14 @@
 
-  <div class="vote-button-container center" ng-controller="EventVoteController">
+<div ng-controller="EventDetailController" class="main-event-container center">
+  <div ng-include='"views/event-title.html"'></div>
+  <div class="center data-location-container">
+    <br>
+    <span id="event-date">{{ event.date }}</span>
+    <span id="event-location">{{ event.address }}</span>
+  </div>
+  <div ng-include='"views/event-content.html"'></div>
+
+  <div class="vote-button-container" ng-controller="EventVoteController">
     <input type="image" name="bam" class="btn btn-success vote-btn" ng-click="eventVote(true)" src="images/like.png">
     <span>Bam!! count</span>
 
@@ -8,12 +17,4 @@
     </div>
   </div>
 
-  <div ng-controller="EventDetailController" class="main-event-container center">
-    <div ng-include='"views/event-title.html"'></div>
-    <div class="center data-location-container">
-      <br>
-      <span id="event-date">{{ event.date }}</span>
-      <span id="event-location">{{ event.address }}</span>
-    </div>
-    <div ng-include='"views/event-content.html"'></div>
-  </div>
+</div>
