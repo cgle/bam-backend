@@ -22,8 +22,12 @@ body {
 	width: 40%;
 }
 
-.vote-btn {
-	width: 200px;
+.vote-btn{
+	padding: 10px;
+	height: 70px;
+	width: 70px;
+	background-color: white;
+	border-color: white;
 }
 
 .main-event-container {

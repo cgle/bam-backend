@@ -1,32 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Bam!</title>
-  <link rel="stylesheet" href="css/event.css">
-  
-<body>
 
   <div class="vote-button-container center" ng-controller="EventVoteController">
-    <input type="submit" name="bam" class="btn btn-success vote-btn" ng-click="eventVote(true)" value='Bam!'>
-    <input type="submit" name="slam" class="btn btn-danger vote-btn" ng-click="eventVote(false)" value ='Slam!'>
-    <div>
-      <span>vote count</span>
-      <span>vote count</span>
+    <input type="image" name="bam" class="btn btn-success vote-btn" ng-click="eventVote(true)" src="images/like.png">
+    <span>Bam!! count</span>
+
+    <input type="image" name="slam" class="btn btn-danger vote-btn" ng-click="eventVote(false)" src="images/dislike.png" >
+    <span>Slam!! count</span>
     </div>
   </div>
 
   <div ng-controller="EventDetailController" class="main-event-container center">
     <div ng-include='"views/event-title.html"'></div>
     <div class="center data-location-container">
+      <br>
       <span id="event-date">{{ event.date }}</span>
       <span id="event-location">{{ event.address }}</span>
     </div>
     <div ng-include='"views/event-content.html"'></div>
   </div>
-
-
-
-
-</body>
-</html>
