@@ -1,10 +1,10 @@
-<br>
+<section id="event-desc">
+	<p style="text-align: center;"><strong>Description</strong></p>
+	<p>{{ event.description }}</p>
+  <span id="event-img"><img src="{{event.profile_pic}}"></span>
+</section>
 
-<span id="event-img"><img src="{{event.profile_pic}}"></span>
-<span id="event-desc">{{ event.description }}</span>
-<div class='attendees'>
-	<h3>Featuring:</h3>
-	<div>
-		<div ng-include='"views/attendants.html"'></div>
-	</div>
-</div>
+<aside id='attendees'>
+	<p><strong>Attendance</strong></p>
+	<div ng-include='"views/attendants.html"'></div>
+</aside>

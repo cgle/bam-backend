@@ -1,20 +1,35 @@
 
+
 <div ng-controller="EventDetailController" class="main-event-container center">
+  
   <div ng-include='"views/event-title.html"'></div>
+
+  <img id="event-img" src="images/c-and-hobbes-title.png">
+
   <div class="center data-location-container">
-    <br>
     <span id="event-date">{{ event.date }}</span>
     <span id="event-location">{{ event.address }}</span>
   </div>
-  <div ng-include='"views/event-content.html"'></div>
+  
+  <div class="center join-container">
+    <span id="event-status">Hosted by EVENT.USER</span>
+    <button id="join-button"><Strong>Join</Strong></button>
+  </div>
+
+
+  <div id="event-info" ng-include='"views/event-content.html"'></div>
 
   <div class="vote-button-container" ng-controller="EventVoteController">
-    <input type="image" name="bam" class="btn btn-success vote-btn" ng-click="eventVote(true)" src="images/like.png">
-    <span>Bam!! count</span>
-
-    <input type="image" name="slam" class="btn btn-danger vote-btn" ng-click="eventVote(false)" src="images/dislike.png" >
-    <span>Slam!! count</span>
+    
+    <div style="float: left; width: 50%">
+      <input type="image" name="bam" class="btn-success vote-btn" ng-click="eventVote(true)" src="images/like.png" onmouseover=" this.src='images/bam.jpeg'" onmouseout="this.src='images/like.png'">
+      <p>Bam!! count</p>
     </div>
+    <div  style="float: right; width: 50%">
+      <input type="image" name="slam" class="btn-danger vote-btn" ng-click="eventVote(false)" src="images/dislike.png"  onmouseover=" this.src='images/slam.jpg'" onmouseout="this.src='images/dislike.png'">  
+      <p>Slam!! count</p>
+    </div>    
+    
   </div>
 
 </div>
