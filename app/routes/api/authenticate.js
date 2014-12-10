@@ -50,7 +50,7 @@ module.exports = function(app) {
               res.send({error: err});
           }
           if (reply) {
-              res.send({message: 'logged in', access_token: token, expireInMinutes: TOKEN_EXPIRATION});
+              res.send({message: 'logged in', access_token: token, user: req.user, expireInMinutes: TOKEN_EXPIRATION});
           } else {
               res.send({error: 'redis cannot set expiration'});
           }
