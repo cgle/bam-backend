@@ -69,10 +69,9 @@
     text-align: center;
 }
 
-.mini-navigation-menu li {
-    display: inline-block;
-    margin-right: 48px;
-    font-size: 13px;
+.mini-navigation-menu button {
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .mini-navigation hr {
@@ -88,6 +87,10 @@
     text-transform: uppercase;
 }
 
+.mini-navigation-menu button {
+    font-family: "Times New Roman"
+}
+
 button {
     border : 0;
     background-color: white;
@@ -95,18 +98,24 @@ button {
 
 .comic-container {
     /*border: 1px solid black;*/
-    height: 613px;
+    height: 450px;
     width: 100%;
 }
 
-.comic-block {
+.event-item {
     height: 200px;
+    width: 200px;
     border: 2px solid black;
     background: #2db34a;
+    padding: 10px;
+    margin-right: 0.5%;
+    margin-top: 0.5%;
+    font-family: "Times New Roman";
 }
 
-.comic-container > div > div:not(:last-child) {
+/*.comic-container > div > div:not(:last-child) {
     margin-right: 0.5%;
+    margin-bottom: 0.5%;
 }
 
 .comic-container div:not(:first-child) div{
@@ -139,7 +148,7 @@ button {
 .third-row div {
     float: left;
     width: 33%;
-}
+}*/
 
 .login-button {
     background-color: #FF3333;

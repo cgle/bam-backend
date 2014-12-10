@@ -41,6 +41,7 @@ $(document).ready(function() {
         $(this).css("opacity","1.0");
     })
 
+
     console.log('js loaded');
 });
 
