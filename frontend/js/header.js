@@ -19,17 +19,7 @@ $(document).ready(function() {
     });
 
     $('html').click(function(e) {
-        // $('.dropdown-container').hide();
-        var target = e.target.className;
-        console.log(target);
-        switch (target) {
-            case 'login':
 
-            case 'search':
-
-            case 'settings':
-
-        }
         // $("#settings-container").addClass('overlay-open');
 
         if (e.target.className == 'overlay ng-scope overlay-open') {
