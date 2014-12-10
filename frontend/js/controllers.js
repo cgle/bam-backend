@@ -7,7 +7,11 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
   function($scope, $routeParams, $http) {
     console.log($routeParams);
     $http.get('api/events/' + $routeParams.eventId).success(function(data) {
+      var date = new Date(data.data[0].date);
+      var formattedDate = dateParser(date);
+      console.log(formattedDate);
       $scope.event = data.data[0];
+      $scope.event.date = formattedDate;
       console.log(data.data[0]);
     });
   }]);
@@ -23,10 +27,8 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     $scope.events = [];
-    console.log("ROUTE PARAM>>", $routeParams);
     $http.get('api/events').success(function(data) {
       data.data.forEach(function(event){
-        console.log("EVENT>>", event);
         if ($.inArray($routeParams.category, event.categories) > -1){
           $scope.events.push(event);
         }
@@ -46,12 +48,14 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
     $scope.eventForm.address = ' Location'
     $scope.eventForm.createEvent = function(item, event) {
       console.log("SUBMITTING");
+      var dateString = $scope.eventForm.date;
+      var date = new Date(dateString);
       var newEvent = {
         name : $scope.eventForm.name,
         address : $scope.eventForm.address,
         description : $scope.eventForm.description,
         public : $scope.eventForm.privacy,
-        date : $scope.eventForm.date,
+        date : date,
         categories : $scope.eventForm.category
       };
       var responsePromise = $http.post("/api/events", newEvent, {});
@@ -98,35 +102,44 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     var eventUpvotes;
     var eventDownvotes;
     var eventCohosts;
+    var eventDate;
 
     console.log($routeParams);
     $http.get('api/events/' + $routeParams.eventId).
       success(function(data) {
         console.log("event data>>", data);
         userId = data.data[0].user_id;
+        eventDate = data.data[0].date;
+        var date = new Date(eventDate);
+        console.log(date);
         $scope.event = data.data[0];
         $scope.eventForm.name = data.data[0].name;
         $scope.eventForm.address = data.data[0].address;
-        $scope.eventForm.date = data.data[0].date;
+        $scope.eventForm.date = date;
         $scope.eventForm.privacy = data.data[0].public;
         $scope.eventForm.description = data.data[0].description;
         $scope.eventForm.category = data.data[0].category;
     }).
       error(function(data) {
         console.log('Could not edit event info');
-      });
+    });
+
+    //console.log("DATE>>",userId);
+    //dateParser($scope.eventForm.date);
     $scope.eventForm.updateEvent = function(){
       console.log("SUBMITTING");
+      console.log("EVENT DATE>>", dateParser( eventDate));
+      var formatDate = dateParser( eventDate)
       var editEvent = {
         user_id : userId,
         name : $scope.eventForm.name,
         address : $scope.eventForm.address,
-        date : $scope.eventForm.date,
+        date : formatDate,
         public : $scope.eventForm.description,
         description : $scope.eventForm.description,
         category : $scope.eventForm.category,
+      };
 
-      }
 
       var data = new FormData();
       var promises = [];
@@ -252,8 +265,6 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
         data.append('profile_pic', file);
       });
 
-
-
       $scope.putProfilePromise = $http.put("/api/users/" + userId, editUser, {});
       $scope.uploadPromise = $.ajax({
             url: '/api/users/' + userId + '/media',
@@ -302,29 +313,11 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
   }]);
 
-
-
-// userControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
-//   window.scope = $scope;
-//   window.scope = UserData;
-//   $scope.firstName = UserData.firstName;
-//   $scope.lastName = UserData.lastName;
-//   $scope.email = UserData.email;
-//   // $scope.birthdate = UserData.birthdate
-//   $scope.userDescription = UserData.userDescription;
-
-//   $scope.edit = function() {
-//     $location.path('/user/edit')
-//   }
-
-// }]);
-
-
 var loginControllers = angular.module('loginControllers', []);
 
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
-    var email;
+    var username;
     var password;
 
     // stores location information
@@ -358,11 +351,24 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       navigator.geolocation.getCurrentPosition(c, showError);
 
 
-      email = $scope.loginForm.email;
+      username = $scope.loginForm.username;
       password = $scope.loginForm.password;
-      console.log(email);
+      console.log(username);
       console.log(password);
       // add ajax post code to authenticate user here !!!
+      var credentials = {
+        username: username,
+        password: password
+      }
+
+      var responsePromise = $http.post('/api/authenticate/login', credentials, {});
+      responsePromise.success(function(data) {
+        console.log(data);
+        console.log('login success');
+      });
+      responsePromise.error(function(){
+        console.log('login error');
+      });
     }
     $scope.registerLink = function(){
       $location.path('register')
@@ -400,3 +406,10 @@ loginControllers.controller('uploadTestController', ['$scope', '$routeParams', '
   function($scope, $routeParams, $http, $location) {
 
 }])
+
+var dateParser = function(date){
+  
+  var formattedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+  console.log("DATE>>", formattedDate);
+  return formattedDate;
+}

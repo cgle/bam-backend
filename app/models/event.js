@@ -8,6 +8,8 @@ var Event = new Schema({
   date: {type: Date, default: Date.now},
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now},
+  event_main_pic: {type: String, default: ''},
+  event_pics: [{type: String, default: ''}],
   description: String,
   pos: {
     lng: {type: Number, default: 0.0},
