@@ -1,34 +1,25 @@
- <script src="js/main.js"></script>
+ <script src="js/header.js"></script>
 
 
  <div class="container">
     <div class="header">
-      <div class="quick-navigation">
-        <button class="sections-button"  onclick="toggle_visibility('dropdown-container')">
-          <img height="13" width="13" src="images/three-lines.png">
-          <span class="button-text">Sections</span>
-          <ul id="dropdown-container" >
-            <li><a href="#">Home Page</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Your Events</a></li>
-            <li><a href="#">Friends</a></li>
-          </ul>
+
+      <div class="user-tools">
+        <button type="button">
+          <span class="login-button">Login</span>
         </button>
-        <button class="search-button"  onclick="toggle_visibility('search-flyout')">
+        
+        <button class="settings-button" type="button">
+          <img height="18" width="18" src="images/settings.png">
+          <span class="button-text">Settings</span>
+        </button>
+
+        <button class="search-button">
           <img height="13" width="13" src="images/magnifying-glass.png">
           <span id="search-button" class="button-text">Search</span>      
         </button>
       </div>
 
-      <div class="user-tools">
-        <button class="login-button" type="button" onclick="toggle_visibility('login-container')">
-          <span>Log In</span>
-        </button>
-        <button class="settings-button" type="button" onclick="toggle_visibility('settings-container')">
-          <img height="18" width="18" src="images/settings.png">
-          <span class="button-text">Settings</span>
-        </button>
-      </div>
     </div>
 
     <div class="masthead">
@@ -36,7 +27,7 @@
       <ul class="masthead-menu">
         <li class="page-wide-text">Friday, November 14, 2014</li>
         <li style="color: #d3d3d3"> | </li>
-        <li class="page-wide-text">Users Online: 2,001</li>
+        <li class="page-wide-text">Users Online: ###</li>
       </ul>
       <hr/>
     </div>
@@ -53,70 +44,55 @@
     </div>   
   </div>
 
-    <hr/>
+  <hr/>
 
-      <div id="login-container" class="overlay">
-        
-        <form id="login-form" ng-submit="submitLogin()" ng-controller="LoginSubmitController">
-          
-          <button class="close-button" type="button" onclick="toggle_visibility('login-container')">
-            <img height="30" width="30" src="images/close-button.png">
-          </button>
-          
-          <h3 class="page-wide-text">Log In</h3>
-          <input type="email" id="login-email" name="login-email" placeholder="Email Address"  ng-model="loginForm.email" required>
-          <input type="password" id="login-password" name="login-password" placeholder="Password" ng-model="loginForm.password" required>
-          
-          </br>
-          <button class="login-button" type="submit">
-            <span>Log In</span>
-          </button>
-          </br></br>
-          <button class="register-button" type="button" ng-click="registerLink()"  onclick="toggle_visibility('login-container')">
-            <span>Register</span>
-          </button>
-        </form>
-      </div>
+  <!-- Login overlay -->
+  <div id="login-container" class="overlay">
+    <form id="login-form" ng-submit="submitLogin()" ng-controller="LoginSubmitController">
+      <h3 class="page-wide-text">Login</h3>
+      <input type="email" id="login-email" name="login-email" placeholder="Email Address"  ng-model="loginForm.email" required>
+      <input type="password" id="login-password" name="login-password" placeholder="Password" ng-model="loginForm.password" required>
+      </br>
+      <button class="login-button" type="submit">
+        <span>Login</span>
+      </button>
+      </br></br>
+      <button class="register-button" type="button" ng-click="registerLink()">
+        <span>Register</span>
+      </button>
+    </form>
+  </div>
 
-      <div id="search-flyout" class="overlay" onclick="toggle_visibility('search-flyout')">
-        <div class="search-container">
-          <form id="search-form">
-            <button class="close-button" type="button" onclick="close-overlay">
-            <img height="30" width="30" src="images/close-button.png">
-            </button>
-            <input type="text" name="search" placeholder="Search">
-          </form>
-        </div>
-      </div>
-
-      <div id="settings-container" class="overlay">
-        <form id="settings-form">
-          <button class="close-button" type="button" onclick="toggle_visibility('settings-container')">
-            <img height="30" width="30" src="images/close-button.png">
-          </button>
-
-          <h3 class="page-wide-text">Settings</h3>
-          
-          <div>
-            Distance:  
-            <input type="radio" name="distance" checked> 1 mi.
-            <input type="radio" name="distance"> 3 mi.
-            <input type="radio" name="distance"> 5 mi.
-            <input type="radio" name="distance"> 10 mi.
-          </div>
-          <div>
-            Order By:  
-            <input type="radio" name="popularity" checked> Best Event
-            <input type="radio" name="popularity"> Upvotes
-            <input type="radio" name="popularity"> Downvotes
-          </div>
-        </form>
-      </div>
-
-
-      </div>
+  <!-- Search overlay -->
+  <div id="search-flyout" class="overlay">
+    <div class="search-container">
+      <form id="search-form">
+        <input type="text" name="search" placeholder="Search">
+      </form>
     </div>
   </div>
+
+  <!-- Settings overlay -->
+  <div id="settings-container" class="overlay">
+    <form id="settings-form">
+      <h3 class="page-wide-text">Settings</h3>
+      <div>
+        Distance:  
+        <input type="radio" name="distance" checked> 1 mi.
+        <input type="radio" name="distance"> 3 mi.
+        <input type="radio" name="distance"> 5 mi.
+        <input type="radio" name="distance"> 10 mi.
+      </div>
+      <div>
+        Order By:  
+        <input type="radio" name="popularity" checked> Best Event
+        <input type="radio" name="popularity"> Upvotes
+        <input type="radio" name="popularity"> Downvotes
+      </div>
+    </form>
+  </div>
+
+</div>
 
    
 

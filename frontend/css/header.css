@@ -1,5 +1,6 @@
- Header */
-
+/*****************************
+Header and Masthead
+*****************************/
 .header {
     margin: 10px 0px 0px 0px;
 }
@@ -9,23 +10,11 @@
 }
 
 .quick-navigation button {
-    float: left;
-}
-
-.sections-button img {
-    margin-top: -3px;
-}
-
-.search-button img {
-    margin-top: -3px;
-}
-
-.settings-button img {
-    margin-top: -3px;
+    float: right;
 }
 
 .user-tools button {
-    float: right;
+    float: left;
 }
 
 .masthead {
@@ -56,9 +45,30 @@
     border-top: 2px solid black;
 }
 
+/*****************************
+General
+*****************************/
+
 .page-wide-text {
     font-family: "Times New Roman";
 }
+
+/* Remove default butotn css */
+button {
+    border : 0;
+    background-color: white;
+}
+
+.button-text {
+    color: black;
+    background-color: transparent;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/*****************************
+Mini Navigation
+*****************************/
 
 .mini-navigation-menu {
     margin-bottom: -15px;
@@ -77,20 +87,11 @@
     border-top: 1px solid #ccc;
 }
 
-.button-text {
-    color: black;
-    background-color: transparent;
-    font-weight: 700;
-    text-transform: uppercase;
-}
 
-button {
-    border : 0;
-    background-color: white;
-}
+/*
 
 .comic-container {
-    /*border: 1px solid black;*/
+    border: 1px solid black;
     height: 613px;
     width: 100%;
 }
@@ -137,12 +138,16 @@ button {
     width: 33%;
 }
 
+*/
+
+
+/*****************************
+Login Header
+*****************************/
+
 .login-button {
     background-color: #FF3333;
-    border-radius: 5px;
-}
-
-.login-button span {
+    border-radius: 10px;
     color: white;
     font-weight: 400;
     text-transform: uppercase;
@@ -200,7 +205,52 @@ button {
     margin-right: 50%;
 }
 
-/* Overlay */
+/*****************************
+Settings Header
+*****************************/
+
+.settings-button img {
+    margin-top: -3px;
+}
+
+#settings-form {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
+    height: 325px;
+    width: 375px;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+}
+
+/*****************************
+Search Header
+*****************************/
+
+.search-button img {
+    margin-top: -3px;
+}
+
+#search-form {
+    margin-left: 50%;
+    margin-top: 150px;
+    width: 400px;
+}
+
+#search-form input {
+    width: 350px;
+    height: 30px;
+    margin-left: -200px;
+}
+
+#search-form button {
+    margin-right: 200px;
+} 
+
+/*****************************
+Overlay for all header buttons
+*****************************/
 
 .overlay {
     position: fixed;
@@ -222,83 +272,15 @@ button {
     transition: opacity 0.5s;
 }
 
-#search-form {
-    margin-left: 50%;
-    margin-top: 150px;
-    width: 400px;
-}
 
-#search-form input {
-    width: 350px;
-    height: 30px;
-    margin-left: -200px;
-}
 
-#search-form button {
-    margin-right: 200px;
-}
 
-#dropdown-container {
-    position: absolute;
-    display: none;
-    list-style-type: none;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    padding-bottom: 0px;
-    margin-top: 8px;
-}
-
-#dropdown-container li {
-    margin-left: 15px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 2px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: white;
-}
-
-#dropdown-container li:hover{
-    border-style: solid;
-    border-color: lightblue; 
-
-}
-
-#dropdown-container a {
-    text-decoration: none;
-    color: black;
-} 
-
-#settings-form {
-    background-color: white;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 120px;
-    height: 325px;
-    width: 375px;
-    border: 1px solid #d3d3d3;
-    text-align: center;
-}
-
-.comic-block-overlay {
-    /*display: none;*/
-    opacity: 0.50;
-    -webkit-transition: opacity .25s ease;
-    -moz-transition: opacity .25s ease;
-}
 
 .formSpan {
     font-weight: bold;
     float: left;
     margin-left: 40px;
     margin-right: 10px;
-}
-
-.close-button {
-    float: right;
 }
 
 #login-email, #login-password {
@@ -312,7 +294,6 @@ button {
     text-indent: 40px;
     margin-top: 5px;
     font-size: 12px;
-
 }
 
 #registerText {
