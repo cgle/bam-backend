@@ -23,10 +23,8 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     $scope.events = [];
-    console.log("ROUTE PARAM>>", $routeParams);
     $http.get('api/events').success(function(data) {
       data.data.forEach(function(event){
-        console.log("EVENT>>", event);
         if ($.inArray($routeParams.category, event.categories) > -1){
           $scope.events.push(event);
         }
@@ -252,8 +250,6 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
         data.append('profile_pic', file);
       });
 
-
-
       $scope.putProfilePromise = $http.put("/api/users/" + userId, editUser, {});
       $scope.uploadPromise = $.ajax({
             url: '/api/users/' + userId + '/media',
@@ -302,29 +298,11 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
   }]);
 
-
-
-// userControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
-//   window.scope = $scope;
-//   window.scope = UserData;
-//   $scope.firstName = UserData.firstName;
-//   $scope.lastName = UserData.lastName;
-//   $scope.email = UserData.email;
-//   // $scope.birthdate = UserData.birthdate
-//   $scope.userDescription = UserData.userDescription;
-
-//   $scope.edit = function() {
-//     $location.path('/user/edit')
-//   }
-
-// }]);
-
-
 var loginControllers = angular.module('loginControllers', []);
 
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
-    var email;
+    var username;
     var password;
 
     // stores location information
@@ -358,11 +336,24 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       navigator.geolocation.getCurrentPosition(c, showError);
 
 
-      email = $scope.loginForm.email;
+      username = $scope.loginForm.username;
       password = $scope.loginForm.password;
-      console.log(email);
+      console.log(username);
       console.log(password);
       // add ajax post code to authenticate user here !!!
+      var credentials = {
+        username: username,
+        password: password
+      }
+
+      var responsePromise = $http.post('/api/authenticate/login', credentials, {});
+      responsePromise.success(function(data) {
+        console.log(data);
+        console.log('login success');
+      });
+      responsePromise.error(function(){
+        console.log('login error');
+      });
     }
     $scope.registerLink = function(){
       $location.path('register')
