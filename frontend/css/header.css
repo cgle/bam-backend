@@ -53,7 +53,7 @@ General
     font-family: "Times New Roman";
 }
 
-/* Remove default butotn css */
+/* Remove default button css */
 button {
     border : 0;
     background-color: white;
@@ -271,8 +271,6 @@ Overlay for all header buttons
     -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
-
-
 
 
 

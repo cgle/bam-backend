@@ -7,6 +7,10 @@ var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'l
 bamApp.config(function($routeProvider) {
 
 	$routeProvider.
+		when('/', {
+			controller: 'EventListController',
+			templateUrl: 'views/eventListView.html'
+		}).
 		when('/events', {
 			controller: 'EventListController',
 			templateUrl: 'views/eventListView.html'
@@ -42,6 +46,10 @@ bamApp.config(function($routeProvider) {
 		when('/register', {
 			controller:'registerController',
 			templateUrl:'views/register-form.html'
+		}).
+		when('/uploadtest', {
+			controller: 'uploadTestController',
+			templateUrl: 'views/uploadtest.html'
 		});
 
 });

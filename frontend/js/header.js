@@ -45,7 +45,7 @@ $(document).ready(function() {
     //     $(this).css("opacity","1.0");
     // })
 
-    // console.log('js loaded');
+    console.log('js loaded');
 });
 
 function getUserData(userId) {

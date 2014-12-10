@@ -6,5 +6,8 @@ module.exports = {
   redis_pwd: 'dollhouse',
   s3_key: 'AKIAJA26MCHHDFNZ2D2Q',
   s3_secret: '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',
-  s3_bucket: 'bam-static'
+  s3_bucket: 'bam-static',
+  cloud_name: 'bam',
+  cloud_key: '921484868581986',
+  cloud_secret: 'ylKWOjCyx4OhzTMebYBDcgaPiQo'
 };

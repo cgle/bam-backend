@@ -62,6 +62,33 @@
       </button>
     </form>
   </div>
+=======
+    <hr/>
+
+      <div id="login-container" class="overlay">
+        
+        <form id="login-form" ng-submit="submitLogin()" ng-controller="LoginSubmitController">
+          
+          <button class="close-button" type="button" onclick="toggle_visibility('login-container')">
+            <img height="30" width="30" src="images/close-button.png">
+          </button>
+          
+          <h3 class="page-wide-text">Log In</h3>
+          <!-- <input type="email" id="login-email" name="login-email" placeholder="Email Address"  ng-model="loginForm.email" required> -->
+          <input type="text" id="login-username" name="login-username" placeholder="Username" ng-model="loginForm.username" required>
+          <input type="password" id="login-password" name="login-password" placeholder="Password" ng-model="loginForm.password" required>
+          
+          </br>
+          <button class="login-button" type="submit">
+            <span>Log In</span>
+          </button>
+          </br></br>
+          <button class="register-button" type="button" ng-click="registerLink()"  onclick="toggle_visibility('login-container')">
+            <span>Register</span>
+          </button>
+        </form>
+      </div>
+>>>>>>> c5948f14f31c1e8e504ae680f95e1e87aafb038a
 
   <!-- Search overlay -->
   <div id="search-flyout" class="overlay">

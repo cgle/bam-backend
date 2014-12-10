@@ -26,7 +26,7 @@ module.exports = function(app, localauth, auth, isOwner) {
 
   //need: check for logged in, public/private events
   app.get('/api/events/:event_id', function(req, res) {
-    Event.find({_id: req.params.event_id}, function(err, event) {
+    Event.find({_id: req.params.event_id}).populate('user_id').populate('attendants').exec(function(err, event) {
       if (!err) return res.send({data: event});
       else res.send({error: err});
     });
@@ -73,8 +73,10 @@ module.exports = function(app, localauth, auth, isOwner) {
 
   app.put('/api/events/:event_id', localauth, isOwner, function(req, res) {
     var id = req.params.event_id;
+    var add = req.query.add ? req.query.add : false;
     var cohosts = req.body.cohosts ? req.body.cohosts : [];
     var attendants = req.body.attendants ? req.body.attendants : [];
+    attendants = _.union(attendants,cohosts);
     //var categories = req.body.categories ? req.body.categories : [];
     var update = _.omit(req.body, ['cohosts','attendants','user_id','_id']);
     update['updatedAt'] = Date.now();

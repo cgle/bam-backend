@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var busboy = require('connect-multiparty');
 //load project modules & configs);
 var config = require('./config/app');
 var redisClient = require('./app/utils').redisClient;
@@ -59,6 +60,7 @@ var runServer = function() {
   app.set('port', process.env.PORT || 8080);
   app.use(allowCrossDomain);
   app.use(bodyParser.json());
+  app.use(bodyParser({ keepExtensions: true, uploadDir: __dirname + "/public/uploads" }));
   app.use(bodyParser.urlencoded({
    extended: true
   }));
@@ -93,7 +95,9 @@ var runServer = function() {
     });
   }));
 
-  app.use(session({secret: config.app_secret}));
+  app.use(session({secret: config.app_secret,
+                resave : false,
+                saveUninitialized: false}));
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -130,6 +134,7 @@ var runServer = function() {
   require('./app/routes/api/event')(app, localauth, auth, isOwner);
   require('./app/routes/api/vote')(app, localauth, auth, isOwner);
   require('./app/routes/api/comment')(app, localauth, auth, isOwner);
+  require('./app/routes/api/media')(app, localauth, auth, isOwner);
   //app listen port 8080
   app.listen(8080);
   console.log('Worker ' + cluster.worker.id + ' running!');

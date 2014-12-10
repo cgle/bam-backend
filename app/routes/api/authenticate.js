@@ -35,6 +35,11 @@ module.exports = function(app) {
     res.send(req.isAuthenticated() ? {"message": "loggedin"} : {"error": "unauthorized"});
   });
 
+  app.get('/api/authenticate/current', function(req, res) {
+    var user = {user: req.user ? req.user : null};
+    res.json(user);
+  });
+
   app.post('/api/authenticate/login', passport.authenticate(['local', 'basic']), function(req, res) {
     var token = jwt.sign(req.body.username, config.app_secret);
     redisClient.set(token, req.user._id, function(err, reply) {
