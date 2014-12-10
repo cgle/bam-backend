@@ -143,17 +143,12 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
 
 var userControllers = angular.module('userControllers', []);
 
-// userControllers.factory('UserData', function(){
-//   var UserData = {firstName:"Rhyan", lastName:"Foo Kune", email:"rfookune@macalester.edu", birthdate:"12/30/1992", userDescription:"Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi."};
-//   return UserData;
-// })
-
 
 // Keep a global instance of the user's id so we don't have to get it from the db each time
-userControllers.factory('User_ID', function(){
-  var User_ID = {id: "your mama"};
-  return User_ID;
-})
+// userControllers.factory('User_ID', function(){
+//   var User_ID = {id: "your mama"};
+//   return User_ID;
+// })
 
 
 userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location',
