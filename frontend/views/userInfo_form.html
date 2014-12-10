@@ -1,34 +1,31 @@
-
-
-<form id="edit-form" ng-submit="submitEdit()" ng-controller="UserEditController">
+<form id="edit-form" ng-submit="submitEdit()" ng-controller="UserEditController" enctype="multipart/form-data">
     <h3 class="page-wide-text">Edit Personal Information</h3>
     </br>
-    
-    <img id='uploadImage' src='images/UploadPhoto.png' width="150px" height="150px"></br></br>
 
-    <button class="upload-pic-button"> 
-    <span> Upload Image</span>
-    </button> </br></br>
+    <img id='uploadImage' src='{{user.profile_pic}}' width="150px" height="150px"></br></br>
 
-    <input type="text" id="firstName" name="firstname" placeholder="First Name" ng-model="userForm.firstname" required>
-    
-    <input type="text" id="lastName" name="lastname" placeholder="Last Name"  ng-model="userForm.lastname" required>
+    <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+    </br></br>
+
+    <input type="text" id="firstname" name="firstname" placeholder="First Name" ng-model="userForm.firstname" required>
+
+    <input type="text" id="lastname" name="lastname" placeholder="Last Name"  ng-model="userForm.lastname" required>
 
     <input type="text" id="username" name="username" placeholder="Username"  ng-model="userForm.username" required>
-    
+
     <input type="email" id="email" name="email" placeholder="Email Address"  ng-model="userForm.email" required>
-    
+
     </br>
     <span class='formSpan'>Date of Birth</span>
     </br>
     <input type="date" id="birthdate" name="birthdate" placeholder="Date of Birth"  ng-model="userForm.birthdate">
     </br>
-    
+
     <span class='formSpan'>Description</span>
     </br>
     <textarea rows="5" cols="50" id="description" ng-model="userForm.userDescription">
     </textarea>
-    
+
     </br></br>
     <button class="user-edit-button" type="submit">
     <span>Save Changes</span>

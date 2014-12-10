@@ -46,6 +46,10 @@ bamApp.config(function($routeProvider) {
 		when('/register', {
 			controller:'registerController',
 			templateUrl:'views/register-form.html'
+		}).
+		when('/uploadtest', {
+			controller: 'uploadTestController',
+			templateUrl: 'views/uploadtest.html'
 		});
 
 });
