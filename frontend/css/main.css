@@ -65,13 +65,29 @@
 }
 
 .mini-navigation-menu {
+    list-style-type: none;
     margin-bottom: -15px;
-    text-align: center;
+    text-align: center;    
+}
+
+.mini-navigation-menu li{
+    display: inline;
+    padding: 20px 20px;
+}
+
+.mini-navigation-menu li a{
+    text-decoration: none;
+    padding: .2em 1em;
+    color: #036;
+}
+
+.mini-navigation-menu li a:hover{
+    color: #369;
 }
 
 .mini-navigation-menu button {
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .mini-navigation hr {
