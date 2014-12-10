@@ -7,6 +7,10 @@ var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'l
 bamApp.config(function($routeProvider) {
 
 	$routeProvider.
+		when('/', {
+			controller: 'EventListController',
+			templateUrl: 'views/eventListView.html'
+		}).
 		when('/events', {
 			controller: 'EventListController',
 			templateUrl: 'views/eventListView.html'

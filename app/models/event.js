@@ -18,6 +18,8 @@ var Event = new Schema({
   upvotes: {type: Number, default: 0},
   downvotes: {type: Number, default: 0},
   category: String,
+  pictures: [String],
+  profile_pic: String,
   user_id: {type: mongoose.Schema.ObjectId, ref: 'User'},
   cohosts: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
   attendants: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
