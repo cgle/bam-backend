@@ -1,9 +1,6 @@
-/** {
-    font-family: "Courier New";
-}
-*/
- Header */
-
+/*****************************
+Header and Masthead
+*****************************/
 .header {
     margin: 10px 0px 0px 0px;
 }
@@ -13,23 +10,11 @@
 }
 
 .quick-navigation button {
-    float: left;
-}
-
-.sections-button img {
-    margin-top: -3px;
-}
-
-.search-button img {
-    margin-top: -3px;
-}
-
-.settings-button img {
-    margin-top: -3px;
+    float: right;
 }
 
 .user-tools button {
-    float: right;
+    float: left;
 }
 
 .masthead {
@@ -60,40 +45,18 @@
     border-top: 2px solid black;
 }
 
+/*****************************
+General
+*****************************/
+
 .page-wide-text {
     font-family: "Times New Roman";
 }
 
-.mini-navigation-menu {
-    list-style-type: none;
-    margin-bottom: -15px;
-    text-align: center;    
-}
-
-.mini-navigation-menu li{
-    display: inline;
-    padding: 20px 20px;
-}
-
-.mini-navigation-menu li a{
-    text-decoration: none;
-    padding: .2em 1em;
-    color: #036;
-}
-
-.mini-navigation-menu li a:hover{
-    color: #369;
-}
-
-.mini-navigation-menu button {
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
-.mini-navigation hr {
-    display: block;
-    height: 1px;
-    border-top: 1px solid #ccc;
+/* Remove default button css */
+button {
+    border : 0;
+    background-color: white;
 }
 
 .button-text {
@@ -103,35 +66,44 @@
     text-transform: uppercase;
 }
 
-.mini-navigation-menu button {
-    font-family: "Times New Roman"
+/*****************************
+Mini Navigation
+*****************************/
+
+.mini-navigation-menu {
+    margin-bottom: -15px;
+    text-align: center;
 }
 
-button {
-    border : 0;
-    background-color: white;
+.mini-navigation-menu li {
+    display: inline-block;
+    margin-right: 48px;
+    font-size: 13px;
 }
+
+.mini-navigation hr {
+    display: block;
+    height: 1px;
+    border-top: 1px solid #ccc;
+}
+
+
+/*
 
 .comic-container {
-    /*border: 1px solid black;*/
-    height: 450px;
+    border: 1px solid black;
+    height: 613px;
     width: 100%;
 }
 
-.event-item {
+.comic-block {
     height: 200px;
-    width: 200px;
     border: 2px solid black;
     background: #2db34a;
-    padding: 10px;
-    margin-right: 0.5%;
-    margin-top: 0.5%;
-    font-family: "Times New Roman";
 }
 
-/*.comic-container > div > div:not(:last-child) {
+.comic-container > div > div:not(:last-child) {
     margin-right: 0.5%;
-    margin-bottom: 0.5%;
 }
 
 .comic-container div:not(:first-child) div{
@@ -164,14 +136,18 @@ button {
 .third-row div {
     float: left;
     width: 33%;
-}*/
+}
+
+*/
+
+
+/*****************************
+Login Header
+*****************************/
 
 .login-button {
     background-color: #FF3333;
-    border-radius: 5px;
-}
-
-.login-button span {
+    border-radius: 10px;
     color: white;
     font-weight: 400;
     text-transform: uppercase;
@@ -229,7 +205,52 @@ button {
     margin-right: 50%;
 }
 
-/* Overlay */
+/*****************************
+Settings Header
+*****************************/
+
+.settings-button img {
+    margin-top: -3px;
+}
+
+#settings-form {
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
+    height: 325px;
+    width: 375px;
+    border: 1px solid #d3d3d3;
+    text-align: center;
+}
+
+/*****************************
+Search Header
+*****************************/
+
+.search-button img {
+    margin-top: -3px;
+}
+
+#search-form {
+    margin-left: 50%;
+    margin-top: 150px;
+    width: 400px;
+}
+
+#search-form input {
+    width: 350px;
+    height: 30px;
+    margin-left: -200px;
+}
+
+#search-form button {
+    margin-right: 200px;
+} 
+
+/*****************************
+Overlay for all header buttons
+*****************************/
 
 .overlay {
     position: fixed;
@@ -251,83 +272,13 @@ button {
     transition: opacity 0.5s;
 }
 
-#search-form {
-    margin-left: 50%;
-    margin-top: 150px;
-    width: 400px;
-}
 
-#search-form input {
-    width: 350px;
-    height: 30px;
-    margin-left: -200px;
-}
-
-#search-form button {
-    margin-right: 200px;
-}
-
-#dropdown-container {
-    position: absolute;
-    display: none;
-    list-style-type: none;
-    text-align: left;
-    padding: 0;
-    margin: 0;
-    padding-bottom: 0px;
-    margin-top: 8px;
-}
-
-#dropdown-container li {
-    margin-left: 15px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 2px;
-    border-style: solid;
-    border-width: 2px;
-    border-color: white;
-}
-
-#dropdown-container li:hover{
-    border-style: solid;
-    border-color: lightblue; 
-
-}
-
-#dropdown-container a {
-    text-decoration: none;
-    color: black;
-} 
-
-#settings-form {
-    background-color: white;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 120px;
-    height: 325px;
-    width: 375px;
-    border: 1px solid #d3d3d3;
-    text-align: center;
-}
-
-.comic-block-overlay {
-    /*display: none;*/
-    opacity: 0.50;
-    -webkit-transition: opacity .25s ease;
-    -moz-transition: opacity .25s ease;
-}
 
 .formSpan {
     font-weight: bold;
     float: left;
     margin-left: 40px;
     margin-right: 10px;
-}
-
-.close-button {
-    float: right;
 }
 
 #login-email, #login-password {
@@ -341,7 +292,6 @@ button {
     text-indent: 40px;
     margin-top: 5px;
     font-size: 12px;
-
 }
 
 #registerText {
