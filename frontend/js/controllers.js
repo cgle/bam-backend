@@ -218,29 +218,11 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
   }]);
 
-
-
-// userControllers.controller("UserController", ['$scope', '$location', 'UserData', function($scope, $location, UserData){
-//   window.scope = $scope;
-//   window.scope = UserData;
-//   $scope.firstName = UserData.firstName;
-//   $scope.lastName = UserData.lastName;
-//   $scope.email = UserData.email;
-//   // $scope.birthdate = UserData.birthdate
-//   $scope.userDescription = UserData.userDescription;
-
-//   $scope.edit = function() {
-//     $location.path('/user/edit')
-//   }
-
-// }]);
-
-
 var loginControllers = angular.module('loginControllers', []);
 
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
-    var email;
+    var username;
     var password;
     
     // stores location information
@@ -273,17 +255,31 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       // Get location of user
       navigator.geolocation.getCurrentPosition(c, showError);
       
-
-      email = $scope.loginForm.email;
+      username = $scope.loginForm.username;
       password = $scope.loginForm.password;
-      console.log(email);
+      console.log(username);
       console.log(password);
       // add ajax post code to authenticate user here !!!
+      var credentials = {
+        username: username,
+        password: password
+      };
+
+      var responsePromise = $http.post('/api/authenticate/login', credentials, {});
+      responsePromise.success(function(data){
+        console.log('login success');
+        console.log(data);
+        $location.path('/');
+
+      });
+      responsePromise.error(function(){
+        console.log('login error');
+      });
     }
     $scope.registerLink = function(){
       $location.path('register')
     }
-}])
+}]);
 
 loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
