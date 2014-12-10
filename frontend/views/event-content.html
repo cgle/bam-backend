@@ -1,10 +1,11 @@
-<br>
 
-<span id="event-img"><img height="40%" width="40%" src="images/c-and-hobbes-one.png"></span>
-<span id="event-desc">{{ event.description }}</span>
-<div class='attendees'>
-	<h3>Featuring:</h3>
-	<div>
-		<div ng-include='"views/attendants.html"'></div>
-	</div>	
-</div>
+
+<section id="event-desc">
+	<p style="text-align: center;"><strong>Description</strong></p>
+	<p>{{ event.description }}</p>
+</section>
+
+<aside id='attendees'>
+	<p><strong>Attendance</strong></p>
+	<div ng-include='"views/attendants.html"'></div>
+</aside>

@@ -18,36 +18,47 @@ body {
 }
 
 .vote-button-container{
-	padding: 30px;
-
+	margin-top: 200px;
+	margin-left: 25%;
 }
 
 .vote-btn{
 	padding: 10px;
-	height: 70px;
-	width: 70px;
-	background-color: #555555;
-	border-color: #555555;
+	height: 75px; 
+	width: 75px;
+	background-color: white;
+	border-color: white;
 }
 
+
 .main-event-container {
-	background-color: #555555;
-	color:#ffa500;
-	width:60%;
-	max-width: 1000px;
-	border: 3px solid;
-	border-radius: 10px;
+	min-width: 500px;
+	width:55%;
 	margin-bottom: 50px;
 	margin-top: 20px;
+	font-family: "Courier New";
 }
 
 .event-title {
 	text-align: center;
+	margin-bottom: 30px;
+}
+
+#event-img {
+	height: 100%;
+	width: 100%;
+	border: 3px solid;
 }
 
 .data-location-container {
-	color: #555555;
-	background-color: #ffa500;
+	background-color: #CEE3F6;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 4px; 
+	padding-right: 4px;
+	border-bottom: 2px solid;
+	border-right: 2px solid;
+	border-left:  2px solid; 
 }
 
 #event-date {
@@ -58,23 +69,39 @@ body {
 	float: right;
 }
 
-#event-desc {
+.join-container{
+	margin-top: 5px;
+}
+
+#join-button{
 	float: right;
-	width: 40%;
-	padding-right: 40px;
-	padding-top: 40px;
+	border-radius: 3px;
+	background-color: #BDBDBD;
 }
 
-#event-img {
-	padding-left: 20px;
+#event-info {
+	margin-top: 30px;
 }
 
-.attendees {
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 10px;
+#event-info #attendees {
+  float: right;
+  width: 37%;
+  padding: 7px;
+  border: 2px solid;
+  overflow:auto;
+  height: 150px;
+  background-color: #CEE3F6;
 }
 
+#event-info #event-desc{
+  border: 2px solid;
+  float: left;
+  padding: 7px;
+  width: 60%;
+  overflow:auto;
+  height: 150px;
+  background-color: #CEE3F6
+}
 
 #eventFormContainer {
 	background-color: white;
