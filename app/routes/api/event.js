@@ -26,7 +26,7 @@ module.exports = function(app, localauth, auth, isOwner) {
 
   //need: check for logged in, public/private events
   app.get('/api/events/:event_id', function(req, res) {
-    Event.find({_id: req.params.event_id}, function(err, event) {
+    Event.find({_id: req.params.event_id}).populate('user_id').exec(function(err, event) {
       if (!err) return res.send({data: event});
       else res.send({error: err});
     });
