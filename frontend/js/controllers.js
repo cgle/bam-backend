@@ -23,8 +23,10 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     $scope.events = [];
+    console.log("ROUTE PARAM>>", $routeParams);
     $http.get('api/events').success(function(data) {
       data.data.forEach(function(event){
+        console.log("EVENT>>", event);
         if ($.inArray($routeParams.category, event.categories) > -1){
           $scope.events.push(event);
         }
@@ -35,10 +37,6 @@ eventControllers.controller('EventCategoriesController', ['$scope', '$routeParam
 eventControllers.controller("EventFormController", ['$scope', '$http', '$location',
   function($scope, $http, $location) {
     $scope.eventForm={};
-    $scope.files = [];
-    $('input[name="profile_pic"]').on('change', function(e) {
-      $scope.files = e.target.files;
-    });
     $scope.eventForm.privacy = true;
     $scope.eventForm.name = ' Event Name'
     $scope.eventForm.address = ' Location'
@@ -55,28 +53,8 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
       var responsePromise = $http.post("/api/events", newEvent, {});
       responsePromise.success(function(data, status, headers, config){
         console.log('success');
-        if ($scope.files.length > 0) {
-          var d =  new FormData();
-          jQuery.each($('input[name="profile_pic"]')[0].files, function(i, file) {
-            d.append('profile_pic', file);
-          });
-          $.ajax({
-            url: '/api/events/' + data.data._id + '/media',
-            type: 'post',
-            processData: false,
-            contentType: false,
-            data: d,
-            cache: false,
-            error: function(error) {
-              console.log(error);
-            }
-          }).done(function() {
-            $location.path('/events/' + data.data._id);
-            $scope.$apply();
-          });
-        } else {
-          $location.path('/events/' + data.data._id);
-        }
+        console.log(data.data._id);
+        $location.path('/events/' + data.data._id)
       });
       responsePromise.error(function(data, status, headers, config){
         console.log("error");
@@ -84,13 +62,9 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
     }
 }]);
 
-eventControllers.controller("EventEditController", ['$scope', '$http', '$location', '$routeParams','$q',
-  function($scope, $http, $location, $routeParams, $q) {
-    $scope.eventForm = {};
-    $scope.files = [];
-    $('input[name="profile_pic"]').on('change', function(e) {
-      $scope.files = e.target.files;
-    });
+eventControllers.controller("EventEditController", ['$scope', '$http', '$location', '$routeParams',
+  function($scope, $http, $location, $routeParams) {
+    $scope.eventForm = {}
     var userId;
     var eventAttendants;
     var eventUpvotes;
@@ -102,7 +76,6 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
       success(function(data) {
         console.log("event data>>", data);
         userId = data.data[0].user_id;
-        $scope.event = data.data[0];
         $scope.eventForm.name = data.data[0].name;
         $scope.eventForm.address = data.data[0].address;
         $scope.eventForm.date = data.data[0].date;
@@ -123,43 +96,18 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
         public : $scope.eventForm.description,
         description : $scope.eventForm.description,
         category : $scope.eventForm.category,
-
+        
       }
 
-      var data = new FormData();
-      var promises = [];
-      jQuery.each($('input[name="profile_pic"]')[0].files, function(i, file) {
-        data.append('profile_pic', file);
-      });
-      console.log($scope.files.length);
-      $scope.putEventPromise = $http.put("/api/events/" + $routeParams.eventId, editEvent, {});
-
-      promises.push($scope.putEventPromise);
-      if ($scope.files.length > 0) {
-        console.log("adofiadoif");
-        $scope.uploadPromise = $.ajax({
-            url: '/api/events/' + $routeParams.eventId + '/media',
-            type: 'post',
-            processData: false,
-            contentType: false,
-            data: data,
-            cache: false
-          });
-        promises.push($scope.uploadPromise);
-      }
-
-      $q.all(promises).then(function(v) {
-        $location.path('/events/' + $routeParams.eventId);
-      });
-      // var responsePromise = $http.put("/api/events/" + $routeParams.eventId, editEvent, {});
-      // responsePromise.
-      //   success(function(data) {
-      //     console.log("success");
-      //     $location.path('/events/' + $routeParams.eventId);
-      //   }).
-      //   error(function(data) {
-      //     console.log("Failed to update event info");
-      //   });
+      var responsePromise = $http.put("/api/events/" + $routeParams.eventId, editEvent, {});
+      responsePromise.
+        success(function(data) {
+          console.log("success");
+          $location.path('/events/' + $routeParams.eventId);
+        }).
+        error(function(data) {
+          console.log("Failed to update event info");
+        });
     }
   }]);
 
@@ -195,34 +143,23 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
 
 var userControllers = angular.module('userControllers', []);
 
-// userControllers.factory('UserData', function(){
-//   var UserData = {firstName:"Rhyan", lastName:"Foo Kune", email:"rfookune@macalester.edu", birthdate:"12/30/1992", userDescription:"Lorem ipsum dolor sit amet, vis cu sale suscipit. Ne sed dictas maiorum consequat. Per id wisi civibus. Pro id oportere consequat, eros aliquip eu eos, ex liber saepe perfecto est. At affert discere qui. Eligendi partiendo sententiae cu pri, suas erat qui id. Ex eam iuvaret denique, ignota similique vim te. Elit velit constituto id ius, ne mea viris inimicus omittantur. No vis principes aliquando definitionem, alii sint solum ad has, eum facer nusquam democritum ut. Eum eu tota efficiendi."};
-//   return UserData;
+
+// Keep a global instance of the user's id so we don't have to get it from the db each time
+// userControllers.factory('User_ID', function(){
+//   var User_ID = {id: "your mama"};
+//   return User_ID;
 // })
 
 
-// Keep a global instance of the user's id so we don't have to get it from the db each time
-userControllers.factory('User_ID', function(){
-  var User_ID = {id: "your mama"};
-  return User_ID;
-})
-
-
-userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location', '$q',
-  function($scope, $routeParams, $http, $location, $q) {
+userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location',
+  function($scope, $routeParams, $http, $location) {
     var userId;
     $scope.userForm = {};
-    $scope.files = [];
-    $('input[name="profile_pic"]').on('change', function(e) {
-      $scope.files = e.target.files;
-    });
-
     $http.get('api/users/' + $routeParams.userId).
       success(function(data) {
         console.log(data.data[0]._id);
         userId = data.data[0]._id;
-        $scope.user = data.data[0];
-        $scope.userForm.firstname = data.data[0].firstname;
+        $scope.userForm.firstname = data.data[0].firstname; 
         $scope.userForm.lastname = data.data[0].lastname;
         $scope.userForm.username = data.data[0].username;
         $scope.userForm.email = data.data[0].email;
@@ -236,44 +173,22 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
       console.log("SUBMITTING");
       console.log(userId);
       var editUser = {
-        firstname : $scope.userForm.firstname, //fixed
-        lastname : $scope.userForm.lastname,
-        username : $scope.userForm.username, //fix cap
+        firstname : $scope.userForm.firstName,
+        lastname : $scope.userForm.lastName,
+        username : $scope.userForm.userName,
         email : $scope.userForm.email,
         description : $scope.userForm.userDescription,
         birthyear : $scope.userForm.birthdate
       };
-
-      var data = new FormData();
-      var promises = [];
-      jQuery.each($('input[name="profile_pic"]')[0].files, function(i, file) {
-        data.append('profile_pic', file);
-      });
-
-      $scope.putProfilePromise = $http.put("/api/users/" + userId, editUser, {});
-      $scope.uploadPromise = $.ajax({
-            url: '/api/users/' + userId + '/media',
-            type: 'post',
-            processData: false,
-            contentType: false,
-            data: data,
-            cache: false
-          });
-
-      promises.push($scope.putProfilePromise);
-      if ($scope.files.length > 1) promises.push($scope.uploadPromise);
-
-      $q.all(promises).then(function(v) {
+      var responsePromise = $http.put("/api/users/" + userId, editUser, {});
+      responsePromise.success(function(data, status, headers, config){
+        console.log('success');
+        console.log("THIS>>", data);
         $location.path('/user/' + userId);
       });
-      // responsePromise.success(function(data, status, headers, config){
-      //   console.log('success');
-      //   console.log("THIS>>", data);
-      //   $location.path('/user/' + userId);
-      // });
-      // responsePromise.error(function(data, status, headers, config){
-      //   console.log("error");
-      // });
+      responsePromise.error(function(data, status, headers, config){
+        console.log("error");
+      });
     }
 
 
@@ -290,7 +205,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
       // User_ID.id = data.data[0]._id;
     });
 
-    // console.log(User_ID.id);
+    // console.log(User_ID.id); 
 
     $scope.edit = function() {
       $location.path('user/' + userId + '/edit')
@@ -304,7 +219,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
   function($scope, $routeParams, $http, $location) {
     var username;
     var password;
-
+    
     // stores location information
     var c = function(pos){
       var lat = pos.coords.latitude,
@@ -313,7 +228,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
           console.log(coords);
     }
 
-    // Handle getting location errors
+    // Handle getting location errors 
     var showError = function(error) {
       switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -334,8 +249,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
     $scope.submitLogin = function() {
       // Get location of user
       navigator.geolocation.getCurrentPosition(c, showError);
-
-
+      
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
       console.log(username);
@@ -344,12 +258,14 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       var credentials = {
         username: username,
         password: password
-      }
+      };
 
       var responsePromise = $http.post('/api/authenticate/login', credentials, {});
-      responsePromise.success(function(data) {
-        console.log(data);
+      responsePromise.success(function(data){
         console.log('login success');
+        console.log(data);
+        $location.path('/');
+
       });
       responsePromise.error(function(){
         console.log('login error');
@@ -358,7 +274,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
     $scope.registerLink = function(){
       $location.path('register')
     }
-}])
+}]);
 
 loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
@@ -383,11 +299,4 @@ loginControllers.controller('registerController', ['$scope', '$routeParams', '$h
       }
       // add ajax post code to register user here !!!
     }
-}])
-
-
-var testControllers = angular.module('testControllers', []);
-loginControllers.controller('uploadTestController', ['$scope', '$routeParams', '$http', '$location',
-  function($scope, $routeParams, $http, $location) {
-
 }])
