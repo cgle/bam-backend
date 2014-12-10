@@ -13,7 +13,7 @@
   </div>
   
   <div class="center join-container">
-    <span id="event-status">Hosted by {{ event.user_id }}</span>
+    <span id="event-status">Hosted by <a ng-href="#/user/{{event.user_id._id}}">{{event.user_id.firstname }}</a></span>
     <button id="join-button"><Strong>Join</Strong></button>
   </div>
 
