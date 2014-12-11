@@ -315,8 +315,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
 var loginControllers = angular.module('loginControllers', []);
 
-loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location',
-  function($scope, $routeParams, $http, $location) {
+loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','AuthService',
+  function($scope, $routeParams, $http, $location, AuthService) {
     var username;
     var password;
 
@@ -350,6 +350,9 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       // Get location of user
       navigator.geolocation.getCurrentPosition(c, showError);
 
+      
+
+
 
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
@@ -361,14 +364,17 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
         password: password
       }
 
-      var responsePromise = $http.post('/api/authenticate/login', credentials, {});
-      responsePromise.success(function(data) {
-        console.log(data);
-        console.log('login success');
-      });
-      responsePromise.error(function(){
-        console.log('login error');
-      });
+      AuthService.login(username, password);
+      
+
+      // var responsePromise = $http.post('/api/authenticate/login', credentials, {});
+      // responsePromise.success(function(data) {
+      //   console.log(data);
+      //   console.log('login success');
+      // });
+      // responsePromise.error(function(){
+      //   console.log('login error');
+      // });
     }
     $scope.registerLink = function(){
       $location.path('register')
