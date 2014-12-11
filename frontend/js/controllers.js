@@ -350,10 +350,6 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       // Get location of user
       navigator.geolocation.getCurrentPosition(c, showError);
 
-      
-
-
-
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
       console.log(username);
@@ -378,6 +374,10 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
     }
     $scope.registerLink = function(){
       $location.path('register')
+    }
+
+    $scope.logout = function(){
+      AuthService.logout();
     }
 }])
 
