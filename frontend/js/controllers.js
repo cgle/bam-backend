@@ -354,23 +354,8 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       password = $scope.loginForm.password;
       console.log(username);
       console.log(password);
-      // add ajax post code to authenticate user here !!!
-      var credentials = {
-        username: username,
-        password: password
-      }
 
       AuthService.login(username, password);
-      
-
-      // var responsePromise = $http.post('/api/authenticate/login', credentials, {});
-      // responsePromise.success(function(data) {
-      //   console.log(data);
-      //   console.log('login success');
-      // });
-      // responsePromise.error(function(){
-      //   console.log('login error');
-      // });
     }
     $scope.registerLink = function(){
       $location.path('register')
@@ -378,6 +363,9 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
 
     $scope.logout = function(){
       AuthService.logout();
+      $(".overlay").removeClass("overlay-open");
+      $location.path('/');
+      AuthService.isLoggedin();
     }
 }])
 
@@ -416,6 +404,5 @@ loginControllers.controller('uploadTestController', ['$scope', '$routeParams', '
 var dateParser = function(date){
   
   var formattedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-  console.log("DATE>>", formattedDate);
   return formattedDate;
 }
