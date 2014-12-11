@@ -1,7 +1,15 @@
 'use strict';
 
-var bamApp = angular.module('bamApp', ['userControllers', 'eventControllers', 'loginControllers', 'voteControllers',
+var bamApp = angular.module('bamApp', ['ngCookies','appControllers','userControllers', 'eventControllers', 'loginControllers', 'voteControllers',
 	'ngRoute', 'ngResource','authModule']);
+
+// bamApp.controller('TopLevelAppController', ['$scope','AuthService','$cookieStore','$cookies', function($cookies,$cookieStore, $scope, AuthService) {
+// 	$scope.currentUser = {};
+// 	//$scope.currentUser.userData;
+// 	$scope.test = {x: 5, y: 10};
+// 	//$rootScope.
+// 	//$cookieStore.put('currentUser','poop');
+// }]);
 
 
 bamApp.config(function($routeProvider) {

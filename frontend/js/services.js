@@ -1,9 +1,9 @@
 var authModule = angular.module('authModule', []);
 
-authModule.factory('AuthService', ['$http', '$location', function( $http, $location) {
+authModule.factory('AuthService', ['$cookieStore','$http', '$location', function($cookieStore, $http, $location) {
 
-	var currentUser;
-	var userAccessToken;
+	var currentUserId = $cookieStore.get('currentUserId');
+	var userAccessToken = $cookieStore.get('access_token');
 
 	return {
 		login: function(username, password) {
@@ -15,11 +15,11 @@ authModule.factory('AuthService', ['$http', '$location', function( $http, $locat
 
 			var responsePromise = $http.post('/api/authenticate/login', credentials, {});
 		    responsePromise.success(function(data) {
-		      console.log(data);
 		      console.log('login success');
-		      currentUser = data.user;
+		      currentUserId = data.user._id;
 		      userAccessToken = data.access_token;
-		      $(".overlay").removeClass("overlay-open");
+		      $cookieStore.put('currentUserId',currentUserId);
+		      $cookieStore.put('access_token', userAccessToken);
 		    });
 		    responsePromise.error(function(){
 		      console.log('login error');
@@ -50,7 +50,12 @@ authModule.factory('AuthService', ['$http', '$location', function( $http, $locat
 			});
 		},
 		currentUser: function() { 
-			return currentUser; 
+			console.log("CURRENT USER>>", currentUserId);
+			return currentUserId; 
+		},
+		access_token: function() {
+			console.log("ACCESS", userAccessToken);
+			return userAccessToken;
 		}
 	}
 	

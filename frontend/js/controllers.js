@@ -3,9 +3,12 @@
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
-eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http',
-  function($scope, $routeParams, $http) {
+var appControllers = angular.module('appControllers', []);
+
+eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http', '$cookieStore',
+  function($scope, $routeParams, $http, $cookieStore) {
     console.log($routeParams);
+    console.log("Current user ->",$cookieStore.get('currentUser'));
     $http.get('api/events/' + $routeParams.eventId).success(function(data) {
       var date = new Date(data.data[0].date);
       var formattedDate = dateParser(date);
@@ -180,17 +183,21 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
 
 var voteControllers = angular.module('voteControllers', []);
 
-voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams',
-  function($scope, $http, $routeParams) {
+appControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'AuthService',
+  function($scope, $http, $routeParams, AuthService) {
     var userId;
-    $http.get("/api/events/" + $routeParams.eventId).
-      success(function(data) {
-        userId = data.data[0].user_id;
-      }).
-      error(function(data) {
-        console.log('problem retrieving event info');
-      });
-
+    // $http.get("/api/events/" + $routeParams.eventId).
+    //   success(function(data) {
+    //     userId = data.data[0].user_id;
+    //   }).
+    //   error(function(data) {
+    //     console.log('problem retrieving event info');
+    //   });
+    
+    //console.log("CURRENT USR>>", currentUser);
+    //$scope.currentUser = AuthService.currentUser();
+    //console.log("current user",$scope.currentUser.userData);
+    //var user = AuthService.currentUser();
     $scope.eventVote = function(voteType) {
       console.log("VOTED ", voteType);
       var vote = {
@@ -314,9 +321,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   }]);
 
 var loginControllers = angular.module('loginControllers', []);
-
-loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','AuthService',
-  function($scope, $routeParams, $http, $location, AuthService) {
+appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$cookieStore','AuthService',
+  function($scope, $routeParams, $http, $location, $cookieStore, AuthService) {
     var username;
     var password;
 
@@ -355,9 +361,10 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
       console.log(username);
       console.log(password);
 
-      AuthService.login(username, password);
+      AuthService.login(username,password);
     }
     $scope.registerLink = function(){
+      AuthService.access();
       $location.path('register')
     }
 
@@ -369,7 +376,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
     }
 }])
 
-loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
+appControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
     var email, username, firstname, lastname, password1, password2;
     $scope.submitRegister = function() {
@@ -396,10 +403,10 @@ loginControllers.controller('registerController', ['$scope', '$routeParams', '$h
 
 
 var testControllers = angular.module('testControllers', []);
-loginControllers.controller('uploadTestController', ['$scope', '$routeParams', '$http', '$location',
-  function($scope, $routeParams, $http, $location) {
+// loginControllers.controller('uploadTestController', ['$scope', '$routeParams', '$http', '$location',
+//   function($scope, $routeParams, $http, $location) {
 
-}])
+// }])
 
 var dateParser = function(date){
   
