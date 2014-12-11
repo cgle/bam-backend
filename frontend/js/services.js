@@ -50,7 +50,7 @@ authModule.factory('AuthService', ['$cookieStore','$http', '$location', function
 			});
 		},
 		currentUser: function() { 
-			console.log("CURRENT USER>>", currentUserId);
+			//console.log("CURRENT USER>>", currentUserId);
 			return currentUserId; 
 		},
 		access_token: function() {

@@ -169,15 +169,6 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
       $q.all(promises).then(function(v) {
         $location.path('/events/' + $routeParams.eventId);
       });
-      // var responsePromise = $http.put("/api/events/" + $routeParams.eventId, editEvent, {});
-      // responsePromise.
-      //   success(function(data) {
-      //     console.log("success");
-      //     $location.path('/events/' + $routeParams.eventId);
-      //   }).
-      //   error(function(data) {
-      //     console.log("Failed to update event info");
-      //   });
     }
   }]);
 
@@ -186,32 +177,61 @@ var voteControllers = angular.module('voteControllers', []);
 appControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'AuthService',
   function($scope, $http, $routeParams, AuthService) {
     var userId;
-    // $http.get("/api/events/" + $routeParams.eventId).
-    //   success(function(data) {
-    //     userId = data.data[0].user_id;
-    //   }).
-    //   error(function(data) {
-    //     console.log('problem retrieving event info');
-    //   });
-    
-    //console.log("CURRENT USR>>", currentUser);
-    //$scope.currentUser = AuthService.currentUser();
-    //console.log("current user",$scope.currentUser.userData);
-    //var user = AuthService.currentUser();
+    $scope.hasVoted = false;
+    $scope.voteType;
+    $scope.voteId;
+    userId = AuthService.currentUser();
+  
+    $http.get('/api/events/'+$routeParams.eventId+'/votes?user_id='+userId).
+    success(function(data){
+      if (data.data.length > 0) {
+        $scope.hasVoted = true;
+        $scope.voteType = data.data[0].is_upvote;
+        $scope.voteId = data.data[0]._id;
+      } else {
+        $scope.hasVoted = false;
+      }
+    }).
+    error(function(){
+      console.log('error');
+    });
+
     $scope.eventVote = function(voteType) {
       console.log("VOTED ", voteType);
-      var vote = {
-        event_id : $routeParams.eventId,
-        user_id : userId,
-        is_upvote: voteType
+      console.log('voted?', $scope.hasVoted);
+      if (!$scope.hasVoted) { 
+        var vote = {
+          event_id : $routeParams.eventId,
+          user_id : userId,
+          is_upvote: voteType
+        }
+        var responsePromise = $http.post('/api/events/'+$routeParams.eventId+'/votes', vote, {});
+        responsePromise.success(function(){
+          console.log('has votred');
+        });
+        responsePromise.error(function(){
+          console.log('error, not able to vote');
+        });
+        $scope.hasVoted = true;
+      } else if (voteType != $scope.voteType) {
+        // update vote
+        $scope.voteType = voteType;
+        var newVote = {
+          is_upvote : voteType,
+          user_id : userId
+        }
+        $http.put('/api/events/'+$routeParams.eventId+'/votes/'+$scope.voteId,
+          newVote, {}).
+          success(function(data){
+            console.log('updated vote');
+          }).
+          error(function(data){
+            console.log('failed to update vote');
+          });
       }
-      var responsePromise = $http.post('/api/events/'+$routeParams.eventId+'/votes', vote, {});
-      responsePromise.success(function(){
-        console.log('has votred');
-      });
-      responsePromise.error(function(){
-        console.log('error, not able to vote');
-      });
+        else {
+        console.log('already voted');
+      }
     }
   }]);
 
@@ -362,10 +382,12 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
       console.log(password);
 
       AuthService.login(username,password);
+
+      $(".overlay").removeClass("overlay-open");
     }
     $scope.registerLink = function(){
-      AuthService.access();
-      $location.path('register')
+
+      $location.path('/register')
     }
 
     $scope.logout = function(){
