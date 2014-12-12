@@ -400,12 +400,15 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
 
 appControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
-    var email, username, firstname, lastname, password1, password2;
+    var email, username, firstname, lastname, password1, password2, birthyear;
+
+
     $scope.submitRegister = function() {
       firstname = $scope.registerForm.firstname;
       lastname = $scope.registerForm.lastname;
       username = $scope.registerForm.username;
       email = $scope.registerForm.email;
+      birthyear = $scope.registerForm.birthyear;
       password1 = $scope.registerForm.password1;
       password2 = $scope.registerForm.password2;
 
@@ -418,6 +421,25 @@ appControllers.controller('registerController', ['$scope', '$routeParams', '$htt
         console.log(email);
         console.log(password1);
         console.log(password2);
+        console.log(birthyear);
+
+        var submitObject = {
+          username: username,
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          birthyear: birthyear,
+          password: password2
+        };
+
+        $http.post('/api/authenticate/register', submitObject,{}).
+        success(function(data){
+          console.log('submit success', data);
+          $location.path('/');
+        }).
+        error(function(){
+          console.log('submit error');
+        });
       }
       // add ajax post code to register user here !!!
     }

@@ -19,9 +19,10 @@
 
   <span id='registerText'>Date of Birth</span>
   </br>
-  <input type="date" id='birthdate' ng-model='registerForm.birthdate'>
+  <input type="text" id='birthyear' placeholder="YYYY" ng-model="registerForm.birthyear" pattern="\d{4}" title="Four digit year">
 
-  <input ng-model="registerForm.address" id="googleAddress" type="text" placeholder="My Location">
+
+  <!-- <input ng-model="registerForm.address" id="googleAddress" type="text" placeholder="My Location"> -->
 
   <p id='textInfo'>*Required field</p>
   </br></br></br>
@@ -33,4 +34,4 @@
 
 </form>
 
-<script src="js/googleMapsApi.js"></script>
+<!-- <script src="js/googleMapsApi.js"></script> -->
