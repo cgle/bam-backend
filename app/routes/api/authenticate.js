@@ -11,10 +11,20 @@ var TOKEN_EXPIRATION_SEC = TOKEN_EXPIRATION * 60;
 module.exports = function(app) {
   app.post('/api/authenticate/register', function(req, res) {
     User.register(
-      new User({email: req.body.email, username: req.body.username}),
+      new User({
+        email: req.body.email,
+        username: req.body.username,
+        description: req.body.description ? req.body.description : '',
+        phone: req.body.phone ? req.body.phone : '',
+        birthyear: req.body.birthyear ? req.body.birthyear : '',
+        zip: req.zip ? req.body.zip : '',
+        current_pos: req.body.current_pos,
+        address: req.body.address ? req.body.address : ''
+      }),
       req.body.password,
       function(err, user) {
       if (err) {
+        console.log(err);
         res.status(err.status || 500);
         res.send({error: err});
       } else {

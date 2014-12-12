@@ -7,7 +7,6 @@ var User = new Schema({
   password: String,
   firstname: {type: String, default: ''},
   lastname: {type: String, default: ''},
-  fullname: { $add: ['$firstname', ' ', '$lastname'] },
   description: String,
   phone: {type: String, default: ''},
   email:  {type: String, default: '', lowercase:true},
