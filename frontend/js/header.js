@@ -35,7 +35,6 @@ $(document).ready(function() {
     //     $(this).css("opacity","1.0");
     // })
 
-    console.log('js loaded');
 });
 
 function getUserData(userId) {
@@ -53,3 +52,6 @@ function toggle_visibility(id) {
         e.style.display = 'block';
     }
 }
+
+
+

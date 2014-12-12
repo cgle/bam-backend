@@ -346,42 +346,14 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
     var username;
     var password;
 
-    // stores location information
-    var c = function(pos){
-      var lat = pos.coords.latitude,
-          long = pos.coords.longitude,
-          coords = lat + ', ' + long;
-          console.log(coords);
-    }
-
-    // Handle getting location errors
-    var showError = function(error) {
-      switch(error.code) {
-        case error.PERMISSION_DENIED:
-          console.log("User denied the request for Geolocation.")
-          break;
-        case error.POSITION_UNAVAILABLE:
-          console.log("Location information is unavailable.")
-          break;
-        case error.TIMEOUT:
-          console.log("The request to get user location timed out.")
-          break;
-        case error.UNKNOWN_ERROR:
-          console.log("An unknown error occurred.")
-          break;
-      }
-  }
-
     $scope.submitLogin = function() {
-      // Get location of user
-      navigator.geolocation.getCurrentPosition(c, showError);
-
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
       console.log(username);
       console.log(password);
 
       AuthService.login(username,password);
+      AuthService.update_user_location();
 
       $(".overlay").removeClass("overlay-open");
     }

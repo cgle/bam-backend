@@ -56,6 +56,51 @@ authModule.factory('AuthService', ['$cookieStore','$http', '$location', function
 		access_token: function() {
 			console.log("ACCESS", userAccessToken);
 			return userAccessToken;
+		},
+		update_user_location: function() {
+			if (navigator.geolocation) {
+        		navigator.geolocation.getCurrentPosition(function(pos){
+        			var lat = pos.coords.latitude,
+        				lng = pos.coords.longitude;
+    				var current_position = {
+				        lng : lng,
+				        lat : lat
+    				};
+    				console.log('pos>',current_position);
+    				console.log('user id for location',currentUserId);
+    				$.ajax({
+    					url: '/api/users/'+currentUserId,
+    					type: 'put',
+    					data: {
+    						current_pos: current_position
+    					},
+    					success: function(data){
+    						console.log('position updated', data);
+    					},
+    					error: function(){
+    						console.log('unable to update location');
+    					}
+    				});
+        		},
+        		function(error){
+        			switch(error.code) {
+					    case error.PERMISSION_DENIED:
+					      console.log("User denied the request for Geolocation.")
+					      break;
+					    case error.POSITION_UNAVAILABLE:
+					      console.log("Location information is unavailable.")
+					      break;
+					    case error.TIMEOUT:
+					      console.log("The request to get user location timed out.")
+					      break;
+					    case error.UNKNOWN_ERROR:
+					      console.log("An unknown error occurred.")
+					      break;
+  					}
+        		});
+    		} else {
+        		console.log('Geolocation not supported');
+    		}
 		}
 	}
 	
