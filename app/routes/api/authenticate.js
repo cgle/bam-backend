@@ -18,7 +18,7 @@ module.exports = function(app) {
         phone: req.body.phone ? req.body.phone : '',
         birthyear: req.body.birthyear ? req.body.birthyear : '',
         zip: req.zip ? req.body.zip : '',
-        current_pos: req.body.current_pos,
+        current_pos: req.body.current_pos ? req.body.current_pos : {lng: 0.0, lat: 0.0},
         address: req.body.address ? req.body.address : ''
       }),
       req.body.password,
