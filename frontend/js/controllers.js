@@ -354,6 +354,7 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
 
       AuthService.login(username,password);
       AuthService.update_user_location();
+      toastr.success('logged in');
 
       $(".overlay").removeClass("overlay-open");
     }
