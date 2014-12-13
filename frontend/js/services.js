@@ -1,9 +1,6 @@
 var authModule = angular.module('authModule', []);
 
-authModule.factory('AuthService', ['$cookieStore','$http', '$location', function($cookieStore, $http, $location) {
-
-	var currentUserId = $cookieStore.get('currentUserId');
-	var userAccessToken = $cookieStore.get('access_token');
+authModule.factory('AuthService', ['$http', '$location', 'userService', function($http, $location, userService) {
 
 	return {
 		login: function(username, password) {
@@ -16,10 +13,10 @@ authModule.factory('AuthService', ['$cookieStore','$http', '$location', function
 			var responsePromise = $http.post('/api/authenticate/login', credentials, {});
 		    responsePromise.success(function(data) {
 		      console.log('login success');
-		      currentUserId = data.user._id;
-		      userAccessToken = data.access_token;
-		      $cookieStore.put('currentUserId',currentUserId);
-		      $cookieStore.put('access_token', userAccessToken);
+		      userService.currentUser.user = data.user;
+		      userService.currentUser.access_token = data.access_token;
+		      userService.SaveState();
+		      
 		    });
 		    responsePromise.error(function(){
 		      console.log('login error');
@@ -35,10 +32,12 @@ authModule.factory('AuthService', ['$cookieStore','$http', '$location', function
 				});
 		},
 		logout: function() { 
+			userService.RestoreState()
+			console.log("user token", userService.currentUser.access_token)
 			$.ajax({
 			  url: '/api/authenticate/logout',
 			  headers: {
-			    "Authorization": "Bearer " + userAccessToken
+			    "Authorization": "Bearer " + userService.currentUser.access_token
 			  }, 
 			  type: 'post',
 			  success: function(data) {
@@ -105,3 +104,50 @@ authModule.factory('AuthService', ['$cookieStore','$http', '$location', function
 	}
 	
 }]);
+
+//http://stackoverflow.com/questions/12940974/maintain-model-of-scope-when-changing-between-views-in-angularjs
+authModule.factory('userService',['$rootScope', function($rootScope) {
+	var service = {
+
+		currentUser: {
+			user: {},
+			access_token: '' 
+		},
+
+		SaveState: function() {
+			sessionStorage.userService = angular.toJson(service.currentUser);
+		},
+
+		RestoreState: function() {
+			service.currentUser = angular.fromJson(sessionStorage.userService);
+		}
+	}
+
+	$rootScope.$on("savestate", service.SaveState);
+	$rootScope.$on("restorestate", service.RestoreState);
+
+	return service;
+}]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

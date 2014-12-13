@@ -341,25 +341,27 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   }]);
 
 var loginControllers = angular.module('loginControllers', []);
-appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$cookieStore','AuthService',
-  function($scope, $routeParams, $http, $location, $cookieStore, AuthService) {
+appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$cookieStore','userService','AuthService',
+  function($scope, $routeParams, $http, $location, $cookieStore, userService,AuthService) {
     var username;
     var password;
+    
 
     $scope.submitLogin = function() {
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
       console.log(username);
-      console.log(password);
+      console.log(password); 
 
       AuthService.login(username,password);
-      AuthService.update_user_location();
       toastr.success('logged in');
 
       $(".overlay").removeClass("overlay-open");
     }
     $scope.registerLink = function(){
-
+      userService.RestoreState();
+      //var testname = sessionStorage.testname;
+      console.log("session storage",userService.currentUser);
       $location.path('/register')
     }
 
