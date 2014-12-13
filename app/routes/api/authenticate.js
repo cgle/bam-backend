@@ -71,7 +71,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/authenticate/logout', passport.authenticate('bearer', {session: false}), function(req, res) {
+  app.post('/api/authenticate/logout', passport.authenticate('local', {session: true}), function(req, res) {
     redisClient.expire(req.authInfo.token, 0, function(err, reply) {
       if (err) {
           res.send({error: err});
