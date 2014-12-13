@@ -50,10 +50,10 @@ module.exports = function(app) {
     res.json(user);
   });
 
-  app.post('/api/authenticate/login', passport.authenticate(['local', 'basic']), function(req, res) {
+  app.post('/api/authenticate/login', passport.authenticate(['local']), function(req, res) {
     var token = jwt.sign(req.body.username, config.app_secret);
     redisClient.set(token, req.user._id, function(err, reply) {
-      if (err) res.send({error: err});
+      if (err) res.send({error: err}, 401);
       if (reply) {
         redisClient.expire(token, TOKEN_EXPIRATION_SEC, function (err, reply) {
           if (err) {
