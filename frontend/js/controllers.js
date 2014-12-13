@@ -5,10 +5,9 @@ var eventControllers = angular.module('eventControllers', []);
 
 var appControllers = angular.module('appControllers', []);
 
-eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http', '$cookieStore',
-  function($scope, $routeParams, $http, $cookieStore) {
+eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
     console.log($routeParams);
-    console.log("Current user ->",$cookieStore.get('currentUser'));
     $http.get('api/events/' + $routeParams.eventId).success(function(data) {
       var date = new Date(data.data[0].date);
       var formattedDate = dateParser(date);
@@ -341,12 +340,11 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   }]);
 
 var loginControllers = angular.module('loginControllers', []);
-appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$cookieStore','userService','AuthService',
-  function($scope, $routeParams, $http, $location, $cookieStore, userService,AuthService) {
+appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','userService','AuthService',
+  function($scope, $routeParams, $http, $location, userService, AuthService) {
     var username;
     var password;
-    
-
+  
     $scope.submitLogin = function() {
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
