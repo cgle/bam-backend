@@ -173,13 +173,14 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
 
 var voteControllers = angular.module('voteControllers', []);
 
-appControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'AuthService',
-  function($scope, $http, $routeParams, AuthService) {
+appControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
+  function($scope, $http, $routeParams, userService) {
     var userId;
     $scope.hasVoted = false;
     $scope.voteType;
     $scope.voteId;
-    userId = AuthService.currentUser();
+    userService.RestoreState();
+    userId = userService.currentUser.user._id;
   
     $http.get('/api/events/'+$routeParams.eventId+'/votes?user_id='+userId).
     success(function(data){
