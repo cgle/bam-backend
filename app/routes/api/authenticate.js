@@ -71,17 +71,27 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/authenticate/logout', passport.authenticate('local', {session: true}), function(req, res) {
-    redisClient.expire(req.authInfo.token, 0, function(err, reply) {
-      if (err) {
-          res.send({error: err});
-      }
-      if (reply) {
-          req.logout();
-          res.send({message: 'logged out'});
-      } else {
-          res.send({error: 'redis cannot set expiration'});
-      }
-    });
+  app.post('/api/authenticate/logout', function(req, res) {
+    if (req.isAuthenticated()) {
+      //no need token for current version !!! will do this again in mobile
+      // console.log(req.user.access_token);
+      // redisClient.expire(req.user.access_token, 0, function(err, reply) {
+      //     if (err) {
+      //         console.log(err);
+      //         res.send({error: err});
+      //     }
+      //     if (reply) {
+      //         req.logout();
+      //         res.send({message: 'logged out'});
+      //     } else {
+      //         res.send({error: 'redis cannot set expiration'});
+      //     }
+      // });
+      req.logout();
+      res.send('logged out', 200);
+    } else {
+      res.send({error: 'unauthenticated'}, 401);
+    }
+
   });
 }
