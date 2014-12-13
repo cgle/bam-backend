@@ -340,8 +340,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   }]);
 
 var loginControllers = angular.module('loginControllers', []);
-appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','userService','AuthService',
-  function($scope, $routeParams, $http, $location, userService, AuthService) {
+appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
+  function($scope, $routeParams, $http, $location, $q,userService, AuthService) {
     var username;
     var password;
   
@@ -351,15 +351,12 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
       console.log(username);
       console.log(password); 
 
-      AuthService.login(username,password);
-      toastr.success('logged in');
+      $q.all(AuthService.login(username,password)).then(AuthService.update_user_location(), toastr.success('logged in'));
 
       $(".overlay").removeClass("overlay-open");
     }
     $scope.registerLink = function(){
-      userService.RestoreState();
-      //var testname = sessionStorage.testname;
-      console.log("session storage",userService.currentUser);
+      $(".overlay").removeClass("overlay-open");
       $location.path('/register')
     }
 

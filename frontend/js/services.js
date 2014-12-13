@@ -1,10 +1,12 @@
 var authModule = angular.module('authModule', []);
 
-authModule.factory('AuthService', ['$http', '$location', 'userService', function($http, $location, userService) {
+authModule.factory('AuthService', ['$http', '$location', '$q','userService', function($http, $location, $q,userService) {
 
 	return {
 		login: function(username, password) {
 			
+			var deferred = $q.defer();
+
 			var credentials = {
 				username : username,
 				password : password
@@ -16,11 +18,13 @@ authModule.factory('AuthService', ['$http', '$location', 'userService', function
 		      userService.currentUser.user = data.user;
 		      userService.currentUser.access_token = data.access_token;
 		      userService.SaveState();
-		      
+		      deferred.resolve('logged in');
 		    });
 		    responsePromise.error(function(){
 		      console.log('login error');
 		    });
+
+		    return deferred;
 		},
 		isLoggedin: function() { 
 			$http.get('/api/authenticate/loggedin').
@@ -44,6 +48,7 @@ authModule.factory('AuthService', ['$http', '$location', 'userService', function
 			});
 		},
 		update_user_location: function() {
+			userService.RestoreState();
 			if (navigator.geolocation) {
         		navigator.geolocation.getCurrentPosition(function(pos){
         			var lat = pos.coords.latitude,
@@ -53,9 +58,9 @@ authModule.factory('AuthService', ['$http', '$location', 'userService', function
 				        lat : lat
     				};
     				console.log('pos>',current_position);
-    				console.log('user id for location',currentUserId);
+    				console.log('user id for location',userService.currentUser.user._id);
     				$.ajax({
-    					url: '/api/users/'+currentUserId,
+    					url: '/api/users/'+userService.currentUser.user._id,
     					type: 'put',
     					data: {
     						current_pos: current_position
