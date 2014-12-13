@@ -32,13 +32,8 @@ authModule.factory('AuthService', ['$http', '$location', 'userService', function
 				});
 		},
 		logout: function() { 
-			userService.RestoreState()
-			console.log("user token", userService.currentUser.access_token)
 			$.ajax({
 			  url: '/api/authenticate/logout',
-			  headers: {
-			    "Authorization": "Bearer " + userService.currentUser.access_token
-			  }, 
 			  type: 'post',
 			  success: function(data) {
 			    console.log('logout success');
@@ -47,14 +42,6 @@ authModule.factory('AuthService', ['$http', '$location', 'userService', function
 			    console.log('logout error');
 			  }
 			});
-		},
-		currentUser: function() { 
-			//console.log("CURRENT USER>>", currentUserId);
-			return currentUserId; 
-		},
-		access_token: function() {
-			console.log("ACCESS", userAccessToken);
-			return userAccessToken;
 		},
 		update_user_location: function() {
 			if (navigator.geolocation) {
