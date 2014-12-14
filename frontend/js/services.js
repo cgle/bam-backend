@@ -12,28 +12,13 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				username : username,
 				password : password
 			};
-
 			
 			defer.resolve($http.post('/api/authenticate/login', credentials, {}));
 
-			// var loginPromise = $http.post('/api/authenticate/login', credentials, {}).
-			// success(function(data) {
-		 //      console.log('login success');
-		 //      userService.currentUser.user = data.user;
-		 //      userService.currentUser.access_token = data.access_token;
-		 //      userService.SaveState();
-		 //      deferred.resolve('login success');
-		 //    }).
-		 //    error(function(data) {
-		 //      responsePromise.error(function(){
-		 //      console.log('login error');
-		 //      deferred.reject('login error');
-		 //    });
-
 			promise.then(function(result){
 				console.log('login success');
-				userService.currentUser.user = result.user;
-				userService.currentUser.access_token = result.access_token;
+				userService.currentUser.user = result.data.user;
+				userService.currentUser.access_token = result.data.access_token;
 				userService.SaveState();
 			}, function(reason){
 				console.log('login error');
@@ -63,30 +48,29 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 			});
 		},
 		update_user_location: function() {
+
+			var defer = $q.defer();
+			var promise = defer.promise;
+
+			var current_position;
+
 			userService.RestoreState();
+
+			$http.put('/api/users/'+userService.currentUser.user._id, 
+				{ current_pos: current_position }, {});
 			if (navigator.geolocation) {
         		navigator.geolocation.getCurrentPosition(function(pos){
         			var lat = pos.coords.latitude,
         				lng = pos.coords.longitude;
-    				var current_position = {
+    				current_position = {
 				        lng : lng,
 				        lat : lat
     				};
     				console.log('pos>',current_position);
+    				console.log(userService.currentUser);
     				console.log('user id for location',userService.currentUser.user._id);
-    				$.ajax({
-    					url: '/api/users/'+userService.currentUser.user._id,
-    					type: 'put',
-    					data: {
-    						current_pos: current_position
-    					},
-    					success: function(data){
-    						console.log('position updated', data);
-    					},
-    					error: function(){
-    						console.log('unable to update location');
-    					}
-    				});
+    				defer.resolve($http.put('/api/users/'+userService.currentUser.user._id, 
+				{ current_pos: current_position }, {}));
         		},
         		function(error){
         			switch(error.code) {
@@ -107,6 +91,8 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
     		} else {
         		console.log('Geolocation not supported');
     		}
+
+    		return defer.promise
 		}
 	}
 	

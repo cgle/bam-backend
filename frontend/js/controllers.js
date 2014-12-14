@@ -359,7 +359,19 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
       }, function(){
         console.log('error logging in');
         toastr.error('Login error')
-      }); //AuthService.update_user_location(), toastr.success('logged in'));
+      }).then(function(){
+        AuthService.update_user_location().then(function(){
+            toastr.info('Updated location');
+          }, function() {
+            toastr.warning('Unable to update location');
+        });
+      });
+
+      // }).then(function(){
+      //   toastr.info('Updated location');
+      // }, function() {
+      //   toastr.warning('Unable to update location');
+      // }); //AuthService.update_user_location(), toastr.success('logged in'));
 
       //$(".overlay").removeClass("overlay-open");
     }
