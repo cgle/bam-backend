@@ -319,10 +319,10 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
-    $http.get('api/users/' + $routeParams.userId).success(function(data) {
-      $scope.user = data.data[0];
-      userId = data.data[0]._id;
-    });
+    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
+    //   $scope.user = data.data[0];
+    //   userId = data.data[0]._id;
+    // });
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
@@ -330,6 +330,14 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     $scope.edit = function() {
       $location.path('user/' + userId + '/edit')
+    }
+
+    $scope.getUser = function() {
+      // if (userService.currentUser.is_logged_in) {
+
+      // } else
+      console.log('hi!');
+      //$("#login-container").addClass('overlay-open');
     }
 
   }]);
@@ -350,6 +358,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
         console.log('Logged in');
         toastr.success('logged in');
         $(".overlay").removeClass("overlay-open");
+        $(".login-button").css('visibility','hidden');
         AuthService.update_user_location().then(function(){
             toastr.info('Updated location');
           }, function() {

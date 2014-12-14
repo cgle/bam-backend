@@ -17,6 +17,22 @@
           <img height="13" width="13" src="images/magnifying-glass.png">
           <span id="search-button" class="button-text">Search</span>      
         </button>
+
+       <!--  <div class="btn-group"> -->
+          <div class="dropdown" ng-controller="UserController" style="float:right;">
+            <button class="user-button dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  >
+              <img height="20" width="20" src="images/user-pic.png">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li ng-controller="LoginSubmitController"><a href="" class="logout-button" ng-click="logout()">Logout</li>
+            </ul>
+          </div>
+       <!--  </div> -->
+
+
       </div>
 
     </div>
@@ -95,6 +111,9 @@
       </div>
     </form>
   </div>
+
+  <!-- User overlay -->
+  <div id
 
 </div>
 

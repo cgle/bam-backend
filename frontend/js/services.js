@@ -20,6 +20,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				console.log('login success');
 				userService.currentUser.user = result.data.user;
 				userService.currentUser.access_token = result.data.access_token;
+				userService.currentUser.is_logged_in = true;
 				userService.SaveState();
 				$location.path('/');
 			}, function(reason){
@@ -40,7 +41,9 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 		logout: function() { 
 			var defer = $q.defer()
 			var promise = defer.promise;
-
+			userService.RestoreState();
+			userService.currentUser.is_logged_in = false;
+			userService.SaveState();
 			defer.resolve($http.post('/api/authenticate/logout',{},{}));
 			return defer.promise;
 		},
@@ -101,7 +104,8 @@ authModule.factory('userService',['$rootScope', function($rootScope) {
 
 		currentUser: {
 			user: {},
-			access_token: '' 
+			access_token: '',
+			is_logged_in: false 
 		},
 
 		SaveState: function() {
