@@ -3,8 +3,6 @@
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
-var appControllers = angular.module('appControllers', []);
-
 eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
     console.log($routeParams);
@@ -173,7 +171,7 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
 
 var voteControllers = angular.module('voteControllers', []);
 
-appControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
+voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
   function($scope, $http, $routeParams, userService) {
     var userId;
     $scope.hasVoted = false;
@@ -207,7 +205,7 @@ appControllers.controller("EventVoteController", ['$scope', '$http', '$routePara
         }
         var responsePromise = $http.post('/api/events/'+$routeParams.eventId+'/votes', vote, {});
         responsePromise.success(function(){
-          console.log('has votred');
+          console.log('has voted');
         });
         responsePromise.error(function(){
           console.log('error, not able to vote');
@@ -341,7 +339,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   }]);
 
 var loginControllers = angular.module('loginControllers', []);
-appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
+loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
   function($scope, $routeParams, $http, $location, $q,userService, AuthService) {
     var username;
     var password;
@@ -356,24 +354,15 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
         console.log('Logged in');
         toastr.success('logged in');
         $(".overlay").removeClass("overlay-open");
-      }, function(){
-        console.log('error logging in');
-        toastr.error('Login error')
-      }).then(function(){
         AuthService.update_user_location().then(function(){
             toastr.info('Updated location');
           }, function() {
             toastr.warning('Unable to update location');
         });
+      }, function(){
+        console.log('error logging in');
+        toastr.error('Login error')
       });
-
-      // }).then(function(){
-      //   toastr.info('Updated location');
-      // }, function() {
-      //   toastr.warning('Unable to update location');
-      // }); //AuthService.update_user_location(), toastr.success('logged in'));
-
-      //$(".overlay").removeClass("overlay-open");
     }
     $scope.registerLink = function(){
       $(".overlay").removeClass("overlay-open");
@@ -381,17 +370,17 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
     }
 
     $scope.logout = function(){
-      AuthService.logout();
-      $(".overlay").removeClass("overlay-open");
-      $location.path('/');
-      AuthService.isLoggedin();
+      AuthService.logout().then(function(){
+        $(".overlay").removeClass("overlay-open");
+        $location.path('/');
+        AuthService.isLoggedin();
+      });
     }
 }])
 
-appControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
+loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
     var email, username, firstname, lastname, password1, password2, birthyear;
-
 
     $scope.submitRegister = function() {
       firstname = $scope.registerForm.firstname;

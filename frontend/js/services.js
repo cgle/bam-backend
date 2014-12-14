@@ -36,16 +36,11 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				});
 		},
 		logout: function() { 
-			$.ajax({
-			  url: '/api/authenticate/logout',
-			  type: 'post',
-			  success: function(data) {
-			    console.log('logout success');
-			  },
-			  error: function(err) {
-			    console.log('logout error');
-			  }
-			});
+			var defer = $q.defer()
+			var promise = defer.promise;
+
+			defer.resolve($http.post('/api/authenticate/logout',{},{}));
+			return defer.promise;
 		},
 		update_user_location: function() {
 
