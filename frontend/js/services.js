@@ -8,6 +8,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 			var defer = $q.defer();
 			var promise = defer.promise;
 
+
 			var credentials = {
 				username : username,
 				password : password

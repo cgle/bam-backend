@@ -1,7 +1,6 @@
 <h1>Hello events</h1>
-
 <div ng-controller="EventListController">
-
+<button class="edit-button" type="button" ng-click="profile()"><span>Profile</span></button>
 	<ul>
 		<li ng-repeat="event in events">
 			{{event.name}}

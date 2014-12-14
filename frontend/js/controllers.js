@@ -16,12 +16,22 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
-eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http',
-  function($scope, $routeParams, $http) {
+eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
+  function($scope, $routeParams, $http, $location, userService) {
+    var userId;
+
     $http.get('api/events').success(function(data) {
       $scope.events = data.data;
       console.log(data.data);
     });
+    
+    userService.RestoreState();
+    userId = userService.currentUser.user._id;
+
+
+    $scope.profile = function() {
+      $location.path('user/' + userId)
+    }
   }]);
 
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
@@ -235,7 +245,6 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
 
 var userControllers = angular.module('userControllers', []);
 
-
 userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location', '$q',
   function($scope, $routeParams, $http, $location, $q) {
     var userId;
@@ -307,14 +316,13 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
 
   }]);
 
-userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'User_ID', 'userService',
-  function($scope, $routeParams, $http, $location, User_ID, userService) {
+userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
+  function($scope, $routeParams, $http, $location, userService) {
     var userId;
-    
-    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
-    //   $scope.user = data.data[0];
-    //   userId = data.data[0]._id;
-    // });
+    $http.get('api/users/' + $routeParams.userId).success(function(data) {
+      $scope.user = data.data[0];
+      userId = data.data[0]._id;
+    });
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
