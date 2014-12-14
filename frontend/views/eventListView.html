@@ -1,10 +1,9 @@
 <h1>Hello events</h1>
 <div ng-controller="EventListController">
-<button class="edit-button" type="button" ng-click="profile()"><span>Profile</span></button>
 	<ul>
-		<li ng-repeat="event in events">
+		<li ng-repeat="event in events"> <a ng-href="#/events/{{event._id}}">
 			{{event.name}}
-		</li>
+		</a></li>
 	</ul>
 </div>
 

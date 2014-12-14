@@ -28,10 +28,6 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     userService.RestoreState();
     userId = userService.currentUser.user._id;
 
-
-    $scope.profile = function() {
-      $location.path('user/' + userId)
-    }
   }]);
 
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
@@ -243,6 +239,8 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
     }
   }]);
 
+
+
 var userControllers = angular.module('userControllers', []);
 
 userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location', '$q',
@@ -319,13 +317,11 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
-    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
-    //   $scope.user = data.data[0];
-    //   userId = data.data[0]._id;
-    // });
+
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
+    
     if( userService.currentUser.is_logged_in ) {
       $("#userDropdown").show();
       $(".login-button").hide();
@@ -334,6 +330,12 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
       $(".login-button").show();
     }
 
+    $scope.userId = userId;
+
+    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
+    //   $scope.user = data.data[0];
+    //   userId = data.data[0]._id;
+    // });
 
     $scope.edit = function() {
       $location.path('user/' + userId + '/edit')
@@ -446,8 +448,7 @@ var testControllers = angular.module('testControllers', []);
 
 // }])
 
-var dateParser = function(date){
-  
+var dateParser = function(date){  
   var formattedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
   return formattedDate;
 }

@@ -25,9 +25,9 @@
               <img height="20" width="20" src="images/user-pic.png">
             </button>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a ng-href="#/">Homepage</a></li>
+              <li><a ng-href="#/user/{{userId}}">Profile</a></li>
+              <li><a href="#">Friends</a></li>
               <li ng-controller="LoginSubmitController"><a href="" class="logout-button" ng-click="logout()">Logout</li>
             </ul>
           </div>
