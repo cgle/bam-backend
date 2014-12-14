@@ -21,6 +21,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				userService.currentUser.user = result.data.user;
 				userService.currentUser.access_token = result.data.access_token;
 				userService.SaveState();
+				$location.path('/');
 			}, function(reason){
 				console.log('login error');
 			});
