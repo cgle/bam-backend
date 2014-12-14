@@ -326,6 +326,13 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
+    if( userService.currentUser.is_logged_in ) {
+      $("#userDropdown").show();
+      $(".login-button").hide();
+    } else {
+      $("#userDropdown").hide();
+      $(".login-button").show();
+    }
 
 
     $scope.edit = function() {
@@ -358,7 +365,9 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
         console.log('Logged in');
         toastr.success('logged in');
         $(".overlay").removeClass("overlay-open");
-        $(".login-button").css('visibility','hidden');
+        //$(".login-button").css('visibility','hidden');
+        $(".login-button").hide();
+        $("#userDropdown").show();
         AuthService.update_user_location().then(function(){
             toastr.info('Updated location');
           }, function() {
@@ -376,8 +385,9 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
 
     $scope.logout = function(){
       AuthService.logout().then(function(){
-        $(".overlay").removeClass("overlay-open");
         $location.path('/');
+        $("#userDropdown").hide();
+        $(".login-button").show();
         AuthService.isLoggedin();
       });
     }
