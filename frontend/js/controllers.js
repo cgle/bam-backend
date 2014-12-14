@@ -1,11 +1,6 @@
 'use strict';
 
 /* Controllers */
-
-// var eventControllers = angular.module('headerControllers', []);
-
-// headerControllers.controller('switchHeader', )
-
 var eventControllers = angular.module('eventControllers', []);
 
 eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http',
@@ -35,7 +30,7 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
 
     $scope.profile = function() {
-      $location.path('user/' + userId);
+      $location.path('user/' + userId)
     }
   }]);
 
@@ -437,4 +432,3 @@ var dateParser = function(date){
   var formattedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
   return formattedDate;
 }
-
