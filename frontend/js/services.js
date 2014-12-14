@@ -5,26 +5,41 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 	return {
 		login: function(username, password) {
 			
-			var deferred = $q.defer();
+			var defer = $q.defer();
+			var promise = defer.promise;
 
 			var credentials = {
 				username : username,
 				password : password
 			};
 
-			var responsePromise = $http.post('/api/authenticate/login', credentials, {});
-		    responsePromise.success(function(data) {
-		      console.log('login success');
-		      userService.currentUser.user = data.user;
-		      userService.currentUser.access_token = data.access_token;
-		      userService.SaveState();
-		      deferred.resolve('logged in');
-		    });
-		    responsePromise.error(function(){
-		      console.log('login error');
-		    });
+			
+			defer.resolve($http.post('/api/authenticate/login', credentials, {}));
 
-		    return deferred;
+			// var loginPromise = $http.post('/api/authenticate/login', credentials, {}).
+			// success(function(data) {
+		 //      console.log('login success');
+		 //      userService.currentUser.user = data.user;
+		 //      userService.currentUser.access_token = data.access_token;
+		 //      userService.SaveState();
+		 //      deferred.resolve('login success');
+		 //    }).
+		 //    error(function(data) {
+		 //      responsePromise.error(function(){
+		 //      console.log('login error');
+		 //      deferred.reject('login error');
+		 //    });
+
+			promise.then(function(result){
+				console.log('login success');
+				userService.currentUser.user = result.user;
+				userService.currentUser.access_token = result.access_token;
+				userService.SaveState();
+			}, function(reason){
+				console.log('login error');
+			});
+
+		    return defer.promise;
 		},
 		isLoggedin: function() { 
 			$http.get('/api/authenticate/loggedin').

@@ -352,9 +352,16 @@ appControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$
       console.log(username);
       console.log(password); 
 
-      $q.all(AuthService.login(username,password)).then(AuthService.update_user_location(), toastr.success('logged in'));
+      AuthService.login(username,password).then(function() {
+        console.log('Logged in');
+        toastr.success('logged in');
+        $(".overlay").removeClass("overlay-open");
+      }, function(){
+        console.log('error logging in');
+        toastr.error('Login error')
+      }); //AuthService.update_user_location(), toastr.success('logged in'));
 
-      $(".overlay").removeClass("overlay-open");
+      //$(".overlay").removeClass("overlay-open");
     }
     $scope.registerLink = function(){
       $(".overlay").removeClass("overlay-open");
