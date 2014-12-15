@@ -62,6 +62,9 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
       }
     });
 
+    $scope.newEvent = function(){
+      $location.path('/events/new');
+    }
 
   }]);
 
@@ -405,6 +408,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
             toastr.warning('Unable to update location');
         });
         $route.reload();
+        $location.path('/')
       }, function(){
         console.log('error logging in');
         toastr.error('Login error')
@@ -418,6 +422,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
     $scope.logout = function(){
       AuthService.logout().then(function(){
         $route.reload();
+        $location.path('/')
         $("#userDropdown").hide();
         $(".login-button").show();
         AuthService.isLoggedin();
