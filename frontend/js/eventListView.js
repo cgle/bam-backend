@@ -2,5 +2,5 @@
 
 $(document).ready(function() {
 
-	console.log($('.event-item .upvotes').html());
+	console.log($('.event-item .upvotes').text());
 });

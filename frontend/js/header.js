@@ -21,8 +21,9 @@ $(document).ready(function() {
     $('html').click(function(e) {
 
         // $("#settings-container").addClass('overlay-open');
+        var target = $(e.target);
         console.log(e.target.className);
-        if (e.target.className == 'overlay overlay-open') {
+        if (target.hasClass('overlay') || target.hasClass('')) {
             $(".overlay").removeClass("overlay-open");
         }
     });
