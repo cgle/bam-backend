@@ -6,7 +6,7 @@
         <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
           <p>{{event.name}}</p>
           <p>Categories: {{event.categories}}</p>
-          <p class="upvotes">{{event.upvotes}}</p>
+          <p class="upvotes">Upvotes: {{event.upvotes}}</p>
           <p>Downvotes: {{event.downvotes}}</p>
           <p>Location: {{event.pos}}</p>
         </a></li>

@@ -41,19 +41,19 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     userService.RestoreState();
     userId = userService.currentUser.user._id;
     userLocation = userService.currentUser.user.current_pos;
-    console.log(userId);
-    console.log(userLocation);
+    // console.log(userId);
+    // console.log(userLocation);
     
     $http.get('api/events').success(function(data) {
       $scope.events = data.data;
-      console.log(data.data[0].categories);
+      // console.log(data.data[0].categories);
       console.log(data.data);
+    }).then(function() {
+      for (var each in $scope.events) {
+        console.log($scope.events[each]);
+      }
     });
 
-    $scope.filter = function(category) {
-      console.log(category);
-      $scope.type = category;
-    }
 
   }]);
 
