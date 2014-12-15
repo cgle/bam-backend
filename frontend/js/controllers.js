@@ -20,11 +20,14 @@ eventControllers.filter('social', function() {
   return function(events) {
     var filtered = [];
     var check  = 'social';
-    for (var i = 0; i < events.length; i++) {
-      if (events[i].categories.indexOf(check) >= 0) {
-        filtered.push(events[i]);
+    for (var index in events) {
+      if (events[index].categories) {
+        if (events[index].categories.indexOf(check) >= 0) {
+          filtered.push(events[index]);
+        }
       }
     }
+    // console.log(filtered);
     return filtered;
   }
 });
@@ -33,17 +36,24 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
     // Get user's current position to find distance from event locations
-    // var userLocation;
+    var userLocation;
 
-    $http.get('api/events').success(function(data) {
-      $scope.events = data.data;
-      // console.log(data.data[0].categories);
-      console.log(data.data);
-    });
-    
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-    // userLocation = userService.currentUser.user.curent_pos;
+    userLocation = userService.currentUser.user.current_pos;
+    console.log(userId);
+    console.log(userLocation);
+    
+    $http.get('api/events').success(function(data) {
+      $scope.events = data.data;
+      console.log(data.data[0].categories);
+      console.log(data.data);
+    });
+
+    $scope.filter = function(category) {
+      console.log(category);
+      $scope.type = category;
+    }
 
   }]);
 
@@ -370,7 +380,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
 var loginControllers = angular.module('loginControllers', []);
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
-  function($scope, $routeParams, $http, $location, $q,userService, AuthService) {
+  function($scope, $routeParams, $http, $location, $q, userService, AuthService) {
     var username;
     var password;
   
@@ -457,6 +467,9 @@ loginControllers.controller('registerController', ['$scope', '$routeParams', '$h
       // add ajax post code to register user here !!!
     }
 }])
+
+// var settingControllers = angular.module('settingControllers', []);
+// settingControllers.controller('SettingControllers', ['$scope', '$routeParams']
 
 
 var testControllers = angular.module('testControllers', []);

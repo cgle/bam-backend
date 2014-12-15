@@ -1,5 +1,5 @@
 <script src="js/header.js"></script>
-
+ 
  <div class="container">
     <div class="header">
 
@@ -49,12 +49,12 @@
 
     <div class="mini-navigation" ng-controller="EventListController">
       <ul class="mini-navigation-menu">
-        <li class="page-wide-text"><a ng-click="myFilter = null">All</a></li>
-        <li class="page-wide-text"><a ng-click="myFilter = 'social'">Social</a></li>
-        <li class="page-wide-text"><a href="#/">Sports</a></li>
-        <li class="page-wide-text"><a href="#/">Food</a></li>
-        <li class="page-wide-text"><a href="#/">Recreational</a></li>
-        <li class="page-wide-text"><a href="#/">Informational</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="*">All</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter=".social">Social</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter=".sports">Sports</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter=".food">Food</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter=".recreational">Recreational</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter=".informational">Informational</a></li>
       </ul>
       <hr/>
     </div>   
@@ -99,7 +99,7 @@
   </div>
 
   <!-- Search overlay -->
-  <div id="search-flyout" class="overlay">
+  <div id="search-flyout" class="overlay" ng-controller="EventListController">
     <div>
       <form id="search-form">
         <input type="text" ng-model="query" placeholder="Search">

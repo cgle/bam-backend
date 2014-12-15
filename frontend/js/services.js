@@ -123,6 +123,10 @@ authModule.factory('userService',['$rootScope', function($rootScope) {
 	return service;
 }]);
 
+// var globalModule = angular.module('globalModule', []);
+
+// globalModule.factorY('singletonService', ['$rootScope'])
+
 
 
 
