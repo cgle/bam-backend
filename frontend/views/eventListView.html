@@ -2,6 +2,10 @@
  
     <div class="events" ng-controller="EventListController">
       <div class="container">
+      <button id='createEvent-button'>
+        Create New Event
+      </button>
+
       <ul>
         <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
           <p>{{event.name}}</p>

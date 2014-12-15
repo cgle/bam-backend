@@ -22,3 +22,14 @@ Event List View
 	border-radius: 10px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .8);
 }
+
+#createEvent-button {
+	float: right;
+	margin-left: 70%;
+	background-color: #FF3333;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
+}

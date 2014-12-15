@@ -45,6 +45,12 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     userLocation = userService.currentUser.user.current_pos;
     // console.log(userId);
     // console.log(userLocation);
+
+    if( userService.currentUser.is_logged_in ) {
+      $("#createEvent-button").show();
+    } else {
+      $("#createEvent-button").hide();
+    }
     
     $http.get('api/events').success(function(data) {
       $scope.events = data.data;
@@ -375,8 +381,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
 var loginControllers = angular.module('loginControllers', []);
 
-loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
-  function($scope, $routeParams, $http, $location, $q, userService, AuthService) {
+loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$route', '$location','$q','userService','AuthService',
+  function($scope, $routeParams, $http, $route, $location, $q, userService, AuthService) {
     var username;
     var password;
   
@@ -398,6 +404,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
           }, function() {
             toastr.warning('Unable to update location');
         });
+        $route.reload();
       }, function(){
         console.log('error logging in');
         toastr.error('Login error')
@@ -410,7 +417,7 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
 
     $scope.logout = function(){
       AuthService.logout().then(function(){
-        $location.path('/');
+        $route.reload();
         $("#userDropdown").hide();
         $(".login-button").show();
         AuthService.isLoggedin();
