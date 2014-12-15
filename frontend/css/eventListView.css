@@ -2,10 +2,12 @@
 Event List View
 *****************/
 
+
 .events ul {
 	list-style: none;
 	padding-left: 0;
 }
+
 
 .event-item {
 	display: inline;

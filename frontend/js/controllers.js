@@ -369,10 +369,6 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
       // userId = data.data[0]._id;
     });
 
-    $scope.edit = function() {
-      $location.path('user/' + userId + '/edit')
-    }
-
   }]);
 
 
