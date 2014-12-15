@@ -16,17 +16,34 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
+eventControllers.filter('social', function() {
+  return function(events) {
+    var filtered = [];
+    var check  = 'social';
+    for (var i = 0; i < events.length; i++) {
+      if (events[i].categories.indexOf(check) >= 0) {
+        filtered.push(events[i]);
+      }
+    }
+    return filtered;
+  }
+});
+
 eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
+    // Get user's current position to find distance from event locations
+    // var userLocation;
 
     $http.get('api/events').success(function(data) {
       $scope.events = data.data;
+      // console.log(data.data[0].categories);
       console.log(data.data);
     });
     
     userService.RestoreState();
     userId = userService.currentUser.user._id;
+    // userLocation = userService.currentUser.user.curent_pos;
 
   }]);
 

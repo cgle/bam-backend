@@ -2,6 +2,7 @@
 Header and Masthead
 *****************************/
 .header {
+    /*border: 1px solid black;*/
     margin: 10px 0px 0px 0px;
 }
 
@@ -28,13 +29,13 @@ Header and Masthead
     font-size: 50px;
 }
 
-.masthead-menu {
+#masthead-menu {
     margin-top: 10px;
     margin-right: 50px;
     margin-bottom: -10px;
 }
 
-.masthead-menu li {
+#masthead-menu li {
     display: inline-block;
     margin-right: 3px;
 }
@@ -227,6 +228,10 @@ Settings Header
 /*****************************
 Search Header
 *****************************/
+
+/*#search-flyout {*/
+    /*border: 1px solid black;*/
+/*}*/
 
 .search-button img {
     margin-top: -3px;

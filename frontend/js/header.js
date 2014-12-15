@@ -21,8 +21,8 @@ $(document).ready(function() {
     $('html').click(function(e) {
 
         // $("#settings-container").addClass('overlay-open');
-
-        if (e.target.className == 'overlay ng-scope overlay-open') {
+        console.log(e.target.className);
+        if (e.target.className == 'overlay overlay-open') {
             $(".overlay").removeClass("overlay-open");
         }
     });
@@ -35,6 +35,23 @@ $(document).ready(function() {
     //     $(this).css("opacity","1.0");
     // })
 
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+    var today = new Date();
+    var day = days[today.getDay()];
+    var dd = today.getDate();
+    var month = months[today.getMonth()];
+    var yyyy = today.getFullYear();
+
+    if (dd<10) {
+        dd='0'+dd;
+    }
+
+    today = day + ", " + month + " " + dd + ", "+ yyyy;
+    // console.log(today);
+
+    $("#date").html(today);
 });
 
 function getUserData(userId) {

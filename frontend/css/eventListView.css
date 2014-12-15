@@ -1,0 +1,20 @@
+/*****************
+Event List View
+*****************/
+
+.events ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.event-item {
+	display: inline;
+	background: #add8e6;
+	position: relative;
+	float: left;
+	width: 200px;
+	height: 200px;
+	margin: 5px;
+	padding: 10px;
+	color: #262524;
+}

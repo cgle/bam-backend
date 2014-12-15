@@ -1,9 +1,14 @@
-<h1>Hello events</h1>
-<div ng-controller="EventListController">
-	<ul>
-		<li ng-repeat="event in events"> <a ng-href="#/events/{{event._id}}">
-			{{event.name}}
-		</a></li>
-	</ul>
-</div>
-
+   
+    <div class="events" ng-controller="EventListController">
+      <div class="container">
+      <ul>
+        <li class="event-item" ng-repeat="event in events | filter: myFilter"> <a ng-href="#/events/{{event._id}}">
+          <p>{{event.name}}</p>
+          <p>Categories: {{event.categories}}</p>
+          <p>Upvotes: {{event.upvotes}}</p>
+          <p>Downvotes: {{event.downvotes}}</p>
+          <p>Location: {{event.pos}}</p>
+        </a></li>
+      </ul>
+	  </div>
+    </div>

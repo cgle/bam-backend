@@ -1,4 +1,4 @@
- <script src="js/header.js"></script>
+<script src="js/header.js"></script>
 
  <div class="container">
     <div class="header">
@@ -32,35 +32,52 @@
             </ul>
           </div>
        <!--  </div> -->
-
-
       </div>
 
     </div>
 
+
     <div class="masthead">
       <img id="nameplate" width="200" height="150" src="/images/bam.jpeg">
-      <ul class="masthead-menu">
-        <li class="page-wide-text">Friday, November 14, 2014</li>
+      <ul id="masthead-menu">
+        <li id="date" class="page-wide-text"></li>
         <li style="color: #d3d3d3"> | </li>
         <li class="page-wide-text">Users Online: ###</li>
       </ul>
       <hr/>
     </div>
 
-    <div class="mini-navigation">
+    <div class="mini-navigation" ng-controller="EventListController">
       <ul class="mini-navigation-menu">
-        <li class="page-wide-text"><a href="#">Social</a></li>
-        <li class="page-wide-text"><a href="#">Sports</a></li>
-        <li class="page-wide-text"><a href="#">Food</a></li>
-        <li class="page-wide-text"><a href="#">Recreational</a></li>
-        <li class="page-wide-text"><a href="#">Informational</a></li>
+        <li class="page-wide-text"><a ng-click="myFilter = null">All</a></li>
+        <li class="page-wide-text"><a ng-click="myFilter = 'social'">Social</a></li>
+        <li class="page-wide-text"><a href="#/">Sports</a></li>
+        <li class="page-wide-text"><a href="#/">Food</a></li>
+        <li class="page-wide-text"><a href="#/">Recreational</a></li>
+        <li class="page-wide-text"><a href="#/">Informational</a></li>
       </ul>
       <hr/>
     </div>   
-  </div>
 
-  <hr/>
+    <!-- eventListView.html 
+    Problems:
+      1. overlay css not covering all
+      2. angular filter:query
+      3. mini navigation buttons to filter
+    -->
+
+<!--     <div class="events" ng-controller="EventListController">
+      <ul>
+        <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
+          <p>{{event.name}}</p>
+          <p>Categories: {{event.categories}}</p>
+          <p>Upvotes: {{event.upvotes}}</p>
+          <p>Downvotes: {{event.downvotes}}</p>
+          <p>Location: {{event.pos}}</p>
+        </a></li>
+      </ul>
+    </div> -->
+    
 
   <!-- Login overlay -->
   <div id="login-container" class="overlay">
@@ -83,9 +100,9 @@
 
   <!-- Search overlay -->
   <div id="search-flyout" class="overlay">
-    <div class="search-container">
+    <div>
       <form id="search-form">
-        <input type="text" name="search" placeholder="Search">
+        <input type="text" ng-model="query" placeholder="Search">
       </form>
     </div>
   </div>
@@ -104,14 +121,15 @@
       <div>
         Order By:  
         <input type="radio" name="popularity" checked> Best Event
-        <input type="radio" name="popularity"> Upvotes
+        <input type="radio" name="popularity" > Upvotes
         <input type="radio" name="popularity"> Downvotes
       </div>
     </form>
   </div>
 
   <!-- User overlay -->
-  <div id
+  <!-- <div id -->
+
 
 </div>
 
