@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
@@ -202,6 +204,8 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     }
   }]);
 
+
+
 var voteControllers = angular.module('voteControllers', []);
 
 voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
@@ -265,6 +269,7 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
       }
     }
   }]);
+
 
 
 
@@ -338,8 +343,8 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
       // });
     }
 
-
   }]);
+
 
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
   function($scope, $routeParams, $http, $location, userService) {
@@ -359,26 +364,21 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     $scope.userId = userId;
 
-    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
-    //   $scope.user = data.data[0];
-    //   userId = data.data[0]._id;
-    // });
+    $http.get('api/users/' + $routeParams.userId).success(function(data) {
+      $scope.user = data.data[0];
+      // userId = data.data[0]._id;
+    });
 
     $scope.edit = function() {
       $location.path('user/' + userId + '/edit')
     }
 
-    $scope.getUser = function() {
-      // if (userService.currentUser.is_logged_in) {
-
-      // } else
-      console.log('hi!');
-      //$("#login-container").addClass('overlay-open');
-    }
-
   }]);
 
+
+
 var loginControllers = angular.module('loginControllers', []);
+
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
   function($scope, $routeParams, $http, $location, $q, userService, AuthService) {
     var username;
@@ -464,7 +464,6 @@ loginControllers.controller('registerController', ['$scope', '$routeParams', '$h
           console.log('submit error');
         });
       }
-      // add ajax post code to register user here !!!
     }
 }])
 
