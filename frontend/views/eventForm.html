@@ -5,16 +5,16 @@
 		<input style="padding-left: 40px;" type="file" id="profile_pic" name="profile_pic" accept="image/*">
 		</br>
 		<!-- <span class='formSpan'>Name</span></br> -->
-		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name"></br>
+		<input type="text" id="name" placeholder='Name' ng-model="eventForm.name" required></br>
 
 		<!-- <span class='formSpan'>Address</span></br> -->
 		<!-- <input type="text" id="address" placeholder='Address' ng-model="eventForm.address"></br> -->
 
 		<span class='formSpan'>Address</span>
-		<input ng-model="eventForm.address" id="googleAddress" type="text" placeholder="Enter address">
+		<input ng-model="eventForm.address" id="googleAddress" type="text" placeholder="Enter address" required>
 
 		<span class='formSpan'>Date</span></br></br>
-		<input type="date" id="date" ng-model="eventForm.date"></br>
+		<input type="date" id="date" ng-model="eventForm.date" required></br>
 
 		<span class='formSpan'>Description</span></br>
 		<textarea rows="5" cols="50" id="description" ng-model="eventForm.description">
@@ -36,10 +36,10 @@
 		</select><br/>
 
 
-	</form>
+		<br/></br></br>
+		<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
 
-	<br/></br></br>
-	<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
+	</form>
 
 	</div>
 	 <script src="js/googleMapsApi.js"></script>
