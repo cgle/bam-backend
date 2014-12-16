@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
@@ -45,6 +47,13 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     // console.log(userId);
     // console.log(userLocation);
 
+    if( userService.currentUser.is_logged_in ) {
+      $("#createEvent-button").show();
+    } else {
+      $("#createEvent-button").hide();
+    }
+
+
     var query_function = function(url) {
       $http.get(url).success(function(data) {
         $scope.events = data.data;
@@ -60,7 +69,6 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
     query_function(url);
 
-
     $('.mini-navigation-menu li a').on('click', function(e) {
       query_category = $(e.target).attr('data-filter');
       if (query_category != '') query_function(url+'?category='+query_category);
@@ -71,9 +79,9 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
       e.preventDefault();
     });
 
-    $('#settings-form-distance').on('click', function(e) {
-
-    });
+    $scope.newEvent = function(){
+      $location.path('/events/new');
+    }
 
   }]);
 
@@ -222,6 +230,8 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     }
   }]);
 
+
+
 var voteControllers = angular.module('voteControllers', []);
 
 voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
@@ -285,6 +295,7 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
       }
     }
   }]);
+
 
 
 
@@ -358,13 +369,12 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
       // });
     }
 
-
   }]);
+
 
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
-
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
@@ -379,28 +389,18 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     $scope.userId = userId;
 
-    // $http.get('api/users/' + $routeParams.userId).success(function(data) {
-    //   $scope.user = data.data[0];
-    //   userId = data.data[0]._id;
-    // });
-
-    $scope.edit = function() {
-      $location.path('user/' + userId + '/edit')
-    }
-
-    $scope.getUser = function() {
-      // if (userService.currentUser.is_logged_in) {
-
-      // } else
-      console.log('hi!');
-      //$("#login-container").addClass('overlay-open');
-    }
+    $http.get('api/users/' + $routeParams.userId).success(function(data) {
+      $scope.user = data.data[0];
+    });
 
   }]);
 
+
+
 var loginControllers = angular.module('loginControllers', []);
-loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$location','$q','userService','AuthService',
-  function($scope, $routeParams, $http, $location, $q, userService, AuthService) {
+
+loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$route', '$location','$q','userService','AuthService',
+  function($scope, $routeParams, $http, $route, $location, $q, userService, AuthService) {
     var username;
     var password;
 
@@ -422,6 +422,8 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
           }, function() {
             toastr.warning('Unable to update location');
         });
+        $route.reload();
+        $location.path('/')
       }, function(){
         console.log('error logging in');
         toastr.error('Login error')
@@ -434,7 +436,8 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
 
     $scope.logout = function(){
       AuthService.logout().then(function(){
-        $location.path('/');
+        $route.reload();
+        $location.path('/')
         $("#userDropdown").hide();
         $(".login-button").show();
         AuthService.isLoggedin();
@@ -484,7 +487,6 @@ loginControllers.controller('registerController', ['$scope', '$routeParams', '$h
           console.log('submit error');
         });
       }
-      // add ajax post code to register user here !!!
     }
 }])
 
