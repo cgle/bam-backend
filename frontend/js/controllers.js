@@ -477,22 +477,41 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-
     if( userService.currentUser.is_logged_in ) {
+
       $("#userDropdown").show();
       $(".login-button").hide();
+      console.log('user id>>',userId);
+      $scope.user = userService.currentUser.user;
+      $scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
+      $scope.userId = userId;
+      // $http.get('api/users/' + userId).
+      //   success(function(data) {
+      //     console.log(data);
+      //     $scope.user = data.data[0];
+      //     $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+      //     $scope.userId = userId;
+      //     console.log("EVENTS",$scope.user.created_events)
+      //   }).
+      //   error(function(){
+      //     console.log('cannot load user');
+      //   });
     } else {
       $("#userDropdown").hide();
       $(".login-button").show();
     }
 
-    $scope.userId = userId;
+    // $scope.userId = userId;
 
-    $http.get('api/users/' + $routeParams.userId).success(function(data) {
-      $scope.user = data.data[0];
-      $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
-      console.log("EVENTS",$scope.user.created_events)
-    });
+    //   $http.get('api/users/' + userId).
+    //     success(function(data) {
+    //       $scope.user = data.data[0];
+    //       $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+    //       console.log("EVENTS",$scope.user.created_events)
+    //     }).
+    //     error(function(){
+    //       console.log('cannot load user');
+    //     });
 
   }]);
 
@@ -515,7 +534,6 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
         console.log('Logged in');
         toastr.success('logged in');
         $(".overlay").removeClass("overlay-open");
-        //$(".login-button").css('visibility','hidden');
         $(".login-button").hide();
         $("#userDropdown").show();
         AuthService.update_user_location().then(function(){
