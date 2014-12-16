@@ -20,6 +20,8 @@ Event List View
 #createEvent-button {
 	float: right;
 	margin-left: 70%;
+	margin-right: 10px;
+	margin-bottom: 10px;
 	background-color: #FF3333;
     border-radius: 10px;
     color: white;
