@@ -16,22 +16,6 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
-// eventControllers.filter('social', function() {
-//   return function(events) {
-//     var filtered = [];
-//     var check  = 'social';
-//     for (var index in events) {
-//       if (events[index].categories) {
-//         if (events[index].categories.indexOf(check) >= 0) {
-//           filtered.push(events[index]);
-//         }
-//       }
-//     }
-//     console.log(filtered);
-//     return filtered;
-//   }
-// });
-
 eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
