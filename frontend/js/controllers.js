@@ -6,7 +6,7 @@ var eventControllers = angular.module('eventControllers', []);
 
 eventControllers.controller('EventDetailController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
-    console.log($routeParams);
+    console.log('EventDetailController loaded');
     $http.get('api/events/' + $routeParams.eventId).success(function(data) {
       var date = new Date(data.data[0].date);
       var formattedDate = dateParser(date);
@@ -28,7 +28,7 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     userLocation = userService.currentUser.user.current_pos;
     // console.log(userId);
     // console.log(userLocation);
-
+    console.log('EventsListController loaded');
     $scope.setDimensions = function(event) {
       var netVotes = event.upvotes - event.downvotes;
       if (netVotes < 5) {
@@ -131,7 +131,6 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     $scope.hasVoted = false;
     $scope.voteType;
     $scope.voteId;
-    console.log(userId);
 
     $scope.eventVote = function(voteType, event) {
       $http.get('/api/events/'+event._id+'/votes?user_id='+userId).
@@ -197,6 +196,7 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
+    console.log('EventCategoriesController loaded');
     $scope.events = [];
     $http.get('api/events').success(function(data) {
       data.data.forEach(function(event){
@@ -209,6 +209,7 @@ eventControllers.controller('EventCategoriesController', ['$scope', '$routeParam
 
 eventControllers.controller("EventFormController", ['$scope', '$http', '$location',
   function($scope, $http, $location) {
+    console.log('EventFormController loaded');
     $scope.eventForm={};
     $scope.files = [];
     $('input[name="profile_pic"]').on('change', function(e) {
@@ -263,6 +264,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
 
 eventControllers.controller("EventEditController", ['$scope', '$http', '$location', '$routeParams','$q',
   function($scope, $http, $location, $routeParams, $q) {
+    console.log('EventEditController loaded');
     $scope.eventForm = {};
     $scope.files = [];
     $('input[name="profile_pic"]').on('change', function(e) {
@@ -347,6 +349,7 @@ var voteControllers = angular.module('voteControllers', []);
 
 voteControllers.controller("EventVoteController", ['$scope', '$http', '$routeParams', 'userService',
   function($scope, $http, $routeParams, userService) {
+    console.log('EventVoteController loaded');
     var userId;
     $scope.hasVoted = false;
     $scope.voteType;
@@ -412,8 +415,30 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
 
 var userControllers = angular.module('userControllers', []);
 
+userControllers.controller("HeaderController", ['$scope','userService',
+  function($scope, userService) {
+    console.log('HeaderController loaded');
+    userService.RestoreState();
+    $scope.userId = userService.currentUser.user._id;
+
+    if( userService.currentUser.is_logged_in ) {
+
+      $("#userDropdown").show();
+      $(".login-button").hide();
+      //console.log('user id>>',userId);
+      //$scope.user = userService.currentUser.user;
+      //$scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
+      //$scope.userId = userId;
+
+    } else {
+      $("#userDropdown").hide();
+      $(".login-button").show();
+    }
+  }]);
+
 userControllers.controller("UserEditController", ['$scope', '$routeParams', '$http', '$location', '$q',
   function($scope, $routeParams, $http, $location, $q) {
+    console.log('UserEditController loaded');
     var userId;
     $scope.userForm = {};
     $scope.files = [];
@@ -486,6 +511,8 @@ userControllers.controller("UserEditController", ['$scope', '$routeParams', '$ht
 userControllers.controller('UserController', ['$scope', '$routeParams', '$http', '$location', 'userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
+    var userEvents = [];
+    console.log('UserController loaded');
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
@@ -496,7 +523,6 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
         $scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
         $scope.userId = userId;
         console.log($scope.user);
-
       }
     } else {
       userId = $routeParams.userId;
@@ -522,8 +548,6 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
       $("#userDropdown").hide();
       $(".login-button").show();
     }
-
-
   }]);
 
 
@@ -532,6 +556,8 @@ var loginControllers = angular.module('loginControllers', []);
 
 loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', '$http', '$route', '$location','$q','userService','AuthService',
   function($scope, $routeParams, $http, $route, $location, $q, userService, AuthService) {
+    console.log('LoginSubmitController loaded');
+
     var username;
     var password;
 
@@ -577,6 +603,8 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
 
 loginControllers.controller('registerController', ['$scope', '$routeParams', '$http', '$location',
   function($scope, $routeParams, $http, $location) {
+    console.log('registerController loaded');
+
     var email, username, firstname, lastname, password1, password2, birthyear;
 
     $scope.submitRegister = function() {

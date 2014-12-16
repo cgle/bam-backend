@@ -22,6 +22,8 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				userService.currentUser.access_token = result.data.access_token;
 				userService.currentUser.is_logged_in = true;
 				userService.SaveState();
+				//$("#user-nav-dropdown").append('<li><a ng-href="#/user/{{userId}}">Profile</a></li>');
+      			//$("#user-nav-dropdown").append('<li><a ng-href="#/user/{{userId}}/edit">Edit Info</a></li>');
 				$location.path('/');
 			}, function(reason){
 				console.log('login error');

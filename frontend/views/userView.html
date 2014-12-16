@@ -1,6 +1,6 @@
 
 
-<div ng-controller="UserController">
+<div>
   <div class='page current'>
     <div class="image-block">
         <img class='circular' width="248px" height="198px" src="{{user.profile_pic}}">
@@ -14,7 +14,7 @@
 
       <p><b>Events</b></p> 
       <ul>
-        <li ng-repeat="event in user.created_events">{{event.name}}</li>
+        <li ng-repeat="event in events"><a ng-href="#/events/{{event._id}}">{{event.name}}</a></li>
 
       </ul>
       
