@@ -37,23 +37,43 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     var userId;
     // Get user's current position to find distance from event locations
     var userLocation;
-
+    var query_category = '';
+    var url = 'api/events';
     userService.RestoreState();
     userId = userService.currentUser.user._id;
     userLocation = userService.currentUser.user.current_pos;
     // console.log(userId);
     // console.log(userLocation);
-    
-    $http.get('api/events').success(function(data) {
-      $scope.events = data.data;
-      // console.log(data.data[0].categories);
-      console.log(data.data);
-    }).then(function() {
-      for (var each in $scope.events) {
-        console.log($scope.events[each]);
+
+    var query_function = function(url) {
+      $http.get(url).success(function(data) {
+        $scope.events = data.data;
+        $scope.apply;
+        // console.log(data.data[0].categories);
+        console.log(data.data);
+      }).then(function() {
+        for (var each in $scope.events) {
+          console.log($scope.events[each]);
+        }
+      });
+    }
+
+    query_function(url);
+
+
+    $('.mini-navigation-menu li a').on('click', function(e) {
+      query_category = $(e.target).attr('data-filter');
+      if (query_category != '') query_function(url+'?category='+query_category);
+      else {
+        query_function(url);
       }
+      e.stopPropagation();
+      e.preventDefault();
     });
 
+    $('#settings-form-distance').on('click', function(e) {
+
+    });
 
   }]);
 
@@ -212,7 +232,7 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
     $scope.voteId;
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-  
+
     $http.get('/api/events/'+$routeParams.eventId+'/votes?user_id='+userId).
     success(function(data){
       if (data.data.length > 0) {
@@ -230,7 +250,7 @@ voteControllers.controller("EventVoteController", ['$scope', '$http', '$routePar
     $scope.eventVote = function(voteType) {
       console.log("VOTED ", voteType);
       console.log('voted?', $scope.hasVoted);
-      if (!$scope.hasVoted) { 
+      if (!$scope.hasVoted) {
         var vote = {
           event_id : $routeParams.eventId,
           user_id : userId,
@@ -348,7 +368,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-    
+
     if( userService.currentUser.is_logged_in ) {
       $("#userDropdown").show();
       $(".login-button").hide();
@@ -383,12 +403,12 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
   function($scope, $routeParams, $http, $location, $q, userService, AuthService) {
     var username;
     var password;
-  
+
     $scope.submitLogin = function() {
       username = $scope.loginForm.username;
       password = $scope.loginForm.password;
       console.log(username);
-      console.log(password); 
+      console.log(password);
 
       AuthService.login(username,password).then(function() {
         console.log('Logged in');
@@ -478,7 +498,7 @@ var testControllers = angular.module('testControllers', []);
 
 // }])
 
-var dateParser = function(date){  
+var dateParser = function(date){
   var formattedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
   return formattedDate;
 }

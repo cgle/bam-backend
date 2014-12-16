@@ -1,9 +1,17 @@
+  <!-- Search overlay -->
     <div class="events" ng-controller="EventListController">
+    <div id="search-flyout" class="overlay">
+      <div>
+        <form id="search-form">
+          <input type="text" ng-model="query" placeholder="Search">
+        </form>
+      </div>
+    </div>
       <div class="container">
       <ul>
         <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
           <p>{{event.name}}</p>
-          <p>Categories: {{event.categories}}</p>
+          <p>Category: {{event.category}}</p>
           <p class="upvotes">Upvotes: {{event.upvotes}}</p>
           <p>Downvotes: {{event.downvotes}}</p>
           <p>Location: {{event.pos}}</p>
@@ -11,3 +19,4 @@
       </ul>
 	  </div>
     </div>
+

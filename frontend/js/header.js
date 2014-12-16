@@ -23,7 +23,7 @@ $(document).ready(function() {
         // $("#settings-container").addClass('overlay-open');
         var target = $(e.target);
         console.log(e.target.className);
-        if (target.hasClass('overlay') || target.hasClass('')) {
+        if (target.hasClass('overlay')) {
             $(".overlay").removeClass("overlay-open");
         }
     });

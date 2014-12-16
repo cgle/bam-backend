@@ -4,7 +4,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 
 	return {
 		login: function(username, password) {
-			
+
 			var defer = $q.defer();
 			var promise = defer.promise;
 
@@ -13,7 +13,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				username : username,
 				password : password
 			};
-			
+
 			defer.resolve($http.post('/api/authenticate/login', credentials, {}));
 
 			promise.then(function(result){
@@ -29,7 +29,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 
 		    return defer.promise;
 		},
-		isLoggedin: function() { 
+		isLoggedin: function() {
 			$http.get('/api/authenticate/loggedin').
 				success(function(data) {
 					console.log("success", data);
@@ -38,7 +38,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 					console.log("error");
 				});
 		},
-		logout: function() { 
+		logout: function() {
 			var defer = $q.defer()
 			var promise = defer.promise;
 			userService.RestoreState();
@@ -56,7 +56,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 
 			userService.RestoreState();
 
-			$http.put('/api/users/'+userService.currentUser.user._id, 
+			$http.put('/api/users/'+userService.currentUser.user._id,
 				{ current_pos: current_position }, {});
 			if (navigator.geolocation) {
         		navigator.geolocation.getCurrentPosition(function(pos){
@@ -69,7 +69,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
     				console.log('pos>',current_position);
     				console.log(userService.currentUser);
     				console.log('user id for location',userService.currentUser.user._id);
-    				defer.resolve($http.put('/api/users/'+userService.currentUser.user._id, 
+    				defer.resolve($http.put('/api/users/'+userService.currentUser.user._id,
 				{ current_pos: current_position }, {}));
         		},
         		function(error){
@@ -95,7 +95,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
     		return defer.promise
 		}
 	}
-	
+
 }]);
 
 //http://stackoverflow.com/questions/12940974/maintain-model-of-scope-when-changing-between-views-in-angularjs
@@ -105,7 +105,7 @@ authModule.factory('userService',['$rootScope', function($rootScope) {
 		currentUser: {
 			user: {},
 			access_token: '',
-			is_logged_in: false 
+			is_logged_in: false
 		},
 
 		SaveState: function() {
@@ -122,14 +122,6 @@ authModule.factory('userService',['$rootScope', function($rootScope) {
 
 	return service;
 }]);
-
-// var globalModule = angular.module('globalModule', []);
-
-// globalModule.factorY('singletonService', ['$rootScope'])
-
-
-
-
 
 
 
