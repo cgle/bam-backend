@@ -16,7 +16,7 @@
 	<div class="container" ng-controller="EventListController">
       <div class="events" data-ng-init="init()">
         <div class="event-item" ng-repeat="event in events | filter:query">
-          <p ng-style="setDimensions(event)" style="background-image: url('{{event.profile_pic}}');">
+          <p ng-style="setDimensions(event)" style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
           <a id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
       	  <!-- <span><img src="{{event.profile_pic}}"/></span> -->
           <!-- <span>Categories: {{event.category}}</span> -->
