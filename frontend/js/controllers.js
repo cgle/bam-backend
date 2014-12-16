@@ -31,36 +31,42 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     // console.log(userLocation);
 
     $scope.setDimensions = function(event) {
-      console.log('hi');
       var netVotes = event.upvotes - event.downvotes;
       if (netVotes < 5) {
-        return {width: "152px", height: "152px"}
+        return {width: "150px", height: "150px"}
       }
 
       else if (5 <= netVotes && netVotes < 10) {
         return {width: "200px", height: "200px"}
       }
-      
+
       else if (10 <= netVotes && netVotes < 15) {
         return {width: "350px", height: "350px"}
       }
 
-      else if (15 <= netVotes && netVotes < 20) {
+      else if (netVotes > 15) {
         return {width: "400px", height: "400px"}
       }
 
-      else if (netVotes >= 20) {
-        return {width: "450px", height: "450px"}
-      }
     };
 
     $scope.init = function() {
       var $container = $('.events');
       $container.masonry({
-        columnWidth: 200,
+        rowHeight: 100,
+        columnWidth: 100,
         itemSelector: '.event-item'
       });
     }
+
+    // $('event-item').mouseover(function(e) {
+    //   console.log(e.target.className);
+    //   if (e.target.className == 'event-item') {
+    //     $(this).css("opacity", "0.50");
+    //   }
+    // }).mouseout(function() {
+    //     $(this).css("opacity","1.0");
+    // })
 
     if( userService.currentUser.is_logged_in ) {
       $("#createEvent-button").show();
@@ -74,10 +80,10 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
         $scope.events = data.data;
         $scope.apply;
         // console.log(data.data[0].categories);
-        console.log(data.data);
+        // console.log(data.data);
       }).then(function() {
         for (var each in $scope.events) {
-          console.log($scope.events[each]);
+          // console.log($scope.events[each]);
         }
       });
     }
@@ -96,6 +102,71 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
     $scope.newEvent = function(){
       $location.path('/events/new');
+    }
+
+    $scope.hasVoted = false;
+    $scope.voteType;
+    $scope.voteId;
+    console.log(userId);
+
+    $scope.eventVote = function(voteType, event) {
+      $http.get('/api/events/'+event._id+'/votes?user_id='+userId).
+      success(function(data){
+        console.log("data:" + data);
+        // console.log(event.eventId);
+        if (data.data.length > 0) {
+          $scope.hasVoted = true;
+          $scope.voteType = data.data[0].is_upvote;
+          $scope.voteId = data.data[0]._id;
+        } else {
+          $scope.hasVoted = false;
+        }
+      }).error(function(){
+        console.log('error');
+      }).then(function() {
+      console.log("VOTED ", voteType);
+      console.log('voted?', $scope.hasVoted);
+      if (!$scope.hasVoted) {
+        var vote = {
+          event_id : $routeParams.eventId,
+          user_id : userId,
+          is_upvote: voteType
+        }
+        var responsePromise = $http.post('/api/events/'+event._id+'/votes', vote, {});
+        responsePromise.success(function(){
+          console.log('has voted');
+          if (voteType) {event.upvotes+=1;}
+          else event.downvotes+=1;
+        });
+        responsePromise.error(function(){
+          console.log('error, not able to vote');
+
+        });
+        $scope.hasVoted = true;
+        $scope.voteType = voteType;
+        } else if (voteType != $scope.voteType) {
+        // update vote
+        $scope.voteType = voteType;
+        var newVote = {
+          is_upvote : voteType,
+          user_id : userId
+        }
+        $http.put('/api/events/'+event._id+'/votes/'+$scope.voteId,
+          newVote, {}).
+          success(function(data){
+            console.log('updated vote');
+            console.log($scope.voteType+" ADOFIJA "+voteType);
+            $scope.voteType = voteType;
+            if (voteType) {event.upvotes+=1; event.downvotes-=1;}
+            else {event.downvotes+=1; event.upvotes-=1;}
+          }).error(function(data){
+            console.log('failed to update vote');
+          });
+      }
+        else {
+        console.log('already voted');
+      }
+      });
     }
 
   }]);

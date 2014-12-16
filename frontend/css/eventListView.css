@@ -12,7 +12,7 @@ Event List View
 	margin: 5px;
 	padding: 10px;
 	color: #262524;
-	font-size: 11px;
+	font-size: 14px;
 	border-radius: 10px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, .8);
 }
@@ -28,4 +28,12 @@ Event List View
     font-weight: bold;
     text-transform: uppercase;
     padding: 5px;
+}
+
+#event-name {
+	color: black;
+   /*-webkit-text-fill-color: white;  Will override color (regardless of order) */
+      /*-webkit-text-stroke: 0.05px white;*/
+	/*opacity: 50%;*/
+	/*background-color: white;*/
 }
