@@ -1,7 +1,7 @@
 <div id='eventFormContainer' ng-controller="EventFormController">
 	<h3>{{eventForm.name}}</h3>
 	<p> @ {{eventForm.address}}</p></br>
-	<form>
+	<form ng-submit="eventForm.submit()">
 		<input style="padding-left: 40px;" type="file" id="profile_pic" name="profile_pic" accept="image/*">
 		</br>
 		<!-- <span class='formSpan'>Name</span></br> -->
@@ -37,7 +37,7 @@
 
 
 		<br/></br></br>
-		<button class="btn btn-primary" id='createEvent' ng-click="eventForm.createEvent()">Create Event</button>
+		<input class="btn btn-primary" id='submit' type="submit" value="Create Event">
 
 	</form>
 

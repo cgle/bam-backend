@@ -122,7 +122,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
     $scope.eventForm.privacy = true;
     $scope.eventForm.name = ' Event Name'
     $scope.eventForm.address = ' Location'
-    $scope.eventForm.createEvent = function(item, event) {
+    $scope.eventForm.submit = function(item, event) {
       console.log("SUBMITTING");
       var dateString = $scope.eventForm.date;
       var date = new Date(dateString);
