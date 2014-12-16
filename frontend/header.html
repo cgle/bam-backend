@@ -19,11 +19,11 @@
           <span class="login-button">Login</span>
         </button>
 
-          <div id="userDropdown" class="dropdown" ng-controller="UserController" style="float:right;">
+          <div id="userDropdown" class="dropdown" ng-controller="HeaderController" style="float:right;">
             <button class="user-button dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
               <img height="20px" width="20px" src="images/user-pic.png">
             </button>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <ul id="user-nav-dropdown" class="dropdown-menu dropdown-menu-right" role="menu">
               <li><a ng-href="#/">Homepage</a></li>
               <li><a ng-href="#/user/{{userId}}">Profile</a></li>
               <li><a ng-href="#/user/{{userId}}/edit">Edit Info</a></li>

@@ -51,14 +51,13 @@ bamApp.config(function($routeProvider) {
 			templateUrl: 'views/uploadtest.html'
 		});
 }).
-run(function($rootScope) {
+run(function($rootScope, $route) {
 	$rootScope.$on("$routeChangeStart", function(event, next, current) {
 		if (sessionStorage.restorestate == "true") {
 	        $rootScope.$broadcast('restorestate'); //let everything know we need to restore state
 	        sessionStorage.restorestate = false;
     	}
 	});
-
 	window.onbeforeunload = function (event) {
     	$rootScope.$broadcast('savestate');
 	};
