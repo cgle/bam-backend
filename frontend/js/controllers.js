@@ -359,7 +359,6 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
 
-
     userService.RestoreState();
     userId = userService.currentUser.user._id;
     
@@ -375,7 +374,6 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
       $scope.user = data.data[0];
-      // userId = data.data[0]._id;
     });
 
   }]);
