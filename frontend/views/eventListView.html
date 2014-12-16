@@ -41,7 +41,7 @@
   </div> -->
 
 
-  <div class="container" ng-controller="EventListController">
+  <div class="container" >
       <div masonry class="events" column-width="50" item-selector=".event-item" data-ng-init="init()" style="position: relative" masonry-options="{ transitionDuration: '0.1s'}" >
         <div masonry-brick class="event-item" ng-repeat="event in events | filter:query" ng-style="setDimensions(event)"style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
           <div class="item-title">
