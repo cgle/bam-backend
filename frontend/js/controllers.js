@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
@@ -18,8 +17,8 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
-eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
-  function($scope, $routeParams, $http, $location, userService) {
+eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService', '$q',
+  function($scope, $routeParams, $http, $location, userService, $q) {
     var userId;
     var userLocation;
     var query_category = '';
@@ -50,14 +49,24 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
     };
 
+
+    var $container = $('.container .events');
+  
     $scope.init = function() {
-      var $container = $('.events');
-      $container.masonry({
-        rowHeight: 100,
-        columnWidth: 100,
-        itemSelector: '.event-item'
-      });
-    }
+    $container.masonry({
+      rowHeight: 300,
+      isAnimated:true,
+      itemSelector: '.event-item'
+    });  
+    };
+
+    // var container = document.querySelector('.events');
+    // console.log(container);
+    // var msnry = new Masonry(container, {
+    //     rowHeight: 1000,
+    //     columnWidth: 100,
+    //     itemSelector: '.event-item'
+    //   });
 
     // $('event-item').mouseover(function(e) {
     //   console.log(e.target.className);
@@ -76,16 +85,19 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
 
     var query_function = function(url) {
-      $http.get(url).success(function(data) {
+      var promise = $http.get(url).success(function(data) {
         $scope.events = data.data;
         $scope.apply;
         // console.log(data.data[0].categories);
         // console.log(data.data);
-      }).then(function() {
-        for (var each in $scope.events) {
-          // console.log($scope.events[each]);
-        }
       });
+
+      $q.all(promise).then(function() {
+        var msnry = $container.masonry('reloadItems').masonry('layout');
+        var elems = $container.masonry('getItemElements');
+        console.log(elems);        
+      });
+
     }
 
     query_function(url);
@@ -465,22 +477,41 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-
     if( userService.currentUser.is_logged_in ) {
+
       $("#userDropdown").show();
       $(".login-button").hide();
+      console.log('user id>>',userId);
+      $scope.user = userService.currentUser.user;
+      $scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
+      $scope.userId = userId;
+      // $http.get('api/users/' + userId).
+      //   success(function(data) {
+      //     console.log(data);
+      //     $scope.user = data.data[0];
+      //     $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+      //     $scope.userId = userId;
+      //     console.log("EVENTS",$scope.user.created_events)
+      //   }).
+      //   error(function(){
+      //     console.log('cannot load user');
+      //   });
     } else {
       $("#userDropdown").hide();
       $(".login-button").show();
     }
 
-    $scope.userId = userId;
+    // $scope.userId = userId;
 
-    $http.get('api/users/' + $routeParams.userId).success(function(data) {
-      $scope.user = data.data[0];
-      $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
-      console.log("EVENTS",$scope.user.created_events)
-    });
+    //   $http.get('api/users/' + userId).
+    //     success(function(data) {
+    //       $scope.user = data.data[0];
+    //       $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+    //       console.log("EVENTS",$scope.user.created_events)
+    //     }).
+    //     error(function(){
+    //       console.log('cannot load user');
+    //     });
 
   }]);
 
@@ -503,7 +534,6 @@ loginControllers.controller('LoginSubmitController', ['$scope', '$routeParams', 
         console.log('Logged in');
         toastr.success('logged in');
         $(".overlay").removeClass("overlay-open");
-        //$(".login-button").css('visibility','hidden');
         $(".login-button").hide();
         $("#userDropdown").show();
         AuthService.update_user_location().then(function(){
