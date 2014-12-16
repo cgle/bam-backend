@@ -51,7 +51,8 @@ General
 *****************************/
 
 .page-wide-text {
-    font-family: "Times New Roman";
+    font-size: 16px;
+    font-weight: 600;
 }
 
 /* Remove default button css */
@@ -251,7 +252,7 @@ Search Header
 
 #search-form button {
     margin-right: 200px;
-} 
+}
 
 /*****************************
 Overlay for all header buttons

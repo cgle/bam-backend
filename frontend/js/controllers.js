@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 /* Controllers */
 var eventControllers = angular.module('eventControllers', []);
 
@@ -18,8 +17,8 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
-eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
-  function($scope, $routeParams, $http, $location, userService) {
+eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService', '$q',
+  function($scope, $routeParams, $http, $location, userService, $q) {
     var userId;
     var userLocation;
     var query_category = '';
@@ -33,31 +32,41 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     $scope.setDimensions = function(event) {
       var netVotes = event.upvotes - event.downvotes;
       if (netVotes < 5) {
-        return {width: "150px", height: "150px"}
-      }
-
-      else if (5 <= netVotes && netVotes < 10) {
         return {width: "200px", height: "200px"}
       }
 
+      else if (5 <= netVotes && netVotes < 10) {
+        return {width: "250px", height: "250px"}
+      }
+
       else if (10 <= netVotes && netVotes < 15) {
-        return {width: "350px", height: "350px"}
+        return {width: "320px", height: "320px"}
       }
 
       else if (netVotes > 15) {
-        return {width: "400px", height: "400px"}
+        return {width: "380", height: "380px"}
       }
 
     };
 
+
+    var $container = $('.container .events');
+
     $scope.init = function() {
-      var $container = $('.events');
-      $container.masonry({
-        rowHeight: 100,
-        columnWidth: 100,
-        itemSelector: '.event-item'
-      });
-    }
+    // $container.masonry({
+    //   rowHeight: 300,
+    //   isAnimated:true,
+    //   itemSelector: '.event-item'
+    // });
+    };
+
+    // var container = document.querySelector('.events');
+    // console.log(container);
+    // var msnry = new Masonry(container, {
+    //     rowHeight: 1000,
+    //     columnWidth: 100,
+    //     itemSelector: '.event-item'
+    //   });
 
     // $('event-item').mouseover(function(e) {
     //   console.log(e.target.className);
@@ -76,19 +85,33 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
 
     var query_function = function(url) {
-      $http.get(url).success(function(data) {
+      var promise = $http.get(url).success(function(data) {
         $scope.events = data.data;
-        $scope.apply;
+        $scope.$apply;
         // console.log(data.data[0].categories);
         // console.log(data.data);
-      }).then(function() {
-        for (var each in $scope.events) {
-          // console.log($scope.events[each]);
-        }
       });
     }
 
     query_function(url);
+
+    $(document).on('mouseover', '.event-item', function(e) {
+      var target = $(e.target);
+      var footer = target.find('.item-footer');
+      $(footer).show();
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    $(document).on('mouseleave', '.event-item, .item-footer',  function(e) {
+      var that = this;
+      var target = $(e.target);
+      var footer = target.find('.item-footer');
+      footer = footer.length == 1 ? footer : ($(that).hasClass('event-item') ? footer : that);
+      $(footer).hide();
+      e.stopPropagation();
+      e.preventDefault();
+    });
+
 
     $('.mini-navigation-menu li a').on('click', function(e) {
       query_category = $(e.target).attr('data-filter');

@@ -13,29 +13,53 @@
         Create New Event
       </button>
 	</div>
-	<div class="container" ng-controller="EventListController">
-      <div class="events" data-ng-init="init()">
-        <div class="event-item" ng-repeat="event in events | filter:query">
-          <p ng-style="setDimensions(event)" style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
-          <a id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
-      	  <!-- <span><img src="{{event.profile_pic}}"/></span> -->
-          <!-- <span>Categories: {{event.category}}</span> -->
-          <br>
 
-  	      Upvotes: {{event.upvotes}}
-  	      <br>
-          Downvotes: {{event.downvotes}}
-          <br>
-	      <input style="" width="30" type="image" name="bam"  ng-click="eventVote(true, event)" src="images/like.png"/>
-          <input style="position:relative;bottom:44px;left:40px;" width="30" type="image" name="slam" ng-click="eventVote(false, event)" src="images/dislike.png"/>
-
-          <br>
-
-	      </p>
-        <!-- <ul> -->
-
-        <!-- </ul> -->
+	<!-- <div class="container" ng-controller="EventListController">
+    <div class="events" data-ng-init="init()">
+      <div class="event-item" style="height:200px;width:200px;background-color:blue;">
+        <p>1</p>
       </div>
+      <div class="event-item" style="height:200px;width:400px;background-color:blue;">
+        <p>2</p>
+      </div>
+      <div class="event-item" style="height:400px;width:200px;background-color:blue;">
+        <p>3</p>
+      </div>
+      <div class="event-item" style="height:200px;width:200px;background-color:blue;">
+        <p>4</p>
+      </div>
+      <div class="event-item" style="height:300px;width:200px;background-color:blue;">
+        <p>5</p>
+      </div>
+      <div class="event-item" style="height:200px;width:200px;background-color:blue;">
+        <p>6</p>
+      </div>
+      <div class="event-item" style="height:200px;width:300px;background-color:blue;">
+        <p>7</p>
       </div>
     </div>
+  </div> -->
+
+
+  <div class="container" ng-controller="EventListController">
+      <div masonry class="events" column-width="50" item-selector=".event-item" data-ng-init="init()" style="position: relative" masonry-options="{ transitionDuration: '0.1s'}" >
+        <div masonry-brick class="event-item" ng-repeat="event in events | filter:query" ng-style="setDimensions(event)"style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
+          <div class="item-title">
+            <a style="background-color: black; font-size: 20px; opacity: 0.8; width: 100%; color:white" id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
+          </div>
+          <br>
+          <div class="item-footer" style="position: absolute; background-color: black; color: white; opacity: 0.8; bottom: 0px; width: 100%; left: 0px; font-weight: 700; padding: 10px; height: 62px; display:none">
+            <div style="position:absolute; bottom: 40px; width: 100%;">
+                <span>{{event.upvotes}}</span>
+                <span style="right: 20px; position:absolute" >{{event.downvotes}}</span>
+            </div>
+
+            <div style="position:absolute; bottom: 5px; width: 100%;">
+      	        <img style="" size="0" width="30" type="image" name="bam"  ng-click="eventVote(true, event)" src="images/like.png"/>
+                <img style="right: 20px; position:absolute" width="30" type="image" name="slam" ng-click="eventVote(false, event)" src="images/dislike.png"/>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 	<hr/>
