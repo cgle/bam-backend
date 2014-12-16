@@ -11,7 +11,7 @@ module.exports = function(app, localauth, auth, isOwner) {
   });
 
   app.get('/api/users/:user_id', function(req, res) {
-    User.find({_id: req.params.user_id}, function(err, user) {
+    User.find({_id: req.params.user_id}).populate('created_events').exec(function(err, user) {
       if (!err) return res.send({'data': user});
       else res.send({error: err});
     });

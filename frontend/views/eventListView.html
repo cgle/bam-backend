@@ -44,8 +44,8 @@
   <div class="container" ng-controller="EventListController">
       <div masonry class="events" column-width="50" item-selector=".event-item" data-ng-init="init()" style="position: relative" masonry-options="{ transitionDuration: '0.1s'}" >
         <div masonry-brick class="event-item" ng-repeat="event in events | filter:query" ng-style="setDimensions(event)"style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
-          <div class="item-title">
-            <a style="background-color: black; font-size: 20px; opacity: 0.8; width: 100%; color:white" id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
+          <div class="item-title" style="padding: 10px; top:0px; position: absolute; background-color: black; opacity: 0.8; color: white; width: 100%; left: 0px; font-size: 20px">
+            <a style="color:white;" id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
           </div>
           <br>
           <div class="item-footer" style="position: absolute; background-color: black; color: white; opacity: 0.8; bottom: 0px; width: 100%; left: 0px; font-weight: 700; padding: 10px; height: 62px; display:none">

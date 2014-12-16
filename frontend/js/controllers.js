@@ -102,11 +102,12 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
       e.stopPropagation();
       e.preventDefault();
     })
-    $(document).on('mouseleave', '.event-item, .item-footer',  function(e) {
+    $(document).on('mouseleave', '.event-item, .item-title, .item-footer',  function(e) {
       var that = this;
       var target = $(e.target);
       var footer = target.find('.item-footer');
-      footer = footer.length == 1 ? footer : ($(that).hasClass('event-item') ? footer : that);
+      footer = footer.length == 1 ? footer : ($(that).hasClass('event-item') ? footer :
+        ($(that).parent().find('.item-footer').length == 1 ? $(that).parent().find('.item-footer') : that));
       $(footer).hide();
       e.stopPropagation();
       e.preventDefault();
@@ -226,7 +227,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
         description : $scope.eventForm.description,
         public : $scope.eventForm.privacy,
         date : date,
-        categories : $scope.eventForm.category
+        category : $scope.eventForm.category
       };
       var responsePromise = $http.post("/api/events", newEvent, {});
       responsePromise.success(function(data, status, headers, config){
@@ -488,41 +489,40 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
-    if( userService.currentUser.is_logged_in ) {
+    if (userId == $routeParams.userId || $routeParams.userId == undefined) {
+      console.log(userService.currentUser.is_logged_in);
+      if( userService.currentUser.is_logged_in ) {
+        $scope.user = userService.currentUser.user;
+        $scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
+        $scope.userId = userId;
+        console.log($scope.user);
 
-      $("#userDropdown").show();
-      $(".login-button").hide();
-      console.log('user id>>',userId);
+      }
+    } else {
+      userId = $routeParams.userId;
+      $http.get('api/users/' + userId).
+        success(function(data) {
+          $scope.user = data.data[0];
+          $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+          console.log("EVENTS",$scope.user.created_events)
+        }).
+        error(function(){
+          console.log('cannot load user');
+        });
+    }
+    // $scope.userId = userId;
+    if( userService.currentUser.is_logged_in ) {
+      // console.log(userService.currentUser);
       $scope.user = userService.currentUser.user;
       $scope.user.fullname = userService.currentUser.user.firstname + ' ' + userService.currentUser.user.lastname;
       $scope.userId = userId;
-      // $http.get('api/users/' + userId).
-      //   success(function(data) {
-      //     console.log(data);
-      //     $scope.user = data.data[0];
-      //     $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
-      //     $scope.userId = userId;
-      //     console.log("EVENTS",$scope.user.created_events)
-      //   }).
-      //   error(function(){
-      //     console.log('cannot load user');
-      //   });
+      $("#userDropdown").show();
+      $(".login-button").hide();
     } else {
       $("#userDropdown").hide();
       $(".login-button").show();
     }
 
-    // $scope.userId = userId;
-
-    //   $http.get('api/users/' + userId).
-    //     success(function(data) {
-    //       $scope.user = data.data[0];
-    //       $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
-    //       console.log("EVENTS",$scope.user.created_events)
-    //     }).
-    //     error(function(){
-    //       console.log('cannot load user');
-    //     });
 
   }]);
 
