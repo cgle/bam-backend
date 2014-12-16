@@ -184,8 +184,9 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     $http.get('api/events/' + $routeParams.eventId).
       success(function(data) {
         console.log("event data>>", data);
-        userId = data.data[0].user_id;
-        eventDate = data.data[0].date;
+        userId = data.data[0].user_id._id;
+        console.log("USER", userId);
+        eventDate = new Date(data.data[0].date);
         var date = new Date(eventDate);
         console.log(date);
         $scope.event = data.data[0];
