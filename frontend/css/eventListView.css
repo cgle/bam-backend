@@ -5,8 +5,8 @@ Event List View
 .event-item {
 	/*display: inline;*/
 	background: #add8e6;
-	float: left;
-	position: relative;
+	/*float: left;*/
+	/*position: relative;*/
 	width: 200px;
 	height: 200px;
 	margin: 5px;

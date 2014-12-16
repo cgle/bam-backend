@@ -51,13 +51,13 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
 
 
     var $container = $('.container .events');
-  
+
     $scope.init = function() {
-    $container.masonry({
-      rowHeight: 300,
-      isAnimated:true,
-      itemSelector: '.event-item'
-    });  
+    // $container.masonry({
+    //   rowHeight: 300,
+    //   isAnimated:true,
+    //   itemSelector: '.event-item'
+    // });
     };
 
     // var container = document.querySelector('.events');
@@ -87,17 +87,10 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     var query_function = function(url) {
       var promise = $http.get(url).success(function(data) {
         $scope.events = data.data;
-        $scope.apply;
+        $scope.$apply;
         // console.log(data.data[0].categories);
         // console.log(data.data);
       });
-
-      $q.all(promise).then(function() {
-        var msnry = $container.masonry('reloadItems').masonry('layout');
-        var elems = $container.masonry('getItemElements');
-        console.log(elems);        
-      });
-
     }
 
     query_function(url);

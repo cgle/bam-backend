@@ -42,8 +42,8 @@
 
 
   <div class="container" ng-controller="EventListController">
-      <div class="events" data-ng-init="init()">
-        <div class="event-item" ng-repeat="event in events | filter:query" ng-style="setDimensions(event)" style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
+      <div masonry class="events" column-width="210" item-selector=".event-item" data-ng-init="init()">
+        <div masonry-brick class="event-item" ng-repeat="event in events | filter:query" ng-style="setDimensions(event)" style="background-image: url('{{event.profile_pic}}'); background-size: 100% 100%;">
           <a id="event-name" ng-href="#/events/{{event._id}}"><strong>{{event.name}}</strong></a>
 
           <br>
