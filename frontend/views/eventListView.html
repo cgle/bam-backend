@@ -1,15 +1,13 @@
-<script src="js/eventListView.js"></script>
- 
-    <div class="events" ng-controller="EventListController">
-      <div class="container">
-      <ul>
-        <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
-          <p>{{event.name}}</p>
-          <p>Categories: {{event.categories}}</p>
-          <p class="upvotes">Upvotes: {{event.upvotes}}</p>
-          <p>Downvotes: {{event.downvotes}}</p>
-          <p>Location: {{event.pos}}</p>
-        </a></li>
-      </ul>
-	  </div>
+
+    <div class="container" ng-controller="EventListController">
+      <div class="events" data-ng-init="init()">
+        <div class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
+          <p ng-style="setDimensions(event)">{{event.name}}
+          <span>Categories: {{event.categories}}</span>
+          <span>Upvotes: {{event.upvotes}}</span>
+          <span>Downvotes: {{event.downvotes}}</span>
+	      </p>
+        </a></div>
+      </div>
     </div>
+	<hr/>

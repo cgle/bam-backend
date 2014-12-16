@@ -2,12 +2,7 @@
 Event List View
 *****************/
 
-.events ul {
-	list-style: none;
-	padding-left: 0;
-}
-
-.event-item {
+.event-item p {
 	display: inline;
 	background: #add8e6;
 	position: relative;
@@ -17,4 +12,5 @@ Event List View
 	margin: 5px;
 	padding: 10px;
 	color: #262524;
+	font-size: 11px;
 }

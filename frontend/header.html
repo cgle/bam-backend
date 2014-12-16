@@ -59,26 +59,6 @@
       <hr/>
     </div>   
 
-    <!-- eventListView.html 
-    Problems:
-      1. overlay css not covering all
-      2. angular filter:query
-      3. mini navigation buttons to filter
-    -->
-
-<!--     <div class="events" ng-controller="EventListController">
-      <ul>
-        <li class="event-item" ng-repeat="event in events | filter:query"> <a ng-href="#/events/{{event._id}}">
-          <p>{{event.name}}</p>
-          <p>Categories: {{event.categories}}</p>
-          <p>Upvotes: {{event.upvotes}}</p>
-          <p>Downvotes: {{event.downvotes}}</p>
-          <p>Location: {{event.pos}}</p>
-        </a></li>
-      </ul>
-    </div> -->
-    
-
   <!-- Login overlay -->
   <div id="login-container" class="overlay">
     <form id="login-form" ng-submit="submitLogin()" ng-controller="LoginSubmitController">

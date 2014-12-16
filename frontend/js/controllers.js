@@ -16,45 +16,69 @@ eventControllers.controller('EventDetailController', ['$scope', '$routeParams', 
     });
   }]);
 
-eventControllers.filter('social', function() {
-  return function(events) {
-    var filtered = [];
-    var check  = 'social';
-    for (var index in events) {
-      if (events[index].categories) {
-        if (events[index].categories.indexOf(check) >= 0) {
-          filtered.push(events[index]);
-        }
-      }
-    }
-    // console.log(filtered);
-    return filtered;
-  }
-});
+// eventControllers.filter('social', function() {
+//   return function(events) {
+//     var filtered = [];
+//     var check  = 'social';
+//     for (var index in events) {
+//       if (events[index].categories) {
+//         if (events[index].categories.indexOf(check) >= 0) {
+//           filtered.push(events[index]);
+//         }
+//       }
+//     }
+//     console.log(filtered);
+//     return filtered;
+//   }
+// });
 
 eventControllers.controller('EventListController', ['$scope', '$routeParams', '$http', '$location','userService',
   function($scope, $routeParams, $http, $location, userService) {
     var userId;
-    // Get user's current position to find distance from event locations
     var userLocation;
 
     userService.RestoreState();
     userId = userService.currentUser.user._id;
     userLocation = userService.currentUser.user.current_pos;
     // console.log(userId);
-    // console.log(userLocation);
     
     $http.get('api/events').success(function(data) {
       $scope.events = data.data;
       // console.log(data.data[0].categories);
       console.log(data.data);
-    }).then(function() {
-      for (var each in $scope.events) {
-        console.log($scope.events[each]);
+    })
+
+    $scope.setDimensions = function(event) {
+      // console.log(event);
+      var netVotes = event.upvotes - event.downvotes;
+      if (netVotes < 5) {
+        return {width: "152px", height: "152px"}
       }
-    });
 
+      else if (5 <= netVotes && netVotes < 10) {
+        return {width: "200px", height: "200px"}
+      }
 
+      else if (10 <= netVotes && netVotes < 15) {
+        return {width: "350px", height: "350px"}
+      }
+
+      else if (15 <= netVotes && netVotes < 20) {
+        return {width: "400px", height: "400px"}
+      }
+
+      else if (netVotes >= 20) {
+        return {width: "450px", height: "450px"}
+      }
+    };
+
+    $scope.init = function() {
+      var $container = $('.events');
+      $container.masonry({
+        columnWidth: 200,
+        itemSelector: '.event-item'
+      });
+    }
   }]);
 
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
