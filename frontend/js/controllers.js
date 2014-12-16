@@ -408,6 +408,7 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
       $scope.user = data.data[0];
       $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+      console.log("EVENTS",$scope.user.created_events)
     });
 
   }]);

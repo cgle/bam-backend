@@ -11,6 +11,12 @@
       <p><b>Username: </b> {{user.username}} </p>
       <p><b>Birth Date: </b> {{user.birthyear}} </p>
       <p>{{user.description}}</p>
+
+      <p><b>Events</b></p> 
+      <ul>
+        <li ng-repeat="event in user.created_events">{{event.name}}</li>
+
+      </ul>
       
     </div>
 
