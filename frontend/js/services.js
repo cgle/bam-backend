@@ -25,6 +25,7 @@ authModule.factory('AuthService', ['$http', '$location', '$q','userService', fun
 				//$("#user-nav-dropdown").append('<li><a ng-href="#/user/{{userId}}">Profile</a></li>');
       			//$("#user-nav-dropdown").append('<li><a ng-href="#/user/{{userId}}/edit">Edit Info</a></li>');
 				$location.path('/');
+				$location.reload();
 			}, function(reason){
 				console.log('login error');
 			});
