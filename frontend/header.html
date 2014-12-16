@@ -1,10 +1,10 @@
 <script src="js/header.js"></script>
- 
- <div class="container">
+
+ <div class="container" id='headerContainer'>
     <div class="header">
 
       <div class="user-tools">
-        
+
         <button class="settings-button" type="button">
           <img height="18" width="18" src="images/settings.png">
           <span class="button-text">Settings</span>
@@ -12,33 +12,32 @@
 
         <button class="search-button">
           <img height="13" width="13" src="images/magnifying-glass.png">
-          <span id="search-button" class="button-text">Search</span>      
+          <span id="search-button" class="button-text">Search</span>
         </button>
 
         <button type="button" style="float:right;">
           <span class="login-button">Login</span>
         </button>
 
-       <!--  <div class="btn-group"> -->
           <div id="userDropdown" class="dropdown" ng-controller="UserController" style="float:right;">
-            <button class="user-button dropdown-toggle" data-toggle="dropdown" aria-expanded="true"  >
-              <img height="20" width="20" src="images/user-pic.png">
+            <button class="user-button dropdown-toggle" data-toggle="dropdown" aria-expanded="true" >
+              <img height="20px" width="20px" src="images/user-pic.png">
             </button>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
               <li><a ng-href="#/">Homepage</a></li>
               <li><a ng-href="#/user/{{userId}}">Profile</a></li>
               <li><a href="#">Friends</a></li>
+              <li><a ng-href="#/user/{{userId}}/edit">Edit Info</a></li>
               <li ng-controller="LoginSubmitController"><a href="" class="logout-button" ng-click="logout()">Logout</li>
             </ul>
           </div>
-       <!--  </div> -->
       </div>
 
     </div>
 
 
     <div class="masthead">
-      <img id="nameplate" width="200" height="150" src="/images/bam.jpeg">
+      <img id="nameplate" width="200" height="150" src="/images/bam.png">
       <ul id="masthead-menu">
         <li id="date" class="page-wide-text"></li>
         <li style="color: #d3d3d3"> | </li>
@@ -49,24 +48,23 @@
 
     <div class="mini-navigation" ng-controller="EventListController">
       <ul class="mini-navigation-menu">
-        <li class="page-wide-text"><a href="#/" data-filter="*">All</a></li>
-        <li class="page-wide-text"><a href="#/" data-filter=".social">Social</a></li>
-        <li class="page-wide-text"><a href="#/" data-filter=".sports">Sports</a></li>
-        <li class="page-wide-text"><a href="#/" data-filter=".food">Food</a></li>
-        <li class="page-wide-text"><a href="#/" data-filter=".recreational">Recreational</a></li>
-        <li class="page-wide-text"><a href="#/" data-filter=".informational">Informational</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="">All</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="social">Social</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="sports">Sports</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="food">Food</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="recreational">Recreational</a></li>
+        <li class="page-wide-text"><a href="#/" data-filter="informational">Informational</a></li>
       </ul>
       <hr/>
-    </div>   
+    </div>
 
   <!-- Login overlay -->
   <div id="login-container" class="overlay">
     <form id="login-form" ng-submit="submitLogin()" ng-controller="LoginSubmitController">
       <h3 class="page-wide-text">Log In</h3>
-      <!-- <input type="email" id="login-email" name="login-email" placeholder="Email Address"  ng-model="loginForm.email" required> -->
       <input type="text" id="login-username" name="login-username" placeholder="Username" ng-model="loginForm.username" required>
       <input type="password" id="login-password" name="login-password" placeholder="Password" ng-model="loginForm.password" required>
-      
+
       </br>
       <button class="login-button" type="submit">
         <span>Log In</span>
@@ -78,28 +76,28 @@
     </form>
   </div>
 
-  <!-- Search overlay -->
-  <div id="search-flyout" class="overlay" ng-controller="EventListController">
+
+<!--   <div id="search-flyout" class="overlay">
     <div>
       <form id="search-form">
         <input type="text" ng-model="query" placeholder="Search">
       </form>
     </div>
-  </div>
+  </div> -->
 
   <!-- Settings overlay -->
   <div id="settings-container" class="overlay">
     <form id="settings-form">
       <h3 class="page-wide-text">Settings</h3>
-      <div>
-        Distance:  
-        <input type="radio" name="distance" checked> 1 mi.
-        <input type="radio" name="distance"> 3 mi.
-        <input type="radio" name="distance"> 5 mi.
-        <input type="radio" name="distance"> 10 mi.
+      <div id='settings-form-distance'>
+        Distance:
+        <input type="radio" value='1' name="distance" checked> 1 mi.
+        <input type="radio" value='3' name="distance"> 3 mi.
+        <input type="radio" value='5' name="distance"> 5 mi.
+        <input type="radio" value='10' name="distance"> 10 mi.
       </div>
-      <div>
-        Order By:  
+      <div id='settings-form-popularity'>
+        Order By:
         <input type="radio" name="popularity" checked> Best Event
         <input type="radio" name="popularity" > Upvotes
         <input type="radio" name="popularity"> Downvotes
@@ -113,7 +111,7 @@
 
 </div>
 
-   
+
 
 
 

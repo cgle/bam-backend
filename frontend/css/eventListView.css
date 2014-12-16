@@ -2,15 +2,28 @@
 Event List View
 *****************/
 
-.event-item p {
+.event-item {
 	display: inline;
 	background: #add8e6;
 	position: relative;
 	float: left;
 	width: 200px;
 	height: 200px;
-	margin: 5px;
+	margin: 20px;
 	padding: 10px;
 	color: #262524;
 	font-size: 11px;
+	border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, .8);
+}
+
+#createEvent-button {
+	float: right;
+	margin-left: 70%;
+	background-color: #FF3333;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px;
 }

@@ -2,20 +2,16 @@
 
 <div ng-controller="UserController">
   <div class='page current'>
-    <div class="userimage-block">
-      <img width="248px" height="198px" src="{{user.profile_pic}}">
+    <div class="image-block">
+        <img class='circular' width="248px" height="198px" src="{{user.profile_pic}}">
     </div>
 
     <div id="userDescription-block">
       <p><b>Fullname: </b> {{user.fullname}} </p>
       <p><b>Username: </b> {{user.username}} </p>
       <p><b>Birth Date: </b> {{user.birthyear}} </p>
-      <p><b>Email: </b> {{user.email}} </p><!-- Do we want to make this info public?-->
       <p>{{user.description}}</p>
-
-      <button class="edit-button" type="button" ng-click="edit()">
-        <span>Edit</span>
-      </button>
+      
     </div>
 
   </div>

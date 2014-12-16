@@ -2,9 +2,11 @@
     <h3 class="page-wide-text">Edit Personal Information</h3>
     </br>
 
-    <img id='uploadImage' src='{{user.profile_pic}}' width="150px" height="150px"></br></br>
+    <img class="circular" src='{{user.profile_pic}}' width="150px" height="150px"></br></br>
 
-    <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
+    </br>
+
+    <input style='padding-left: 150px' type="file" id="profile_pic" name="profile_pic" accept="image/*">
     </br></br>
 
     <input type="text" id="firstname" name="firstname" placeholder="First Name" ng-model="userForm.firstname" required>
