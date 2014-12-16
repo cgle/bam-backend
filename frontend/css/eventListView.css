@@ -2,14 +2,14 @@
 Event List View
 *****************/
 
-.event-item {
+.event-item p {
 	display: inline;
 	background: #add8e6;
 	position: relative;
 	float: left;
 	width: 200px;
 	height: 200px;
-	margin: 20px;
+	margin: 5px;
 	padding: 10px;
 	color: #262524;
 	font-size: 11px;

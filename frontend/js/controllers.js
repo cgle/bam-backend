@@ -30,6 +30,38 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
     // console.log(userId);
     // console.log(userLocation);
 
+    $scope.setDimensions = function(event) {
+      console.log('hi');
+      var netVotes = event.upvotes - event.downvotes;
+      if (netVotes < 5) {
+        return {width: "152px", height: "152px"}
+      }
+
+      else if (5 <= netVotes && netVotes < 10) {
+        return {width: "200px", height: "200px"}
+      }
+      
+      else if (10 <= netVotes && netVotes < 15) {
+        return {width: "350px", height: "350px"}
+      }
+
+      else if (15 <= netVotes && netVotes < 20) {
+        return {width: "400px", height: "400px"}
+      }
+
+      else if (netVotes >= 20) {
+        return {width: "450px", height: "450px"}
+      }
+    };
+
+    $scope.init = function() {
+      var $container = $('.events');
+      $container.masonry({
+        columnWidth: 200,
+        itemSelector: '.event-item'
+      });
+    }
+
     if( userService.currentUser.is_logged_in ) {
       $("#createEvent-button").show();
     } else {
@@ -66,36 +98,6 @@ eventControllers.controller('EventListController', ['$scope', '$routeParams', '$
       $location.path('/events/new');
     }
 
-    $scope.setDimensions = function(event) {
-      // console.log(event);
-      var netVotes = event.upvotes - event.downvotes;
-      if (netVotes < 5) {
-        return {width: "152px", height: "152px"}
-      }
-
-      else if (5 <= netVotes && netVotes < 10) {
-        return {width: "200px", height: "200px"}
-      }
-      else if (10 <= netVotes && netVotes < 15) {
-        return {width: "350px", height: "350px"}
-      }
-
-      else if (15 <= netVotes && netVotes < 20) {
-        return {width: "400px", height: "400px"}
-      }
-
-      else if (netVotes >= 20) {
-        return {width: "450px", height: "450px"}
-      }
-    };
-
-    $scope.init = function() {
-      var $container = $('.events');
-      $container.masonry({
-        columnWidth: 200,
-        itemSelector: '.event-item'
-      });
-    }
   }]);
 
 eventControllers.controller('EventCategoriesController', ['$scope', '$routeParams', '$http',
