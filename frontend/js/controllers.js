@@ -193,7 +193,7 @@ eventControllers.controller("EventFormController", ['$scope', '$http', '$locatio
     $scope.eventForm.privacy = true;
     $scope.eventForm.name = ' Event Name'
     $scope.eventForm.address = ' Location'
-    $scope.eventForm.createEvent = function(item, event) {
+    $scope.eventForm.submit = function(item, event) {
       console.log("SUBMITTING");
       var dateString = $scope.eventForm.date;
       var date = new Date(dateString);
@@ -255,8 +255,9 @@ eventControllers.controller("EventEditController", ['$scope', '$http', '$locatio
     $http.get('api/events/' + $routeParams.eventId).
       success(function(data) {
         console.log("event data>>", data);
-        userId = data.data[0].user_id;
-        eventDate = data.data[0].date;
+        userId = data.data[0].user_id._id;
+        console.log("USER", userId);
+        eventDate = new Date(data.data[0].date);
         var date = new Date(eventDate);
         console.log(date);
         $scope.event = data.data[0];
@@ -477,6 +478,8 @@ userControllers.controller('UserController', ['$scope', '$routeParams', '$http',
 
     $http.get('api/users/' + $routeParams.userId).success(function(data) {
       $scope.user = data.data[0];
+      $scope.user.fullname = data.data[0].firstname + ' ' + data.data[0].lastname;
+      console.log("EVENTS",$scope.user.created_events)
     });
 
   }]);
